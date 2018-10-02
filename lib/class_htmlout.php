@@ -852,11 +852,15 @@ class HTMLOUT
 		Module::runTriggers(T_TRIGGER_BEFORE_PAGE_RENDER);
 		?>
 		<!-- Following HTML from ./lib/class_htmlout.php frame_begin -->
-		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-		<html>
+		<!doctype html>
+		<html lang="en">
 		<head>
-			<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+			<!-- Required meta tags -->
+		    <meta charset="utf-8">
+		    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 			<title><?php echo $settings['site_name']; ?></title>
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 			<link type="text/css" href="css/stylesheet_default.css" rel="stylesheet">
 			<link type="text/css" href="css/stylesheet<?php echo $settings['stylesheet']; ?>.css" rel="stylesheet">
 			<link type="text/css" href="css/league_override_<?php echo self::getSelectedNodeLidOrDefault(); ?>.css" rel="stylesheet">
@@ -875,6 +879,9 @@ class HTMLOUT
 				width: 860,
 				height: 150
 			});</script>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 			
 			<script type="text/javascript" src="js/app/ViewModel/Common/RegistrationViewModel.js"></script>
 			<script type="text/javascript" src="js/app/ViewModel/Common/PageViewModel.js"></script>
@@ -1160,18 +1167,13 @@ class HTMLOUT
 		$CP = count($fields);
 		?>
 		<!-- Following HTML from ./lib/class_htmlout.php sort_table-->
-		<table class="common" <?php echo (array_key_exists('tableWidth', $extra)) ? "style='width: $extra[tableWidth];'" : '';?>>
-			<tr class="commonhead">
-				<td colspan="<?php echo $CP;?>"><b>
-				<?php echo $title;?>&nbsp;
-				<?php
-				if (!array_key_exists('noHelp', $extra) || !$extra['noHelp']) {
-					?><a TARGET="_blank" href="html/table_desc.html">[?]</a><?php
-				}
-				?>
-				</b></td>
-			</tr>
-			<tr>
+		<div class='table-responsive card bg-dark'>
+	    <div class="card-header">
+	    	<?php echo $title;?>
+	    </div>
+		<table class="table table-dark table-sm" <?php echo (array_key_exists('tableWidth', $extra)) ? "style='width: $extra[tableWidth];'" : '';?>>
+			<thead>
+			<tr> 
 				<?php
 				foreach ($fields as $f => $attr)
 					echo "<td><i>$attr[desc]</i></td>";
@@ -1194,12 +1196,13 @@ class HTMLOUT
 			}
 			?>
 			</tr>
-			<tr><td colspan="<?php echo $CP;?>"><hr></td></tr>
+			</thead>
+			<tbody>
 			<?php
 			$i = 1 + (($PAGE && $PAGELENGTH) ? ($PAGE-1)*$PAGELENGTH : 0);
 			foreach ($objs as $o) {
 				$DASH = (array_key_exists('dashed', $extra) && $o->{$extra['dashed']['condField']} == $extra['dashed']['fieldVal']) ? true : false;
-				if (array_key_exists('color', $extra)) {
+				if (array_key_exists('color', $extra) && (isset($o->HTMLfcolor) || isset($o->HTMLbcolor))) {
 					$td = "<td style='background-color: ".(isset($o->HTMLbcolor) ? $o->HTMLbcolor : 'white')."; color: ".(isset($o->HTMLfcolor) ? $o->HTMLfcolor : 'black').";'>";
 				}
 				else {
@@ -1209,6 +1212,8 @@ class HTMLOUT
 				if ($DONR) {
 					echo $td.$i."</td>";
 				}
+
+				# Loop over every field.
 				foreach ($fields as $f => $a) { // Field => attributes
 					if (!in_array($f, $no_print_fields)) {
 						if ($DASH && !in_array($f, $extra['dashed']['noDashFields'])) {
@@ -1216,15 +1221,23 @@ class HTMLOUT
 							continue;
 						}
 						$cpy = $o->$f; // Don't change the objects themselves! Make copies!
+
+						# Player Parameters.
 						if (array_key_exists('kilo', $a) && $a['kilo'])
 							$cpy /= 1000;
 							$cpy = (string) $cpy;
+
 						if (is_numeric($cpy) && !ctype_digit(($cpy[0] == '-') ? substr($cpy,1) : $cpy))
 							$cpy = sprintf("%1.2f", $cpy);
+
+						# Cost suffix
 						if (array_key_exists('suffix', $a) && $a['suffix'])
 							$cpy .= $a['suffix'];
+
 						if (array_key_exists('color', $a) && $a['color'])
 							$cpy = "<font color='$a[color]'>".$cpy."</font>";
+
+						# Link to player stats.
 						if (array_key_exists('href', $a) && $a['href']) {
 							$href = (isset($o->href)) ? $o->href : $a['href'];
 							$cpy  = "<a " 
@@ -1295,7 +1308,9 @@ class HTMLOUT
 			</tr>
 			<?php
 			}
+			echo "</tbody>\n";
 		echo "</table>\n";
+		echo "</div>\n";
 	}
 	
 	public static function generateEStable($obj) {

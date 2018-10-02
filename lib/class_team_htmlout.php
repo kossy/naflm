@@ -298,7 +298,7 @@ class Team_HTMLOUT extends Team
 				Colors
 			*/
 			// Fictive player color fields used for creating player table.
-			$p->HTMLfcolor = '#000000';
+			$p->HTMLfcolor = '#FFFFFF';
 			$p->HTMLbcolor = COLOR_HTML_NORMAL;
 			if     ($p->is_sold && $DETAILED)   $p->HTMLbcolor = COLOR_HTML_SOLD; # Sold has highest priority.
 			elseif ($p->is_dead && $DETAILED)   $p->HTMLbcolor = COLOR_HTML_DEAD;
@@ -309,7 +309,7 @@ class Team_HTMLOUT extends Team
 			elseif ($DETAILED)                  $p->HTMLbcolor = COLOR_HTML_READY;
 			$p->skills   = '<small>'.$p->getSkillsStr(true).'</small>';
 			$p->injs     = $p->getInjsStr(true);
-			$p->position = "<table style='border-spacing:0px;'><tr><td><img align='left' src='$p->icon' alt='player avatar'></td><td>".$lng->getTrn("position/".strtolower($lng->FilterPosition($p->position)))."</td></tr></table>";
+			$p->position = "<div class='text-center'><img align='left' src='$p->icon' alt='player avatar'>".$lng->getTrn("position/".strtolower($lng->FilterPosition($p->position))) ."</div>";
 			if ($DETAILED) {
 				$p->mv_cas = "$p->mv_bh/$p->mv_si/$p->mv_ki";
 				$p->mv_spp = "$p->mv_spp/$p->extra_spp";
