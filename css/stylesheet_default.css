@@ -70,7 +70,7 @@ div.section {
  */
 div.boxCommon,div.boxWide,div.boxCoachPage,div.boxTeamPage,div.boxPlayerPageInfo {
     margin: 20px; 
-    border: 1px solid #545454;
+   /* border: 1px solid #545454;*/
 
     border-radius: 4px;
     -moz-border-radius: 4px;

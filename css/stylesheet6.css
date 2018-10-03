@@ -43,7 +43,7 @@ text-decoration: underline;
 
 body 
 {
-    background: #444444;
+    background: #4D555D;
 
     font: 12px bold Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -106,11 +106,7 @@ div.everything {
 div.banner {
     width: 100%;
     height: 135px;
-    margin-left:0px;
-    margin-bottom: 0px;
-    margin-top: 10px;
     background: url(../images/logo.png) left bottom no-repeat, /*url(../images/logo2.png) right bottom no-repeat,*/ url(../images/bg_header.png) left bottom repeat-x;
-	border: 1px solid black;
 	color: black;
 }
 
@@ -159,7 +155,9 @@ div.boxPlayerPageInfo   {float: left; width: 325px; margin-left: 30px;}
 .boxTitle4 {color:black; font-family: aurora; background-color: #D9D8D0; padding: 6px; font-size: 20px; font-weight: normal;} /* Used for: Statistics (standings, player leaders, ES) */
 .boxTitle5 {color:black; font-family: aurora; background-color: #D9D8D0; padding: 6px; font-size: 20px; font-weight: normal;} /* Used for: Match summaries & recent games */
 .boxBody   {color:black; border-top: 2px solid black; background-color: #FAFAFA; font-weight: normal; padding: 10px;}
-table.boxTable {color:black; border-spacing: 5px; width: 100%;}
+table.boxTable {border-spacing: 5px; width: 100%;}
+
+.top-buffer { margin-top:20px; }
 
 /* Other types of boxes. */
 .helpBox {

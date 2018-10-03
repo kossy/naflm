@@ -665,7 +665,8 @@ EOQ;
 		<input type="hidden" id="raceid" name="raceid" value="" />
 		<div class='boxWide'>
 		<table class="common"><tr><td>
-		<b>$txtRaceSelectTitle</b>: <select id="rid" name="rid" onchange="changeRace(this.options[this.selectedIndex].value)">
+		<label for="tname">$txtRaceSelectTitle:</label></td><td>
+		<select class="form-control form-control-sm" id="rid" name="rid" onchange="changeRace(this.options[this.selectedIndex].value)">
 EOQ;
 		echo "<option value='-1'>$txtRaceSelectOption</option>";
 		$i = 0;
@@ -680,8 +681,9 @@ EOQ;
 		if (isset($coach)) {
 			$lgeDiv = $lng->getTrn('common/league') . '/' . $lng->getTrn('common/division');
 		echo <<<EOQ
-		<td align="right"><b>$txtTeamName</b>:</td><td><input type="text" id="tname" name="tname" size="20" maxlength="50"></td>
-		<td align="right"><b>$lgeDiv</b>:</td><td><select name="lid_did" id="lid_did">
+		<td><label for="tname">$txtTeamName:</label></td><td><input type="text" class="form-control form-control-sm" id="tname" name="tname" size="20" maxlength="50"></td>
+
+		<td align="right"><label for="lid_did">$lgeDiv:</label></td><td><select class="form-control bg-darkform-control-sm" name="lid_did" id="lid_did">
 EOQ;
 		foreach ($leagues = Coach::allowedNodeAccess(Coach::NODE_STRUCT__TREE, $coach->coach_id, array(T_NODE_LEAGUE => array('tie_teams' => 'tie_teams'))) as $lid => $lstruct) {
 			if ($lstruct['desc']['tie_teams']) {
@@ -698,7 +700,6 @@ EOQ;
 		}
 		echo <<<EOQ
 		</select></td>
-		<td><span id="createBtnTxt" title="$txtNoRaceSelected"><button id="createBtn" onclick="createTeam(); return false;" DISABLED>$txtCreateBtn</button></td>
 EOQ;
 		}
 
@@ -714,15 +715,20 @@ EOQ;
 		$txtSubtotal = $lng->getTrn('subtotal', 'TeamCreator');
 
 		echo <<<EOQ
-		<td align="right" id="indTxt">$txtInducements:</td>
-		<td><input type="checkbox" id="induce" onChange="changeInduce(this.checked)" /><input type="hidden" id="oldInduce" value="false" /></td>
+	    <td  class="form-check">
+		    <label class="form-check-label" for="induce">$txtInducements:</label>
+	        <input type="checkbox"  class="form-check-input" id="induce" onclick="changeInduce(this.checked)">
+	        <input type="hidden" id="oldInduce" value="false" />
+	        
+        </td>
+
 		<td align="right"><b>$txtPlayerCount</b>:</td><td><div id="pcnt"></div></td>
 		<td align="right"><b>$txtTotal</b>:</td><td><div id="total"></div></td>
 		</tr></table>
 		</div>
 		<div class="boxWide">
-			<table class="common" id="teamTable">
-				<tr class="commonhead">
+			<table class="table table-dark table-sm" id="teamTable">
+    			 <tr>
 					<th>$txtPos</th>
 					<th>MA</th>
 					<th>ST</th>
@@ -737,6 +743,14 @@ EOQ;
 				</tr>
 			</table>
 		</div>
+		<div class='row'>
+		    <div class='col-11'>
+			</div>
+			<div class='col'>
+			<span id="createBtnTxt" title="$txtNoRaceSelected"><button id="createBtn"  class="btn btn-success btn-sm" onclick="createTeam(); return false;" DISABLED>$txtCreateBtn</button>
+			</div>
+
+			</div>
 		</form>
 EOQ;
 	}

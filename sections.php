@@ -136,9 +136,11 @@ function sec_main() {
      */
 
     ?>
-    <div class="main_head"><?php echo $settings['league_name']; ?></div>
-    <div class='main_leftColumn'>
-        <div class="main_leftColumn_head">
+    <!-- <div class="main_head"><?php echo $settings['league_name']; ?></div> -->
+    <div class='row'>
+    <div class='col'>
+        <div class="row">
+        
             <?php
             echo "<div class='main_leftColumn_welcome'>\n";
             echo $settings['welcome'];
@@ -169,7 +171,6 @@ function sec_main() {
                     <input type="submit" value="<?php echo $lng->getTrn('common/submit');?>">
                 </form>
             </div>
-        </div>
 
         <?php
         /*
@@ -179,25 +180,19 @@ function sec_main() {
             To generate this table we create a general array holding the content of both.
         */
         $j = 1; $prevPinned = 0;
+        echo "</div>";
+        echo "<div class='row'>\n";
         foreach (TextSubSys::getMainBoardMessages($settings['fp_messageboard']['length'], $sel_lid, $settings['fp_messageboard']['show_team_news'], $settings['fp_messageboard']['show_match_summaries']) as $e) {
 
             if ($prevPinned == 1 && !$e->pinned) { echo "<hr>\n"; }
             $prevPinned = $e->pinned;
 
-            echo "<div class='col-sm'>\n";
-                echo "<h3 class='boxTitle$e->cssidx'>$e->title</h3>\n";
-                echo "<div class='boxBody'>\n";
+            echo "<div class='col'>\n";
+            echo "<div class='card bg-info text-white'>\n";
+                echo "<div class='card-header'>$e->title</div>\n";
+                echo '<div class="card-body">';
                     $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.
-                    echo "
-                    <div id='e$j' class='expandable'>$fmtMsg</div>
-                    <script type='text/javascript'>
-                      $('#e$j').expander({
-                        slicePoint:       300,
-                        expandText:       '".$lng->getTrn('main/more')."',
-                        collapseTimer:    0,
-                        userCollapseText: ''
-                      });
-                      </script>";
+                    echo '<p class="card-text">' . $fmtMsg . '</p>';
                     echo "<br><hr>\n";
                     echo "<table class='boxTable'><tr>\n";
                         switch ($e->type) 
@@ -241,11 +236,12 @@ function sec_main() {
                     ?>
                 </div>
             </div>
+            </div>
             <?php
             $j++;
         }
         ?>
-
+    </div>
     </div>
     <?php
     MTS('Board messages generated');
@@ -255,7 +251,7 @@ function sec_main() {
         We will now generate the stats, so that they are ready to be printed in correct order.
     */
     
-    echo "<div class='main_rightColumn'>\n";
+    echo "<div class='col'>\n";
     $boxes_all = array_merge($settings['fp_standings'], $settings['fp_leaders'], $settings['fp_events'], $settings['fp_latestgames']);
     usort($boxes_all, create_function('$a,$b', 'return (($a["box_ID"] > $b["box_ID"]) ? 1 : (($a["box_ID"] < $b["box_ID"]) ? -1 : 0) );')); 
     $boxes = array();
@@ -319,9 +315,11 @@ function sec_main() {
             }
             list($teams, ) = Stats::getRaw(T_OBJ_TEAM, array($box['type'] => $box['id']), array(1, $box['length']), $SR, false);
             ?>
-            <div class='boxWide'>
-                <h3 class='boxTitle<?php echo T_HTMLBOX_STATS;?>'><?php echo $box['title'];?></h3>
-                <div class='boxBody'>
+            <div class='row top-buffer'>
+            <div class='col'>
+              <div class='card bg-dark text-white'>
+                <div class='card-header'><?php echo $box['title'];?></div>
+                <div class="card-body">
                     <table class="boxTable">
                         <?php
                         echo "<tr>\n";
@@ -358,6 +356,8 @@ function sec_main() {
                     ?>
                 </div>
             </div>
+            </div>
+        </div>
             <?php
             MTS('Standings table generated');
             break;
@@ -369,9 +369,11 @@ function sec_main() {
             }
             $upcoming = isset($box['upcoming']) ? $box['upcoming'] : false;  
            ?>
-          <div class="boxWide">
-              <h3 class='boxTitle<?php echo T_HTMLBOX_MATCH;?>'><?php echo $box['title'];?></h3>
-              <div class='boxBody'>
+           <div class='row top-buffer'>
+           <div class='col'>
+           <div class='card bg-dark text-white'>
+                <div class='card-header'><?php echo $box['title'];?></div>
+                <div class="card-body">
                   <table class="boxTable">
                       <tr>
                           <td style="text-align: right;" width="50%"><i><?php echo $lng->getTrn('common/home');?></i></td>
@@ -405,6 +407,8 @@ function sec_main() {
                     </table>
                 </div>
             </div>
+             </div>
+              </div>
             <?php
             MTS('Latest matches table generated');
             break;
@@ -414,9 +418,11 @@ function sec_main() {
             $f = 'mv_'.$box['field'];
             list($players, ) = Stats::getRaw(T_OBJ_PLAYER, array($box['type'] => $box['id']), array(1, $box['length']), array('-'.$f), false)
             ?>
-            <div class="boxWide">
-                <h3 class='boxTitle<?php echo T_HTMLBOX_STATS;?>'><?php echo $box['title'];?></h3>
-                <div class='boxBody'>
+            <div class='row top-buffer'>
+            <div class='col'>
+             <div class='card bg-dark text-white'>
+                <div class='card-header'><?php echo $box['title'];?></div>
+                <div class="card-body">
                     <table class="boxTable">
                         <tr>
                             <td><i><?php echo $lng->getTrn('common/name');?></i></td>
@@ -443,16 +449,20 @@ function sec_main() {
                     </table>
                 </div>
             </div>
+            </div>
+            </div>
             <?php
             MTS('Leaders standings generated');
             break;
             
         case 'events':
             $events = _events($box['content'], $box['type'], $box['id'], $box['length']);
-            ?>
-            <div class="boxWide">
-                <h3 class='boxTitle<?php echo T_HTMLBOX_STATS;?>'><?php echo $box['title'];?></h3>
-                <div class='boxBody'>
+            ?>  
+        <div class='row top-buffer'>
+           <div class='col'>
+               <div class='card bg-dark text-white'>
+                <div class='card-header'><?php echo $box['title'];?></div>
+                <div class="card-body">
                     <table class="boxTable">
                         <?php
                         $head = array_pop($events);
@@ -496,12 +506,15 @@ function sec_main() {
                     </table>
                 </div>
             </div>
+            </div>
+            </div>
             <?php
             MTS('Events box generated');
             break;
     }
     }
     ?>
+    </div>
     </div>
     <div class="main_foot">
         <?php

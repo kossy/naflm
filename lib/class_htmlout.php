@@ -899,10 +899,10 @@ class HTMLOUT
 				<f0> </f0><br><br><br>
 				<f1><?php echo $settings['banner_title']; ?></f1><br>
 				<f2><?php echo $settings['banner_subtitle']; ?></f2></div>
-				<div class="menu">
-					<?php if ($menu) {HTMLOUT::make_menu();} ?>
-				</div> <!-- Menu div end -->
-				<div class="section"> <!-- This container holds the section specific content -->
+
+				<?php if ($menu) {HTMLOUT::make_menu();} ?>
+
+				<div class="container-fluid section"> <!-- This container holds the section specific content -->
 		<?php
 	}
 	
