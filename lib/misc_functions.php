@@ -181,10 +181,10 @@ function fatal($err_msg) {
 // Print a status message.
 function status($status, $msg = '') {
     if ($status) { # Status == success
-        echo "<div class=\"messageContainer green\">";
+        echo '<div class="alert alert-success" role="alert">';
         echo "Request succeeded";
     } else { # Status == failure
-        echo "<div class=\"messageContainer red\">";
+        echo '<div class="alert alert-danger" role="alert">';
         echo "Request failed";
     }
     if ($msg) {echo " : $msg\n";}

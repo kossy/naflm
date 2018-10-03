@@ -255,3 +255,7 @@ div.red                 {clear:both;background-color:#F20000;border:1px solid #c
         background: #A37B45;
     }
 }
+
+.row {
+    margin-left: 0px;
+}

@@ -447,9 +447,10 @@ class Team_HTMLOUT extends Team
 			'mv_spp'    => array('desc' => ($DETAILED) ? 'SPP/extra' : 'SPP', 'nosort' => ($DETAILED) ? true : false),
 			'value'     => array('desc' => $lng->getTrn('common/value'), 'kilo' => true, 'suffix' => 'k'),
 		);
-		echo "<a href=".urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$this->team_id,false,false)."&amp;detailed=".(($DETAILED) ? 0 : 1).">".$lng->getTrn('profile/team/viewtoggle')."</a><br><br>\n";
+		// echo "<a href=".urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$this->team_id,false,false)."&amp;detailed=".(($DETAILED) ? 0 : 1).">".$lng->getTrn('profile/team/viewtoggle')."</a><br><br>\n";
 		HTMLOUT::sort_table(
-			$team->name.' roster',
+			$team->name.' roster ' . "<a href=".urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$this->team_id,false,false)."&amp;detailed=".(($DETAILED) ? 0 : 1).">".$lng->getTrn('profile/team/viewtoggle')."</a><br><br>\n",
+
 			urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$team->team_id,false,false).(($DETAILED) ? '&amp;detailed=1' : '&amp;detailed=0'),
 			$players,
 			$fields,
@@ -459,25 +460,22 @@ class Team_HTMLOUT extends Team
 		);
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _roster -->
-		<table class="text">
-			<tr>
-				<td style="width: 100%;"> </td>
+		<div class="row top-buffer ">
 				<?php
 				if ($DETAILED) {
 					?>
-					<td style="background-color: <?php echo COLOR_HTML_READY;   ?>;"><font color='black'><b>&nbsp;Ready&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_MNG;     ?>;"><font color='black'><b>&nbsp;MNG&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_JOURNEY; ?>;"><font color='black'><b>&nbsp;Journey&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_JOURNEY_USED; ?>;"><font color='black'><b>&nbsp;Used&nbsp;journey&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_DEAD;    ?>;"><font color='black'><b>&nbsp;Dead&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_SOLD;    ?>;"><font color='black'><b>&nbsp;Sold&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_STARMERC;?>;"><font color='black'><b>&nbsp;Star/merc&nbsp;</b></font></td>
-					<td style="background-color: <?php echo COLOR_HTML_NEWSKILL;?>;"><font color='black'><b>&nbsp;New&nbsp;skill&nbsp;</b></font></td>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_READY;   ?>;"><font color='black'><b>&nbsp;Ready&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_MNG;     ?>;"><font color='black'><b>&nbsp;MNG&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_JOURNEY; ?>;"><font color='black'><b>&nbsp;Journey&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_JOURNEY_USED; ?>;"><font color='black'><b>&nbsp;Used&nbsp;journey&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_DEAD;    ?>;"><font color='black'><b>&nbsp;Dead&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_SOLD;    ?>;"><font color='black'><b>&nbsp;Sold&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_STARMERC;?>;"><font color='black'><b>&nbsp;Star/merc&nbsp;</b></font></div>
+					<div class='col' style="background-color: <?php echo COLOR_HTML_NEWSKILL;?>;"><font color='black'><b>&nbsp;New&nbsp;skill&nbsp;</b></font></div>
 					<?php
 				}
 				?>
-			</tr>
-		</table>
+		</div>
 		<?php
 	}
 
@@ -579,15 +577,28 @@ class Team_HTMLOUT extends Team
 		#cycolors .grey7 a {top:96px;left: 112px;}
 		</style>
 
-		<ul class="css3menu1 topmenu" style="position:static; z-index:0;">
-			<li class="topfirst"><a href="<?php echo $url.'&amp;subsec=man';?>"><?php echo $lng->getTrn('profile/team/tmanage');?></a></li>
-			<li class="topmenu"><a href="<?php echo $url.'&amp;subsec=news';?>"><?php echo $lng->getTrn('profile/team/news');?></a></li>
-			<li><a href="<?php echo $url.'&amp;subsec=about';?>"><?php echo $lng->getTrn('common/about');?></a></li>
-			<li><a href="<?php echo $url.'&amp;subsec=games';?>"><?php echo $lng->getTrn('profile/team/games');?></a></li>
-			<?php
-			echo "<li><a href='${url}&amp;subsec=hhstar'>".$lng->getTrn('common/starhh')."</a></li>\n";
-			echo "<li><a href='${url}&amp;subsec=hhmerc'>".$lng->getTrn('common/merchh')."</a></li>\n";
-			
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<ul class="navbar-nav mr-auto">
+
+			<li class="nav-item">
+        		<a class="nav-link" href="<?php echo $url.'&amp;subsec=man';?>""><?php echo $lng->getTrn('profile/team/tmanage');?></a>
+      		</li>
+      		<li class="nav-item">
+        		<a class="nav-link" href="<?php echo $url.'&amp;subsec=news';?>"><?php echo $lng->getTrn('profile/team/news');?></a>
+      		</li>
+			<li class="nav-item">
+        		<a class="nav-link" href="<?php echo $url.'&amp;subsec=about';?>"><?php echo $lng->getTrn('common/about');?></a>
+     		</li>
+     		<li class="nav-item">
+		        <a class="nav-link" href="<?php echo $url.'&amp;subsec=games';?>"><?php echo $lng->getTrn('profile/team/games');?></a>
+		    </li>
+		    <li class="nav-item">
+	            <a class="nav-link" href="<?php echo $url.'&amp;subsec=hhstar';?>"><?php echo $lng->getTrn('common/starhh')?></a>
+	        </li>
+	        <li class="nav-item">
+	            <a class="nav-link" href="<?php echo $url.'&amp;subsec=hhmerc';?>"><?php echo $lng->getTrn('common/merchh')?></a>
+	        </li>
+			<?php	
 			$pdf    = (Module::isRegistered('PDFroster')) ? "handler.php?type=roster&amp;team_id=$this->team_id&amp;detailed=".($DETAILED ? '1' : '0') : '';
 			$botocs = (Module::isRegistered('XML_BOTOCS') && $settings['leegmgr_botocs']) ? "handler.php?type=botocsxml&amp;teamid=$this->team_id" : '';
 			$cyanide = (Module::isRegistered('XML_BOTOCS') && $settings['leegmgr_cyanide']) ? "handler.php?type=botocsxml&amp;teamid=$this->team_id&amp;cy" : '';
@@ -597,20 +608,33 @@ class Team_HTMLOUT extends Team
 			<?php
 			}
 			if (Module::isRegistered('IndcPage')) {
-				echo "<li><a href='handler.php?type=inducements&amp;team_id=$team->team_id'>Inducements try-out</a></li>\n";
+				echo " <li class='nav-item'>
+							<a class='nav-link' href='handler.php?type=inducements&amp;team_id=$team->team_id'>Inducements try-out</a>
+					   </li>\n";
 			}
 			if (Module::isRegistered('SGraph')) {
-				echo "<li><a href='handler.php?type=graph&amp;gtype=".SG_T_TEAM."&amp;id=$team->team_id''>Vis. stats</a></li>\n";
+				echo "<li class='nav-item'>
+						<a class='nav-link' href='handler.php?type=graph&amp;gtype=".SG_T_TEAM."&amp;id=$team->team_id''>Vis. stats</a>
+					  </li>\n";
 			}
 			if (Module::isRegistered('Cemetery')) {
-				echo "<li><a href='handler.php?type=cemetery&amp;tid=$team->team_id'>".$lng->getTrn('name', 'Cemetery')."</a></li>\n";
+				echo "<li class='nav-item'>
+						<a class='nav-link' href='handler.php?type=cemetery&amp;tid=$team->team_id'>".$lng->getTrn('name', 'Cemetery')."</a>
+					  </li>\n";
 			}
 			?>
 			
-			<li class="toplast"><a>Roster</a>
-				<ul>
-					<?php if ($pdf)    { ?><li class="subfirst"><a TARGET="_blank" href="<?php echo $pdf;?>">PDF</a></li> <?php } ?>
-					<?php if ($botocs) { ?><li><a TARGET="_blank" href="<?php echo $botocs;?>">BOTOCS-XML</a></li> <?php } ?>
+		<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Roster
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<?php 
+		if ($pdf)    { 
+			?>
+		<a class="dropdown-item" TARGET="_blank" href="<?php echo $pdf;?>">PDF</a>
+		<?php } ?>
+				<!-- 	<?php if ($botocs) { ?><a TARGET="_blank" href="<?php echo $botocs;?>">BOTOCS-XML</a><?php } ?>
 					<?php if ($cyanide) { ?><li><span class="dir">Cyanide-DB</span>
 						<ul>
 						<div id="cycolors">
@@ -677,12 +701,11 @@ class Team_HTMLOUT extends Team
 								<li class="purple7"><a href="<?php echo $cyanide."=54";?>">54</a></li>
 								<li class="grey7"><a href="<?php echo $cyanide."=55";?>">55</a></li>
 						</div>
-						</ul>
-					</li>
-					<?php } ?>
-				</ul>
-			</li>
-		</ul>
+						</ul> -->
+					<!-- <?php } ?> -->
+        </div>
+      </li>
+	</nav>
 		<br>
 		<?php
 	}
@@ -777,9 +800,11 @@ class Team_HTMLOUT extends Team
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _actionBoxes -->
 		<a name="aanc"></a>
-		<div class="boxTeamPage">
-			<div class="boxTitle<?php echo T_HTMLBOX_INFO;?>"><?php echo $lng->getTrn('profile/team/box_info/title');?></div>
-			<div class="boxBody">
+		<div class="row">
+		<div class="col">
+		<div class="card text-white bg-dark">
+			<div class="card-header"><?php echo $lng->getTrn('profile/team/box_info/title');?></div>
+			<div class="card-body">
 				<table width="100%">
 					<tr>
 						<td><?php echo $lng->getTrn('common/coach');?></td>
@@ -926,6 +951,7 @@ class Team_HTMLOUT extends Team
 				</table>
 			</div>
 		</div>
+	</div>
 
 		<?php
 		if ($ALLOW_EDIT) {
@@ -933,7 +959,8 @@ class Team_HTMLOUT extends Team
 			if ($coach->isNodeCommish(T_NODE_LEAGUE, $team->f_lid)) {
 				?>
 				<!-- Following HTML is from class_team_htmlout.php _actionBoxes -->
-				<div class="boxTeamPage">
+				<div class="col">
+				<div class="card">
 					<div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>"><?php echo $lng->getTrn('profile/team/box_admin/title');?></div>
 					<div class="boxBody">
 						<?php
@@ -1233,6 +1260,8 @@ class Team_HTMLOUT extends Team
 						</form>
 					</div>
 				</div>
+			</div>
+			</div>
 				<?php
 			}
 		}
@@ -1244,12 +1273,14 @@ class Team_HTMLOUT extends Team
 		if (!$settings['hide_ES_extensions']){
 			?>
 			<div class="row">
-				<div class="boxWide">
-					<div class="boxTitle<?php echo T_HTMLBOX_STATS;?>"><a href='javascript:void(0);' onClick="slideToggleFast('ES');"><b>[+/-]</b></a> &nbsp;<?php echo $lng->getTrn('common/extrastats'); ?></div>
-					<div class="boxBody" id="ES" style='display:none;'>
-						<?php
-						HTMLOUT::generateEStable($this);
-						?>
+				<div class="col">
+					<div class="card bg-dark text-white">
+						<div class="card-header">&nbsp;<?php echo $lng->getTrn('common/extrastats'); ?></div>
+						<div class="card-body" id="ES">
+							<?php
+							HTMLOUT::generateEStable($this);
+							?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1269,9 +1300,11 @@ class Team_HTMLOUT extends Team
 		global $lng, $rules, $DEA, $T_ALLOWED_PLAYER_NR;
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _teamManagementBox -->
-		<div class="boxTeamPage">
-		<div class="boxTitle<?php echo T_HTMLBOX_COACH;?>"><?php echo $lng->getTrn('profile/team/box_tm/title') . ' - ' . $team->name;?></div>
-		<div class="boxBody">
+		<div class="col">
+		<div class="card text-white bg-dark">
+		<div class="card-header"><?php echo $lng->getTrn('profile/team/box_tm/title') . ' - ' . $team->name;?></div>
+
+		<div class="card-body">
 			<?php
 			$base = 'profile/team';
 			$tmanage = array(
@@ -1608,6 +1641,7 @@ class Team_HTMLOUT extends Team
 			</form>
 		</div>
 	</div>
+	</div>
 	<?php
 	}
 
@@ -1671,9 +1705,10 @@ class Team_HTMLOUT extends Team
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _news -->
 		<div class="row">
-			<div class="boxWide">
-				<div class="boxTitle<?php echo T_HTMLBOX_INFO;?>"><?php echo $lng->getTrn('profile/team/tnews');?></div>
-				<div class="boxBody">
+			<div class="col">
+			<div class="card bg-dark text-white">
+				<div class="card-header"><?php echo $lng->getTrn('profile/team/tnews');?></div>
+				<div class="card-body">
 				<?php
 				$news_2 = array();
 				foreach ($news as $n) {
@@ -1705,13 +1740,14 @@ class Team_HTMLOUT extends Team
 						<textarea name='txt' cols='60' rows='4'></textarea>
 						<br><br>
 						<input type="hidden" name="type" value="news">
-						<input type='submit' value="<?php echo $lng->getTrn('common/submit');?>">
+						<input type='submit' class="btn btn-primary" value="<?php echo $lng->getTrn('common/submit');?>">
 					</form>
 					<?php
 				}
 				?>
 				</div>
 			</div>
+		</div>
 		</div>
 		<?php
 	}

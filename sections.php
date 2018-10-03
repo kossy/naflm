@@ -188,7 +188,7 @@ function sec_main() {
             $prevPinned = $e->pinned;
 
             echo "<div class='col'>\n";
-            echo "<div class='card bg-info text-white'>\n";
+            echo "<div class='card bg-secondary text-white'>\n";
                 echo "<div class='card-header'>$e->title</div>\n";
                 echo '<div class="card-body">';
                     $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.

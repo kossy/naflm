@@ -1017,7 +1017,7 @@ class HTMLOUT
 		} else { 
 		?>
 		 <li class="nav-item">
-		<a class="nav-link" rel="nofollow" href="index.php?section=login" style="height:20px;line-height:20px;"><?php echo $lng->getTrn('menu/login');?></a>
+		<a class="nav-link" rel="nofollow" href="index.php?section=login"><?php echo $lng->getTrn('menu/login');?></a>
 		</li>
 		<?php
 		}
@@ -1345,11 +1345,6 @@ class HTMLOUT
 			}
 			if (!$NOSRDISP) {
 			?>
-			<tr>
-				<td colspan="<?php echo $CP;?>">
-				<hr>
-				</td>
-			</tr>
 			<tr>
 				<td align="right" colspan="<?php echo $CP;?>">
 				<?php
