@@ -75,10 +75,6 @@ div.boxCommon,div.boxWide,div.boxCoachPage,div.boxTeamPage,div.boxPlayerPageInfo
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-
-    -moz-box-shadow: 3px 4px 10px #999;
-    -webkit-box-shadow: 3px 4px 10px #999;
-    box-shadow: 3px 4px 10px #999;
 }
 div.boxWide             {clear:both;}
 div.boxCommon           {float:left;}

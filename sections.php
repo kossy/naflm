@@ -184,7 +184,7 @@ function sec_main() {
             if ($prevPinned == 1 && !$e->pinned) { echo "<hr>\n"; }
             $prevPinned = $e->pinned;
 
-            echo "<div class='boxWide'>\n";
+            echo "<div class='col-sm'>\n";
                 echo "<h3 class='boxTitle$e->cssidx'>$e->title</h3>\n";
                 echo "<div class='boxBody'>\n";
                     $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.

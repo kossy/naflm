@@ -43,9 +43,9 @@ text-decoration: underline;
 
 body 
 {
-    background: #990000;
+    background: #444444;
 
-    font: 11px bold Arial, Helvetica, sans-serif;
+    font: 12px bold Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 
@@ -109,7 +109,7 @@ div.banner {
     margin-left:0px;
     margin-bottom: 0px;
     margin-top: 10px;
-    background: url(../images/logo.png) left bottom no-repeat, url(../images/logo2.png) right bottom no-repeat, url(../images/bg_header.png) left bottom repeat-x;
+    background: url(../images/logo.png) left bottom no-repeat, /*url(../images/logo2.png) right bottom no-repeat,*/ url(../images/bg_header.png) left bottom repeat-x;
 	border: 1px solid black;
 	color: black;
 }
@@ -124,7 +124,7 @@ div.menu {
 /* Section code container */
 div.section {
     margin: 5px; 
-    color: white;
+    color: black;
 	padding-bottom: 40px; 
     background-color: inherit;
 }
@@ -135,16 +135,12 @@ div.section {
 div.boxCommon,div.boxWide,div.boxCoachPage,div.boxTeamPage,div.boxPlayerPageInfo {
     margin: 16px; 
 	color: white;
-    border: 2px solid black;
 
 	border-radius: 0px;
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 0px;
-
-	/*-moz-box-shadow: 3px 4px 10px #999;
-	-webkit-box-shadow: 3px 4px 10px #999;
-	box-shadow: 3px 4px 10px #999;*/
 }
+
 div.boxWide             {clear:both;}
 div.boxCommon           {float:left;}
 div.boxCoachPage        {float: left; width: 270px; margin: 15px; margin-bottom: 0px;}

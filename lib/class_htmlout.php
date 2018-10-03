@@ -860,10 +860,12 @@ class HTMLOUT
 		    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 			<title><?php echo $settings['site_name']; ?></title>
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+			
 			<link type="text/css" href="css/stylesheet_default.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 			<link type="text/css" href="css/stylesheet<?php echo $settings['stylesheet']; ?>.css" rel="stylesheet">
 			<link type="text/css" href="css/league_override_<?php echo self::getSelectedNodeLidOrDefault(); ?>.css" rel="stylesheet">
+
 			<link rel="alternate" type="application/rss+xml" title="RSS Feed"href="rss.xml">
 			<script type="text/javascript" src="lib/misc_functions.js"></script>
 			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -879,9 +881,6 @@ class HTMLOUT
 				width: 860,
 				height: 150
 			});</script>
-
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 			
 			<script type="text/javascript" src="js/app/ViewModel/Common/RegistrationViewModel.js"></script>
 			<script type="text/javascript" src="js/app/ViewModel/Common/PageViewModel.js"></script>
@@ -950,6 +949,9 @@ class HTMLOUT
 					<div style="clear: both;"></div>
 				</div> <!-- End of section div -->
 			</div> <!-- End of everything div -->
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		</body>
 		</html>
 		<?php
@@ -961,117 +963,170 @@ class HTMLOUT
 		global $lng, $coach, $settings, $rules, $admin_menu;
 		?>
 		<!-- Following HTML from ./lib/class_htmlout.php make_menu -->
-		<ul class="css3menu1 topmenu">
-			<li class="topfirst"><a href="index.php?section=main"><?php echo $lng->getTrn('menu/home');?></a>
-			 <ul>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav mr-auto">
+		
+			<!-- <li class="topfirst"><a href="index.php?section=main"><?php echo $lng->getTrn('menu/home');?></a> -->
+			<li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          <?php echo $lng->getTrn('menu/home');?>
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		        <a class="dropdown-item" href="index.php?section=main">Dashboard</a>
 				<?php 
 				if(Settings::getValueOrDefault('show-regional-menu', false)) { 
 					foreach(League::getLeaguesByLocation() as $locationName => $leagues) {
-						echo '<li><a href="#">' . $locationName . ' ></a><ul>';
+						echo '<a class="dropdown-item" href="#">' . $locationName . ' ></a>';
 						
 						foreach($leagues as $league) {
-							echo '<li><a href="index.php?SLS_lid=' . $league->lid . '">' . $league->name . '</a></li>';
+							echo '<a class="dropdown-item" href="index.php?SLS_lid=' . $league->lid . '">' . $league->name . '</a>';
 						}
-						
-						echo '</ul></li>';
 					}
 					if (isset($_SESSION['logged_in'])) {
-						echo '<li><a href="index.php?section=requestleague">Request a League</a></li>';
+						echo '<a class="dropdown-item" href="index.php?section=requestleague">Request a League</a>';
 					} 
-					echo '<li><a href="http://www.thenaf.net/leagues/leagues-locator/" >TheNAF.net League Locator</a></li>';
-					echo '<li><a href="index.php?SLS_lid=1" >League Hosting Home</a></li>';
+					echo '<a class="dropdown-item" href="http://www.thenaf.net/leagues/leagues-locator/">TheNAF.net League Locator</a>';
+					echo '<a class="dropdown-item" href="index.php?SLS_lid=1">League Hosting Home</a>';
 				} ?>
-				<li><a href="index.php?section=about">About OBBLM</a></li>
-			</ul>
-		</li>
+				<a class="dropdown-item" href="index.php?section=about">About OBBLM</a>
+			</div>
+	      </li>
 		<?php
 		if (isset($_SESSION['logged_in'])) {
 		?>
 
-		<li class="topfirst"><a href="#">User Menu</a>
-			<ul>
-				<li class="subfirst"><a href="handler.php?type=teamcreator">Create a New Team</a></li>
-				<li><a href="index.php?section=matches&amp;type=usersched" >Schedule Match</a></li>
-				 <li><a rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=teams';?>"><?php echo $lng->getTrn('cc/coach_teams');?></a></li>
-				<li><a rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=profile';?>"><?php echo $lng->getTrn('cc/profile');?></a></li>
-				<li><a rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=stats';?>"><?php echo $lng->getTrn('common/stats');?></a></li>
-			   <li><a rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=recentmatches';?>"><?php echo $lng->getTrn('common/recentmatches');?></a></li>
-				<li><a rel="nofollow"href="index.php?logout=1"><?php echo $lng->getTrn('menu/logout');?></a></li>
-				</ul><?php 
+			<li class="nav-item dropdown"> 
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			        User Menu
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="handler.php?type=teamcreator">Create a New Team</a>
+					<a class="dropdown-item" href="index.php?section=matches&amp;type=usersched" >Schedule Match</a>
+					<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=teams';?>"><?php echo $lng->getTrn('cc/coach_teams');?></a>
+					<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=profile';?>"><?php echo $lng->getTrn('cc/profile');?></a>
+					<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=stats';?>"><?php echo $lng->getTrn('common/stats');?></a>
+				    <a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$coach->coach_id,false,false).'&amp;subsec=recentmatches';?>"><?php echo $lng->getTrn('common/recentmatches');?></a>
+				    <a class="dropdown-item" rel="nofollow"href="index.php?logout=1"><?php echo $lng->getTrn('menu/logout');?></a>
+				</div>
+			</li>
+			<?php 
 		} else { 
-		?><li class="topfirst"><a rel="nofollow" href="index.php?section=login" style="height:20px;line-height:20px;"><?php echo $lng->getTrn('menu/login');?></a></li><?php
+		?>
+		 <li class="nav-item">
+		<a class="nav-link" rel="nofollow" href="index.php?section=login" style="height:20px;line-height:20px;"><?php echo $lng->getTrn('menu/login');?></a>
+		</li>
+		<?php
 		}
 		if (!empty($admin_menu)) {
-			?><li class="topmenu">
-			<a href="#"><?php echo $lng->getTrn('menu/admin_menu/name');?></a>
-			<ul>
-				<li class="subfirst">
-					<a href="handler.php?type=leaguepref"><?php echo $lng->getTrn('name', 'LeaguePref');?></a>
-				</li>
+			?>
+
+			<li class="nav-item dropdown"> 
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		      <?php echo $lng->getTrn('menu/admin_menu/name');?>
+	        </a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+				<a class="dropdown-item" href="handler.php?type=leaguepref"><?php echo $lng->getTrn('name', 'LeaguePref');?></a>
+
 				<?php 
 					if (Module::isRegistered('Conference'))
-						echo '<li><a href="handler.php?type=conference">' . $lng->getTrn('name', 'Conference') . '</a></li>';
+						echo '<a class="dropdown-item" href="handler.php?type=conference">' . $lng->getTrn('name', 'Conference') . '</a>';
 					if (Module::isRegistered('Scheduler'))
-						echo '<li><a href="handler.php?type=scheduler">' . $lng->getTrn('menu/admin_menu/schedule') . '</a></li>';
+						// echo '<a class="dropdown-item" href="handler.php?type=scheduler">' . $lng->getTrn('menu/admin_menu/schedule') . '</a>';
+
+					?><div class="dropdown-divider"></div><?php
 					foreach ($admin_menu as $lnk => $desc) {
 						if (!is_array($desc)) {
-							echo "<li><a href='index.php?section=admin&amp;subsec=$lnk'>$desc</a></li>\n";
+							echo "<a class='dropdown-item' href='index.php?section=admin&amp;subsec=$lnk'>$desc</a>";
+						
 						} else { 
-							echo '<li><a href="#">' . $desc['title'] . '<ul>';
+							// echo '<a class="dropdown-header" href="#">' . $desc['title'] . '<ul>';
 							foreach ($desc['sub'] as $sub) {
-								echo "<li><a href='index.php?section=admin&amp;subsec=$lnk&amp;$sub[href]'>$sub[title]</a></li>\n";
+								echo "<a class='dropdown-item' href='index.php?section=admin&amp;subsec=$lnk&amp;$sub[href]'>$sub[title]</a>\n";
 							}
-							echo '</ul></li>';
 						}
 					}
 				?>
-			</ul>
-		</li><?php
-		} ?>        
+			</div>
+		</li>
+		<?php
+		} 
+		?>        
 
-	<li class="topmenu">
-		<a href="#">League Menu</a>
-		<ul>
-			<li class="subfirst"><a href="index.php?section=rules"><?php echo $lng->getTrn('menu/rules');?></a></li>
-			<li><a href="handler.php?type=leaguetables"><?php echo $lng->getTrn('name', 'LeagueTables');?></a></li>
-			<li><a href="index.php?section=teamlist"><?php echo $lng->getTrn('menu/teams');?></a></li>
-			<li><a href="index.php?section=coachlist"><?php echo $lng->getTrn('menu/coaches');?></a></li>
-			<li><a href="index.php?section=matches&amp;type=recent"><?php echo $lng->getTrn('menu/matches_menu/recent');?></a></li>
-			<li><a href="index.php?section=matches&amp;type=upcoming"><?php echo $lng->getTrn('menu/matches_menu/upcoming');?></a>
-			<?php
-				if (!empty($settings['league_url'])) {
-					$leagueUrl = $settings['league_url'];
-					$leagueUrl = !strpos($leagueUrl, 'http') ? 'http://' . $leagueUrl : $leagueUrl;
-					
-					?>  <li><a href="<?php echo $leagueUrl;?>"><?php echo $settings['league_url_name'];?></a></li><?php
-				}
-			?>
-		</ul>
+	<li class="nav-item dropdown"> 
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        League Menu
+	        </a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="index.php?section=rules"><?php echo $lng->getTrn('menu/rules');?></a>
+				<a class="dropdown-item" href="handler.php?type=leaguetables"><?php echo $lng->getTrn('name', 'LeagueTables');?></a>
+				<a class="dropdown-item" href="index.php?section=teamlist"><?php echo $lng->getTrn('menu/teams');?></a>
+				<a class="dropdown-item" href="index.php?section=coachlist"><?php echo $lng->getTrn('menu/coaches');?></a>
+				<a class="dropdown-item" href="index.php?section=matches&amp;type=recent"><?php echo $lng->getTrn('menu/matches_menu/recent');?></a>
+				<a class="dropdown-item" href="index.php?section=matches&amp;type=upcoming"><?php echo $lng->getTrn('menu/matches_menu/upcoming');?></a>
+				<?php
+					if (!empty($settings['league_url'])) {
+						$leagueUrl = $settings['league_url'];
+						$leagueUrl = !strpos($leagueUrl, 'http') ? 'http://' . $leagueUrl : $leagueUrl;
+						
+						?>  
+						<a class="dropdown-item" href="<?php echo $leagueUrl;?>"><?php echo $settings['league_url_name'];?></a>
+						<?php
+					}
+				?>
+		</div>
 	</li>
 			
-	<li class="topmenu"><a rel="nofollow" href="index.php?section=rules">League History</a>
-		<ul>   
-			<?php if (Module::isRegistered('Gallery'))        { ?><li><a href="handler.php?type=gallery"><?php echo $lng->getTrn('name', 'Gallery');?></a></li><?php } ?>
-			<?php if (Module::isRegistered('Wanted'))        { ?><li><a href="handler.php?type=wanted"><?php echo $lng->getTrn('name', 'Wanted');?></a></li><?php } ?>
-			<?php if (Module::isRegistered('Prize'))        { ?><li><a href="handler.php?type=prize"><?php echo $lng->getTrn('name', 'Prize');?></a></li><?php } ?>
-			<?php if (Module::isRegistered('HOF'))        { ?><li><a href="handler.php?type=hof"><?php echo $lng->getTrn('name', 'HOF');?></a></li><?php } ?>
-			<?php if (Module::isRegistered('FamousTeams'))        { ?><li><a href="handler.php?type=famousteams"><?php echo $lng->getTrn('name', 'FamousTeams');?></a></li><?php } ?>
-			<?php if (Module::isRegistered('Memmatches'))        { ?><li><a href="handler.php?type=memmatches"><?php echo $lng->getTrn('name', 'Memmatches');?></a></li><?php } ?>
-			<li><a href="index.php?section=matches&amp;type=tours"><?php echo $lng->getTrn('menu/matches_menu/tours');?></a></li>
-		</ul>
+	<li class="nav-item dropdown"> 
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        League History
+        </a>
+
+	    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="dropdown-item" rel="nofollow" href="index.php?section=rules">Rules</a>
+ 
+			<?php if (Module::isRegistered('Gallery'))        { ?>
+				<a class="dropdown-item" href="handler.php?type=gallery"><?php echo $lng->getTrn('name', 'Gallery');?></a>
+			<?php } ?>
+			<?php if (Module::isRegistered('Wanted'))        { ?>
+				<a class="dropdown-item" href="handler.php?type=wanted"><?php echo $lng->getTrn('name', 'Wanted');?></a>
+			<?php } ?>
+			<?php if (Module::isRegistered('Prize'))        { ?>
+				<a class="dropdown-item" href="handler.php?type=prize"><?php echo $lng->getTrn('name', 'Prize');?></a>
+			<?php } ?>
+			<?php if (Module::isRegistered('HOF'))        { ?>
+				<a class="dropdown-item" href="handler.php?type=hof"><?php echo $lng->getTrn('name', 'HOF');?></a>
+			<?php } ?>
+			<?php if (Module::isRegistered('FamousTeams'))        { ?>
+				<a class="dropdown-item" href="handler.php?type=famousteams"><?php echo $lng->getTrn('name', 'FamousTeams');
+				?></a>
+			<?php } ?>
+			<?php if (Module::isRegistered('Memmatches'))        { ?>
+				<a  class="dropdown-item" href="handler.php?type=memmatches"><?php echo $lng->getTrn('name', 'Memmatches');?></a>
+			<?php } ?>
+			<a class="dropdown-item" href="index.php?section=matches&amp;type=tours"><?php echo $lng->getTrn('menu/matches_menu/tours');?></a>
+		</div>
 	</li>
 			
-	<li class="topmenu"><a rel="nofollow" href="#">Statistics</a>
-		<ul>
-			<li class="subfirst"><a rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_TEAM,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/team_stn');?></a></li>
-			<li><a rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_PLAYER,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/player_stn');?></a></li>
-			<li><a rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_COACH,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/coach_stn');?></a></li>
-			<li><a rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_RACE,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/race_stn');?></a></li>
-			<li><a rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_STAR,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/star_stn');?></a></li>
-		</ul>
+	<li class="nav-item dropdown"> 
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		       Statistics
+        </a>
+
+	    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<a  class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_TEAM,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/team_stn');?></a>
+			<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_PLAYER,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/player_stn');?></a>
+			<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_COACH,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/coach_stn');?></a>
+			<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_RACE,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/race_stn');?></a>
+			<a class="dropdown-item" rel="nofollow" href="<?php echo urlcompile(T_URL_STANDINGS,T_OBJ_STAR,false,false,false);?>"><?php echo $lng->getTrn('menu/statistics_menu/star_stn');?></a>
+		</div>
 	</li>
 			
-	<li class="topmenu"><a rel="nofollow" href="#">Game Rules</a>
+	<!-- <li class="topmenu"><a rel="nofollow" href="#">Game Rules</a>
 		<ul> 
 			<li class="subfirst"><a rel="nofollow" href="#">CRP Rosters ></a>
 				<ul><li><a href="index.php?section=objhandler&type=1&obj=4&obj_id=0" style="height:10px;line-height:10px;">Amazon</a></li>
@@ -1109,13 +1164,22 @@ class HTMLOUT
 			<li><a href="http://www.thenaf.net/wp-content/uploads/2013/06/CRP1.pdf">The CRP (Full Blood Bowl Rules)</a></li>
 			<li><a href="http://the-outcast.com/bloodbowl/blood%20bowl%20crp%20lite.pdf">A5 Rules Summary</a></li>  
 		</ul>
-	</li>  
-
+	</li>   -->
+	
 	<?php
 		if (Module::isRegistered('Search')) {
-			?><li><a href="handler.php?type=search"><?php
-			echo $lng->getTrn('name', 'Search');?></a></li><?php
+			?> 
+			<li class="nav-item">
+				<a class='nav-link' href="handler.php?type=search"><?php
+			echo $lng->getTrn('name', 'Search');?></a>
+			</li>
+			<?php
 		}
+	?>
+	</ul> 
+	</div>
+	</nav>
+	<?php
 	}
 	
 	// Prints an advanced sort table.
