@@ -272,7 +272,7 @@ class Registration implements ModuleInterface
          **/
 
         $form = '
-        <form id="registrationForm" method="POST" action="handler.php?type=registration" data-bind="with: registrationViewModel">
+        <form >
             <div class="boxCommon">
                 <div class="boxTitle'.T_HTMLBOX_COACH.'">
                     Register
@@ -281,6 +281,7 @@ class Registration implements ModuleInterface
                     Username<br> <input type="text" name="new_name" size="20" maxlength="50"><br><br>
                     Email<br> <input type="text" name="new_mail" size="20" maxlength="129"><br><br>
                     Password<br> <input type="password" name="new_passwd" size="20" maxlength="50"><br><br>
+
                     <strong>I\'m a league commissioner:</strong> <input type="checkbox" name="is_commissioner" data-bind="checked: isCommissioner"><br /><br />
                     <div data-bind="visible: showLeagueSelection">
                         <div>League</div>
@@ -294,6 +295,45 @@ class Registration implements ModuleInterface
             </div>
         </form>
         ';
+
+        $form = '
+        <div class="card bg-dark mt-3">
+          <h6 class="card-header">
+            Register
+          </h6>
+          <div class="card-body">
+
+        <form id="registrationForm" method="POST" action="handler.php?type=registration" data-bind="with: registrationViewModel">
+                  <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input name="new_name" type="text" class="form-control" id="inputUsername" placeholder="" maxlength="50">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input name="new_mail" type="email" class="form-control" id="inputEmail" placeholder="" maxlength="129">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input name="new_passwd" type="password" class="form-control" id="inputPassword" placeholder="">
+                  </div>
+                  <div class="form-group form-check">
+                   <input type="checkbox" class="form-check-input" id="check" name="is_commissioner" data-bind="checked: isCommissioner">
+                    <label class="form-check-label" for="check">  <strong>I\'m a league commissioner:</strong></label>
+                  </div>
+                  
+                  <div class="form-group" data-bind="visible: showLeagueSelection">
+                    <label for="inputLeague">League</label>
+                    <select id="inputLeague" class="form-control"  name="new_league" data-bind="options: leagues, optionsText: \'name\', optionsValue: \'lid\', value: selectedLeague, optionsCaption: \'Select a league.\'"></select>
+                  </div>
+
+                <button type="submit" class="btn btn-primary text-white" aria-describedby="submitHelpBlock">Create</button>
+
+                 <small id="submitHelpBlock" class="form-text text-muted">
+                   *Admin activation is required.
+                  </small>
+                </form>    
+              </div>
+            </div>';
         
         return $form;
     }

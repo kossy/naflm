@@ -506,7 +506,7 @@ EOQ;
 		}
 
 		function makeSelect(id, type, max) {
-			var str = "<select id=\"qty" + type + id + "\" name=\"qty" + type + id + "\" onchange=\"updateQty(" + id + ", '" + type + "', this.options[this.selectedIndex].value)\">";
+			var str = "<select class='form-control form-control-sm' id=\"qty" + type + id + "\" name=\"qty" + type + id + "\" onchange=\"updateQty(" + id + ", '" + type + "', this.options[this.selectedIndex].value)\">";
 			for (var i = 0; i <= max; i++) {
 				str += "<option value=\"" + i + "\">" + i + "</option>";
 			}

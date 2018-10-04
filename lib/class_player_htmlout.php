@@ -4,7 +4,8 @@
 *   Roster/status colors
 *********************/
 define('COLOR_HTML_NORMAL',   '#212529'); // Color used when not in detailed view mode.
-define('COLOR_HTML_READY',    '#83b783');
+define('COLOR_HTML_NORMAL_PDF',   '#FFFFFF');
+define('COLOR_HTML_READY',    '#28A745');
 define('COLOR_HTML_MNG',      '#6495ED');
 define('COLOR_HTML_DEAD',     '#F78771');
 define('COLOR_HTML_SOLD',     '#D2B477');

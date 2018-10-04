@@ -137,68 +137,105 @@ $T_LOCAL_RINGS = array(
     
 <?php echo "<b><a TARGET='_blank' href='".DOC_URL_GUIDE."'>".$lng->getTrn('common/needhelp')."</a></b><br>"; ?>
 
-<div style='float:left; width:100%;'> <!-- ALL -->
-<div class="boxCommon">
-    <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">
-        Create new coach
-    </div>
-    <div class="boxBody">
+<!-- <div> ALL -->
+
+<div class= "row">
+ <div class="col">
+    <div class="card bg-dark text-white">
+    <div class="card-header bg-danger">Create new coach</div>
+    <div class="card-body">
         <form method="POST">
+          <div class="form-group">
+            <label for="inputUsername">Username</label>
+            <input type="text" class="form-control" id="inputUsername" name="name">
+          </div>
+
+          <div class="form-group">
+            <label for="inputName">Full name</label>
+            <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" name="realname">
+            <small id="nameHelp" class="form-text text-muted">Fullname of coach.</small>
+          </div>
+
+           <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" name="mail">
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="passwd">
+          </div>
+
+
+          <div class="form-group">
+            <label for="inputLang">Language</label>
+            <select id="inputLang" class="form-control" name='lang'>
+                <?php
+                foreach (Translations::$registeredLanguages as $lang) {
+                    echo "<option value='$lang'>$lang</option>\n";
+                }
+                ?>
+            </select>
+          </div>
+          <div class="form-group">
+
+
+            <label for="inputGlobal">Global site access level</label>
+            <select id="inputGlobal" class="form-control" name="ring">
+                <?php
+                foreach ($T_GLOBAL_RINGS as $r => $desc) {
+                    if ($r <= $coach->ring) {
+                        echo "<option value='$r' ".(($r == Coach::T_RING_GLOBAL_NONE) ? 'SELECTED' : '').">$desc</option>\n";
+                    }
+                }
+                ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+
+            <label for="inputLocal">Local (league) access</label>
+             
+            <select if="inputLocal" class="form-control" name="def_leagues[]" MULTIPLE>
+            <?php
+            foreach ($settings['default_leagues'] as $lid) {
+                if (get_alt_col('leagues', 'lid', $lid, 'lid')) {
+                    echo "<OPTION DISABLED VALUE='$lid'>".get_alt_col('leagues', 'lid', $lid, 'name')." (added to automatically)</OPTION>\n";
+                }
+            }
+            foreach ($leagues as $lid => $desc) {
+                if ($desc['ring'] == Coach::T_RING_LOCAL_ADMIN && !in_array($lid, $settings['default_leagues'])) {
+                    echo "<OPTION VALUE='$lid'>$desc[lname]</OPTION>\n";
+                }
+            }
+            ?>
+             </select>
+          </div>
+          <input type="hidden" name="phone" value="">
+          <input type="hidden" name="type" value="mk_coach">
+          <button type="submit" name="button" class="btn btn-primary">Create</button>
+        </form>
+<!--         <form method="POST">
         Coach name (login)<br> <input type="text" name="name" size="20" maxlength="50"><br><br>
         Full name<br> <input type="text" name="realname" size="20" maxlength="50"><br><br>
         Mail (optional)<br> <input type="text" name="mail" size="20" maxlength="129"><br><br>
         Phone (optional)<br> <input type="text" name="phone" size="20" maxlength="129"><br><br>
         Password<br> <input type="password" name="passwd" size="20" maxlength="50"><br><br>
-        Language<br>
-        <select name='lang'>
-            <?php
-            foreach (Translations::$registeredLanguages as $lang) {
-                echo "<option value='$lang'>$lang</option>\n";
-            }
-            ?>
-        </select>
-        <br><br>
-        Global site access level<br>
-        <select name="ring">
-            <?php
-            foreach ($T_GLOBAL_RINGS as $r => $desc) {
-                if ($r <= $coach->ring) {
-                    echo "<option value='$r' ".(($r == Coach::T_RING_GLOBAL_NONE) ? 'SELECTED' : '').">$desc</option>\n";
-                }
-            }
-            ?>
-        </select>
-        <br><br>
-        Local (league) access<br>
-        <SELECT NAME="def_leagues[]" MULTIPLE>
-        <?php
-        foreach ($settings['default_leagues'] as $lid) {
-            if (get_alt_col('leagues', 'lid', $lid, 'lid')) {
-                echo "<OPTION DISABLED VALUE='$lid'>".get_alt_col('leagues', 'lid', $lid, 'name')." (added to automatically)</OPTION>\n";
-            }
-        }
-        foreach ($leagues as $lid => $desc) {
-            if ($desc['ring'] == Coach::T_RING_LOCAL_ADMIN && !in_array($lid, $settings['default_leagues'])) {
-                echo "<OPTION VALUE='$lid'>$desc[lname]</OPTION>\n";
-            }
-        }
-        ?>
-        </SELECT>
         <br><br>
         <input type="hidden" name="type" value="mk_coach">
         <input type="submit" name="button" value="Create coach">
-        </form>
+        </form> -->
     </div>
+</div>
 </div>
 
 <div style='float:left;'> <!-- Outer -->
 <div class="row"> <!-- Inner row 1 -->
 
-<div class="boxCommon">
-    <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">
-        Change local access level
-    </div>
-    <div class="boxBody">
+    <div class="col">
+    <div class="card bg-dark text-white">
+    <div class="card-header bg-danger">Change local access level</div>
+    <div class="card-body">
         <form method="POST">
         Coach name<br> <input type="text" name="cname" id="coach1" size="20" maxlength="50"><br><br>
         <div id='massuserlist' style='display:none;'>
@@ -240,12 +277,12 @@ $T_LOCAL_RINGS = array(
         <a href='javascript:void();' onClick='slideDownFast("massuserlist");document.getElementById("coach1").disabled=1;document.getElementById("massuser").value=1;'><b>Mass user access changes?</b></a>
     </div>
 </div>
+</div>
 
-<div class="boxCommon">
-    <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">
-        Change global access level
-    </div>
-    <div class="boxBody">
+     <div class="col">
+    <div class="card bg-dark text-white">
+    <div class="card-header bg-danger">Change global access level</div>
+    <div class="card-body">
         <form method="POST">
         Coach name<br> <input type="text" name="cname" id="coach2" size="20" maxlength="50"><br><br>
         Access level<br>
@@ -264,13 +301,13 @@ $T_LOCAL_RINGS = array(
         </form>
     </div>
 </div>
+</div>
 
 <?php if (Module::isRegistered('Registration') && $settings['allow_registration']) { ?>
-    <div class="boxCommon">
-        <div class="boxTitle<?php echo T_HTMLBOX_ADMIN; ?>">
-            Activate Users
-        </div>
-        <div class="boxBody">
+     <div class="col">
+    <div class="card bg-dark text-white">
+    <div class="card-header bg-danger">Activate Users</div>
+    <div class="card-body">
             <?php
                 $retiredCoaches = Coach::getCoaches('retired = 2');
                     
@@ -301,16 +338,15 @@ $T_LOCAL_RINGS = array(
                 <?php } ?>
         </div>
     </div>
+</div>
 <?php } ?>
     
 </div> <!-- END row 1 -->
 <div class="row"> <!-- Intter row 2 -->
-
-<div class="boxCommon">
-    <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">
-        Display coach access levels
-    </div>
-    <div class="boxBody">
+     <div class="col">
+    <div class="card bg-dark text-white">
+    <div class="card-header bg-danger">Display coach access level</div>
+    <div class="card-body">
         <form method="POST">
         Coach name<br> <input type="text" name="cname" id="coach3" size="20" maxlength="50"><br><br>
         <?php
@@ -337,12 +373,11 @@ $T_LOCAL_RINGS = array(
         </form>
     </div>
 </div>
-
-<div class="boxCommon">
-    <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">
-        Change coach password
-    </div>
-    <div class="boxBody">
+</div>
+     <div class="col">
+  <div class="card bg-dark text-white">
+    <div class="card-header bg-danger">Coach password change</div>
+    <div class="card-body">
         <form method="POST">
         Coach name<br> <input type="text" name="cname" id="coach4" size="20" maxlength="50"><br><br>
         New password<br> <input type="password" name="passwd" size="20" maxlength="50"><br><br>
@@ -351,7 +386,8 @@ $T_LOCAL_RINGS = array(
         </form>
     </div>
 </div>
+</div>
 
 </div> <!-- END row 2 -->
 </div> <!-- END Outer -->
-</div> <!-- END ALL -->
+</div>

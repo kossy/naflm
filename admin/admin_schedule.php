@@ -206,16 +206,27 @@ $commonStyle = "float:left; width:45%; height:300px; margin:10px;";
 <br>
 <form method="POST" name="tourForm">
 
-    <div style='margin:7px;'>
-    <b><?php echo $lng->getTrn('admin/schedule/sched_type');?></b><br>
-    <input type="radio" onClick="chTour(this.value);" name="type" value="FFA_SINGLE" CHECKED> <?php echo $lng->getTrn('admin/schedule/TT_FFA_SINGLE');?><br>
-    <input type="radio" onClick="chTour(this.value);" name="type" value="FFA_TOUR""> <?php echo $lng->getTrn('admin/schedule/TT_FFA');?><br>
-    <input type="radio" onClick="chTour(this.value);" name="type" value="RR_TOUR"> <?php echo $lng->getTrn('admin/schedule/TT_RR');?><br>
+     <div class="row mt-4 mb-4">
+
+    <div class="col">
+        <div class="card bg-dark text-white">
+            <div class="card-header bg-danger"><?php echo $lng->getTrn('admin/schedule/sched_type');?></div>
+            <div class="card-body">
+
+            <input type="radio" onClick="chTour(this.value);" name="type" value="FFA_SINGLE" CHECKED> <?php echo $lng->getTrn('admin/schedule/TT_FFA_SINGLE');?><br>
+            <input type="radio" onClick="chTour(this.value);" name="type" value="FFA_TOUR""> <?php echo $lng->getTrn('admin/schedule/TT_FFA');?><br>
+            <input type="radio" onClick="chTour(this.value);" name="type" value="RR_TOUR"> <?php echo $lng->getTrn('admin/schedule/TT_RR');?><br>
+            </div>
+            </div>
+        </div>
     </div>
-    <div style='clear:both;'>
-    <div class='boxCommon' style='<?php echo $commonStyle;?>'>
-    <h3 class='boxTitle<?php echo T_HTMLBOX_ADMIN;?>'><?php echo $lng->getTrn('common/options');?></h3>
-    <div class='boxBody'>
+
+    <div class="row mt-4 mb-4">
+
+    <div class="col">
+    <div class="card bg-dark text-white">
+    <div class="card-header bg-danger"><?php echo $lng->getTrn('common/options');?></div>
+    <div class="card-body">
 
         <div id='OPTS_NEW_TOUR'>
             <?php echo $lng->getTrn('common/division');?><br>
@@ -268,9 +279,11 @@ $commonStyle = "float:left; width:45%; height:300px; margin:10px;";
         </div>
     </div>
     </div>
-    <div class='boxCommon' style='<?php echo $commonStyle;?>'>
-    <h3 class='boxTitle<?php echo T_HTMLBOX_ADMIN;?>'><?php echo $lng->getTrn('admin/schedule/add_team');?></h3>
-    <div class='boxBody'>
+    </div>
+    <div class="col">
+    <div class="card bg-dark text-white bm-4">
+    <div class="card-header bg-danger"><?php echo $lng->getTrn('admin/schedule/add_team');?></div>
+    <div class="card-body">
     <?php echo $lng->getTrn('admin/schedule/add_team');?><br>
     <script>
         $(document).ready(function(){
@@ -291,10 +304,12 @@ $commonStyle = "float:left; width:45%; height:300px; margin:10px;";
     </div>
     </div>
     </div>
+    </div>
     <div style='clear:both;'>
     <br>
-    &nbsp;&nbsp;&nbsp;<input type="submit" name="button" value="<?php echo $lng->getTrn('common/create');?>" <?php echo (empty($divisions) ? 'DISABLED' : '');?>>
+    <button type="submit"  name="button" value="" class="btn btn-primary"<?php echo (empty($divisions) ? 'DISABLED' : '');?>><?php echo $lng->getTrn('common/create');?></button>
     </div>
+</div>
 </form>
 
 <script language="JavaScript" type="text/javascript">

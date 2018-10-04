@@ -960,9 +960,9 @@ class Team_HTMLOUT extends Team
 				?>
 				<!-- Following HTML is from class_team_htmlout.php _actionBoxes -->
 				<div class="col">
-				<div class="card">
-					<div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>"><?php echo $lng->getTrn('profile/team/box_admin/title');?></div>
-					<div class="boxBody">
+				<div class="card bg-dark text-white">
+					<div class="card-header bg-danger "><?php echo $lng->getTrn('profile/team/box_admin/title');?></div>
+					<div class="card-body">
 						<?php
 						$base = 'profile/team';
 						$admin_tools = array(

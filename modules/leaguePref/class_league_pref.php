@@ -257,9 +257,9 @@ public static function showLeaguePreferences() {
 	// check this coach is allowed to administer this league
 	$canEdit = is_object($coach) && $coach->isNodeCommish(T_NODE_LEAGUE, $l_pref->lid) ? "" : "DISABLED";
     ?>
-	<div class='boxWide'>
-		<h3 class='boxTitle4'><?php echo $l_pref->l_name; ?></h3>
-		<div class='boxConf'>
+	<div class='card bg-dark mt-4'>
+		<div class='card-header'><?php echo $l_pref->l_name; ?></div>
+		<div class='card-body boxConf'>
             <form method="POST">
                 <input type="hidden" name="lid" value="<?php echo $l_pref->lid; ?>" />
                 <input type="hidden" name="existing" value="<?php echo $l_pref->existing; ?>" />

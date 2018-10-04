@@ -26,8 +26,6 @@ h2
     margin:0 auto;
 }
 
-/* Container for rows */
-div.row {width: inherit; clear: both; background-color: inherit;}
 
 /* MAIN container */
 div.everything {
@@ -321,15 +319,6 @@ ul.css3menu1>li:nth-of-type(1){width:25%}ul.css3menu1>li:nth-of-type(2){width:25
     
     table td.date {
         width: 65px;
-    }
-    
-    div.row {
-        margin-bottom: 2px;
-    }
-    
-    div.row input[type="radio"] {
-        vertical-align: middle;
-        margin-top: -1px;
     }
 
     div.boxCommon {

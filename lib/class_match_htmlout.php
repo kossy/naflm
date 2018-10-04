@@ -953,9 +953,11 @@ class Match_HTMLOUT extends Match
 		$LOCK_FORMS = false;
 		?>
 		<!-- Following HTML from ./lib/class_match_htmlout.php userSched -->
-		<div class='boxCommon'>
-			<h3 class='boxTitle<?php echo T_HTMLBOX_MATCH;?>'><?php echo $lng->getTrn('menu/matches_menu/usersched');?></h3>
-			<div class='boxBody'>
+		<div class="row">
+		<div class="col">
+		<div class='card bg-dark text-white'>
+			<h3 class='card-header'><?php echo $lng->getTrn('menu/matches_menu/usersched');?></h3>
+			<div class='card-body'>
 				<form method="POST" id="usersched">
 					<?php 
 					echo "In tournament "; 
@@ -1004,13 +1006,15 @@ class Match_HTMLOUT extends Match
 						});
 					</script>
 					<br><br><br>
-					<input type="submit" name="creategame" value="<?php echo $lng->getTrn('menu/matches_menu/usersched');?>" <?php if (empty($teams) || $_DISABLED) echo 'DISABLED';?>>
+					<input class="btn btn-primary" type="submit" name="creategame" value="<?php echo $lng->getTrn('menu/matches_menu/usersched');?>" <?php if (empty($teams) || $_DISABLED) echo 'DISABLED';?>>
 					
 					<?php if(Mobile::isMobile()) {
 						echo '<a href="' . getFormAction('') . '">' . $lng->getTrn('common/back') . '</a>';
 					} ?>
 				</form>
 			</div>
+		</div>
+		</div>
 		</div>
 		<?php
 	}

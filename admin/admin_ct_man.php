@@ -54,9 +54,10 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
     </tr>
     <tr>
         <td valign='top'>
-            <div class="boxCommon">
-                <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Retire team</div>
-                <div class="boxBody">
+           <div class="col">
+                <div class="card bg-danger text-white">
+                <div class="card-header">Retire team</div>
+                <div class="card-body">
                 <form method="POST">
                 Team name<br>
                 <input type="text" name="name" id="t1" size="30" maxlength="50"><br><br>
@@ -66,11 +67,13 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
                 </form>
                 </div>
             </div>
+        </div>
         </td>
         <td valign='top'>
-            <div class="boxCommon">
-                <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Delete team</div>
-                <div class="boxBody">
+          <div class="col">
+                <div class="card bg-danger text-white">
+                <div class="card-header">Delete team</div>
+                <div class="card-body">
                 <form method="POST">
                 Team name<br>
                 <input type="text" name="name" id="t2" size="30" maxlength="50"><br><br>
@@ -79,14 +82,16 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
                 </form>
                 </div>
             </div>
+            </div>
         </td>
     </tr>
     <tr><td colspan="2"><hr></td></tr>
     <tr>
         <td valign='top'>
-            <div class="boxCommon">
-                <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Retire coach</div>
-                <div class="boxBody">
+          <div class="col">
+                <div class="card bg-danger text-white">
+                <div class="card-header">Retire coach</div>
+                <div class="card-body">
                 <form method="POST">
                 Coach name<br>
                 <input type="text" name="name" id="c1" size="30" maxlength="50"><br><br>
@@ -96,11 +101,13 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
                 </form>
                 </div>
             </div>
+            </div>
         </td>
         <td valign='top'>
-            <div class="boxCommon">
-                <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Delete coach</div>
-                <div class="boxBody">
+          <div class="col">
+                <div class="card bg-danger text-white">
+                <div class="card-header">Delete coach</div>
+                <div class="card-body">
                 <form method="POST">
                 Coach name<br>
                 <input type="text" name="name" id="c2" size="30" maxlength="50"><br><br>
@@ -108,6 +115,7 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
                 <input type='hidden' name='type' value='dc'>
                 </form>
                 </div>
+            </div>
             </div>
         </td>
     </tr>

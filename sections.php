@@ -186,15 +186,14 @@ function sec_main() {
 
             if ($prevPinned == 1 && !$e->pinned) { echo "<hr>\n"; }
             $prevPinned = $e->pinned;
-
+             echo "<div class='row mb-4'>\n";
             echo "<div class='col'>\n";
             echo "<div class='card bg-secondary text-white'>\n";
-                echo "<div class='card-header'>$e->title</div>\n";
+                echo "<div class='card-header'><i class='fas fa-info-circle'></i> $e->title</div>\n";
                 echo '<div class="card-body">';
                     $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.
-                    echo '<p class="card-text">' . $fmtMsg . '</p>';
-                    echo "<br><hr>\n";
-                    echo "<table class='boxTable'><tr>\n";
+                    echo '<p class="card-text">' . $fmtMsg . '</p></div>';
+                    echo '<div class="card-footer">';
                         switch ($e->type) 
                         {
                             case T_TEXT_MATCH_SUMMARY:
@@ -235,6 +234,7 @@ function sec_main() {
                     }
                     ?>
                 </div>
+            </div>
             </div>
             </div>
             <?php
@@ -315,7 +315,7 @@ function sec_main() {
             }
             list($teams, ) = Stats::getRaw(T_OBJ_TEAM, array($box['type'] => $box['id']), array(1, $box['length']), $SR, false);
             ?>
-            <div class='row top-buffer'>
+            <div class='row mt-5 mb-4'>
             <div class='col'>
               <div class='card bg-dark text-white'>
                 <div class='card-header'><?php echo $box['title'];?></div>
@@ -369,7 +369,7 @@ function sec_main() {
             }
             $upcoming = isset($box['upcoming']) ? $box['upcoming'] : false;  
            ?>
-           <div class='row top-buffer'>
+           <div class='row mb-4'>
            <div class='col'>
            <div class='card bg-dark text-white'>
                 <div class='card-header'><?php echo $box['title'];?></div>
@@ -418,7 +418,7 @@ function sec_main() {
             $f = 'mv_'.$box['field'];
             list($players, ) = Stats::getRaw(T_OBJ_PLAYER, array($box['type'] => $box['id']), array(1, $box['length']), array('-'.$f), false)
             ?>
-            <div class='row top-buffer'>
+            <div class='row mb-4'>
             <div class='col'>
              <div class='card bg-dark text-white'>
                 <div class='card-header'><?php echo $box['title'];?></div>
@@ -458,7 +458,7 @@ function sec_main() {
         case 'events':
             $events = _events($box['content'], $box['type'], $box['id'], $box['length']);
             ?>  
-        <div class='row top-buffer'>
+        <div class='row mb-4'>
            <div class='col'>
                <div class='card bg-dark text-white'>
                 <div class='card-header'><?php echo $box['title'];?></div>
@@ -517,9 +517,6 @@ function sec_main() {
     </div>
     </div>
     <div class="main_foot">
-        <?php
-        HTMLOUT::dnt();
-        ?>
         <br>
         <a TARGET="_blank" href="http://nicholasmr.dk/index.php?sec=obblm">OBBLM official website</a><br><br>
         This web site is completely unofficial and in no way endorsed by Games Workshop Limited.
@@ -786,7 +783,7 @@ function sec_rules() {
 function sec_about() {
     global $lng, $credits;
     title("About OBBLM");
-    HTMLOUT::dnt();
+    // HTMLOUT::dnt();
     ?>
     <br>
     <p>

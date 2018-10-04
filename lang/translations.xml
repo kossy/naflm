@@ -220,7 +220,7 @@ For example, english is in <en-GB>, french in <fr-FR>, .......
 <cc>
     <new_team>New team</new_team>
     <!-- <stats> defined in <common> block -->
-    <coach_teams>Coach's teams</coach_teams>
+    <coach_teams>Your Teams</coach_teams>
     <profile>Profile</profile>        
     <photo>Coach picture</photo>
     <coach_info>Coach information</coach_info>
