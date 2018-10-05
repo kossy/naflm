@@ -1064,12 +1064,13 @@ class HTMLOUT
 				</a>
 
 				<?php 
-					if (Module::isRegistered('Conference'))
+					if (Module::isRegistered('Conference')) {
 						echo '<a class="dropdown-item" href="handler.php?type=conference">
-					<i class="fas fa-object-group fa-fw"></i></i>&nbsp; Groupings</a>;
-					if (Module::isRegistered('Scheduler'))
+					<i class="fas fa-object-group fa-fw"></i></i>&nbsp; Groupings</a>';
+					}
+					if (Module::isRegistered('Scheduler')){
 						// echo '<a class="dropdown-item" href="handler.php?type=scheduler">' . $lng->getTrn('menu/admin_menu/schedule') . '</a>';
-
+					}
 					?><div class="dropdown-divider"></div><?php
 					foreach ($admin_menu as $lnk => $desc) {
 						if (!is_array($desc)) {

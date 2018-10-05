@@ -271,3 +271,6 @@ div.red                 {clear:both;background-color:#F20000;border:1px solid #c
 .navbar-dark .navbar-nav .nav-link{
     color: white;
 }
+
+td.round     {background-color: #32383E;}
+td.match     {background-color: #3a4047;}

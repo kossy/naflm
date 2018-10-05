@@ -307,7 +307,7 @@ $commonStyle = "float:left; width:45%; height:300px; margin:10px;";
     </div>
     <div style='clear:both;'>
     <br>
-    <button type="submit"  name="button" value="" class="btn btn-primary"<?php echo (empty($divisions) ? 'DISABLED' : '');?>><?php echo $lng->getTrn('common/create');?></button>
+    <button type="submit"  name="button" class="btn btn-primary"<?php echo (empty($divisions) ? 'DISABLED' : '');?>><?php echo $lng->getTrn('common/create');?></button>
     </div>
 </div>
 </form>
