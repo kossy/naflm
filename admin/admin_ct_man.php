@@ -55,8 +55,8 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
     <tr>
         <td valign='top'>
            <div class="col">
-                <div class="card bg-danger text-white">
-                <div class="card-header">Retire team</div>
+                <div class="card bg-dark text-white">
+                <div class="card-header bg-danger">Retire team</div>
                 <div class="card-body">
                 <form method="POST">
                 Team name<br>
@@ -71,8 +71,8 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
         </td>
         <td valign='top'>
           <div class="col">
-                <div class="card bg-danger text-white">
-                <div class="card-header">Delete team</div>
+                <div class="card bg-dark text-white">
+                <div class="card-header bg-danger">Delete team</div>
                 <div class="card-body">
                 <form method="POST">
                 Team name<br>
@@ -89,8 +89,8 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
     <tr>
         <td valign='top'>
           <div class="col">
-                <div class="card bg-danger text-white">
-                <div class="card-header">Retire coach</div>
+                <div class="card bg-dark text-white">
+                <div class="card-header bg-danger">Retire coach</div>
                 <div class="card-body">
                 <form method="POST">
                 Coach name<br>
@@ -105,8 +105,8 @@ title($lng->getTrn('menu/admin_menu/ct_man'));
         </td>
         <td valign='top'>
           <div class="col">
-                <div class="card bg-danger text-white">
-                <div class="card-header">Delete coach</div>
+                <div class="card bg-dark text-white">
+                <div class="card-header bg-danger">Delete coach</div>
                 <div class="card-body">
                 <form method="POST">
                 Coach name<br>

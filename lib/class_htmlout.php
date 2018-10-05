@@ -1353,7 +1353,14 @@ class HTMLOUT
 				if ($ANCHOR) {
 					$anc = "#$ANCHOR";
 				}
-				echo "<td><b><a href='$lnk&amp;page=1&amp;$sort=$f&amp;$dir=a$anc' title='Sort ascending'>+</a>/<a href='$lnk&amp;page=1&amp;$sort=$f&amp;$dir=d$anc' title='Sort descending'>-</a></b></td>";
+				echo "<td>
+				      <b><a href='$lnk&amp;page=1&amp;$sort=$f&amp;$dir=a$anc' title='Sort ascending'>
+				      <i class='fas fa-sort-amount-up'></i>
+				      </a>
+				      <a href='$lnk&amp;page=1&amp;$sort=$f&amp;$dir=d$anc' title='Sort descending'><i class='fas fa-sort-amount-down'></i>
+				      </a>
+				      </b>
+				    </td>";
 			}
 			?>
 			</tr>

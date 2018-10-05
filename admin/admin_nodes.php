@@ -87,9 +87,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
     ?>
     <tr>
         <td valign='top'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Create tournament</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+            <div class="card-header bg-danger">Create tournament</div>
+            <div class="card-body">
             <form method="POST">
             In division<br>
             <?php
@@ -122,9 +122,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
         </div>
         </td>
         <td valign='top'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Modify tournament</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+        <div class="card-header bg-danger">Modify tournament</div>
+        <div class="card-body">
             <form method="POST" id=''>
             Tournament<br>
             <?php
@@ -187,9 +187,10 @@ title($lng->getTrn('menu/admin_menu/nodes'));
     </tr>
     <tr>
         <td valign='top' colspan='2'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Tournament deletion</div>
-            <div class="boxBody">
+
+        <div class="card bg-dark text-white mt-4">
+        <div class="card-header bg-danger">Tournament deletion</div>
+        <div class="card-body">
             <form method="POST">
 
                 I wish to delete the tournament<br><?php echo HTMLOUT::nodeList(T_NODE_TOURNAMENT,'trid',array('OTHER' => array('ring' => Coach::T_RING_LOCAL_ADMIN)),array(),array('empty_str' => array(T_NODE_DIVISION => '')));?>
@@ -220,9 +221,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
     ?>
     <tr>
         <td valign='top'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Create division</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+        <div class="card-header bg-danger">Create division</div>
+        <div class="card-body">
             <form method="POST">
             In league<br>
             <?php
@@ -238,9 +239,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
         </div>
         </td>
         <td valign='top'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Modify division</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+        <div class="card-header bg-danger">Modify division</div>
+        <div class="card-body">
             <form method="POST">
             Division<br>
             <?php
@@ -258,9 +259,10 @@ title($lng->getTrn('menu/admin_menu/nodes'));
     </tr>
     <tr>
         <td valign='top' colspan='2'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Delete division</div>
-            <div class="boxBody">
+
+        <div class="card bg-dark text-white mt-4">
+        <div class="card-header bg-danger">Delete division</div>
+        <div class="card-body">
             <form method="POST">
             Division<br>
             <?php

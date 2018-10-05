@@ -292,7 +292,7 @@ class Team_HTMLOUT extends Team
 			*/
 			$p->name = preg_replace('/\s/', '&nbsp;', $p->name);
 			$p->position = preg_replace('/\s/', '&nbsp;', $p->position);
-			$p->info = '<i class="icon-info"></i>';
+			$p->info = '<i class="fas fa-info-circle"></i>';
 			$p->team_id = $team->team_id;
 			/*
 				Colors
