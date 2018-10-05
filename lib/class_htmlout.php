@@ -1066,7 +1066,7 @@ class HTMLOUT
 				<?php 
 					if (Module::isRegistered('Conference'))
 						echo '<a class="dropdown-item" href="handler.php?type=conference">
-					<i class="fas fa-chalkboard fa-fw"></i>&nbsp;' . $lng->getTrn('name', 'Conference') . '</a>';
+					<i class="fas fa-object-group fa-fw"></i></i>&nbsp; Groupings</a>;
 					if (Module::isRegistered('Scheduler'))
 						// echo '<a class="dropdown-item" href="handler.php?type=scheduler">' . $lng->getTrn('menu/admin_menu/schedule') . '</a>';
 
