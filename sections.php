@@ -71,7 +71,7 @@ function sec_login() {
                 <?php echo $lng->getTrn('login/loginname');?><br>
                 <input type="text" id="coach" name="coach" size="20" maxlength="50"><br><br>
                 <?php echo $lng->getTrn('login/passwd');?><br>
-                <input type="password" name="passwd" size="20" maxlength="50">
+                <input type="password" name="passwd" size="20" maxlength="128">
                 <div style='display: none;'><input type='text' name='hackForHittingEnterToLogin' size='1'></div>
                 <br><br>
                 <?php echo $lng->getTrn('login/remember');?>

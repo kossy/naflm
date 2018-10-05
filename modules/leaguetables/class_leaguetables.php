@@ -133,9 +133,9 @@ public static function showTables() {
     }
 	$firstTour = 0;
     ?>
-    <div class='boxWide'>
-        <h3 class='boxTitle2'><?php echo $lng->getTrn('tours', 'LeagueTables');?></h3>
-        <div class='boxBody'>
+        <div class="card bg-dark text-white mt-4">
+	    <h6 class="card-header"><?php echo $lng->getTrn('tours', 'LeagueTables');?></h6>
+	    <div class="card-body">
 			<form method="POST">
 				<select name="tour_id">
 					<?php
@@ -205,14 +205,15 @@ public static function showTables() {
 	}
 	// Now the clean output.
 ?>
-	<div class='boxWide'>
-		<h3 class='boxTitle<?php echo T_HTMLBOX_STATS;?>'><?php echo $tour->name;?></h3>
+
+	  <div class="card bg-dark text-white mt-4 mb-4">
+	    <h6 class="card-header"><?php echo $tour->name;?></h6>
 <?php
 	if ($confs == 0 || empty($confs)) {
 		// no conferences at all, or not for this league - normal format
 echo<<< EOQ
-		<div class='boxBody'>
-			<table class="boxTable">
+		<div class="card-body">
+			<table class="table table-dark">
 EOQ;
 				$i = 0;
 				self::showHeader($fields);

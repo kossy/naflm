@@ -269,8 +269,8 @@ class Coach
     }
 
     public function setPasswd($passwd) {
-        $query = "UPDATE coaches SET passwd = '".md5($passwd)."' WHERE coach_id = $this->coach_id";
-        return (mysql_query($query) && ($this->passwd = md5($passwd)));
+        $query = "UPDATE coaches SET passwd = '". hash('sha256', $passwd)."' WHERE coach_id = $this->coach_id";
+        return (mysql_query($query) && ($this->passwd = hash('sha256', $passwd)));
     }
 
     public function setName($name) {
@@ -354,7 +354,7 @@ class Coach
         if ($OK) {
             $this->setRetired(false);
             $this->setActivationCode(false);
-            $this->setPasswd($new_passwd = md5($AC)); # Scramble password.
+            $this->setPasswd($new_passwd = hash('sha256', $AC)); # Hash password.
             self::login($this->coach_id, $new_passwd);
             return $new_passwd;
         }
@@ -477,8 +477,8 @@ class Coach
         return false;
     }
     
-    public static function checkPasswd($cid, $passwd, $MD5 = true) {
-        return (get_alt_col('coaches', 'coach_id', $cid, 'passwd') == ($MD5 ? md5($passwd) : $passwd));
+    public static function checkPasswd($cid, $passwd, $hash = true) {
+        return (get_alt_col('coaches', 'coach_id', $cid, 'passwd') == ($hash ? hash('sha256', $passwd) : $passwd));
     }
     
     protected static function _setSession($cid) {
@@ -524,7 +524,7 @@ class Coach
         $query = "INSERT INTO coaches (name, realname, passwd, mail, phone, ring, settings) 
                     VALUES ('" . mysql_real_escape_string($input['name']) . "',
                             '" . mysql_real_escape_string($input['realname']) . "', 
-                            '" . md5($input['passwd']) . "', 
+                            '" . hash('sha256', $input['passwd']) . "', 
                             '" . mysql_real_escape_string($input['mail']) . "', 
                             '" . mysql_real_escape_string($input['phone']) . "', 
                             " . $input['ring'].",

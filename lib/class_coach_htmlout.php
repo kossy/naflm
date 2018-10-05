@@ -288,8 +288,8 @@ class Coach_HTMLOUT extends Coach
 				<tr>
 					<form method="POST">
 					<td><?php echo $lng->getTrn('cc/chpasswd');?>:</td>
-					<td><?php echo $lng->getTrn('cc/old');?>:<input type='password' name='old_passwd' size="20" maxlength="50"></td>
-					<td><?php echo $lng->getTrn('cc/new');?>:<input type='password' name='new_passwd' size="20" maxlength="50"></td>
+					<td><?php echo $lng->getTrn('cc/old');?>:<input type='password' name='old_passwd' size="20" maxlength="128"></td>
+					<td><?php echo $lng->getTrn('cc/new');?>:<input type='password' name='new_passwd' size="20" maxlength="128"></td>
 					<td><input type="submit" name="button" value="<?php echo $lng->getTrn('cc/chpasswd');?>"></td>
 					<input type='hidden' name='type' value='chpasswd'>
 					</form>
