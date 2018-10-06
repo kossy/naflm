@@ -333,7 +333,7 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
 {
     global $lng;
     $entries = self::getWanted($node,$node_id);
-    echo "<table style='table-layout:fixed; width:".(count($entries) == 1 ? 50 : 100)."%;'><tr>"; # The percentage difference is a HTML layout fix.
+    echo "<div class='row'>"; # The percentage difference is a HTML layout fix.
     $i = 1;
     foreach ($entries as $e) {
         if ($i > 2) {
@@ -341,14 +341,14 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
             $i = 1;
         }
         ?>
-        <td style='width:50%;' valign='top'>
-        <div class="boxWide" style="width: 80%; margin: 20px auto 20px auto;">
-            <div class="boxTitle<?php echo T_HTMLBOX_INFO;?>"><?php 
+        <div class="col">
+        <div class="card bg-dark" style="width: 80%; margin: 20px auto 20px auto;">
+            <div class="card-header bg-danger"><?php 
                 echo $lng->getTrn('wanted', __CLASS__).": <a href='".urlcompile(T_URL_PROFILE,T_OBJ_PLAYER,$e->pid,false,false)."'>$e->name</a>";
                 echo ' (<a href="'.urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$e->f_tid,false,false).'">'.$e->f_tname.'</a>)';
             ?>
             </div>
-            <div class="boxBody">
+            <div class="card-body">
                 <table class="common">
                     <tr>
                         <td colspan="2" align="left" valign="top">
@@ -364,7 +364,9 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
                         <?php 
                         echo $e->why;
                         if ($e->date_died) {
-                            echo "<br><br><font color='red'><b>".$lng->getTrn('killed', __CLASS__)."</b></font>\n";
+                            echo "<br><br>
+                                  <i class='fas fa-skull'></i>
+                                  <font class='text-danger'><b>".$lng->getTrn('killed', __CLASS__)."</b></font>\n";
                         }
                         ?>
                         </td>
@@ -393,12 +395,12 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
                     </tr>
                 </table>
             </div>
-        </div>
-        </td>
+        </div> <!-- card end -->
+        </div> <!-- col end -->
         <?php
         $i++;
     }
-    echo "</tr></table>";
+    echo "</div>";
 }
 }
 ?>

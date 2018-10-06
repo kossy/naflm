@@ -28,9 +28,9 @@ public static function main($argv) # argv = argument vector (array).
         });
     </script>
     
-    <div class='boxCommon'>
-        <h3 class='boxTitle<?php echo T_HTMLBOX_COACH;?>'><?php echo $lng->getTrn('name', 'Search');?></h3>
-        <div class='boxBody'>
+     <div class="card bg-dark text-white mt-4">
+            <div class="card-header"><?php echo $lng->getTrn('name', 'Search');?></div>
+            <div class="card-body">
             <?php echo $lng->getTrn('search_tname', 'Search');?><br>
             <input id='team' type="text" name="team" size="30" maxlength="50"><br>
             <br>

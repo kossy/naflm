@@ -283,9 +283,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
     ?>
     <tr>
         <td valign='top'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Create league</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+            <div class="card-header bg-danger">Create league</div>
+            <div class="card-body">
             <form method="POST">
             Name<br>
             <input type="text" name="name" <?php echo $IS_GLOBAL_ADMIN ? '' : 'DISABLED';?>><br><br>
@@ -301,9 +301,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
         </div>
         </td>
         <td valign='top'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Modify league</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+            <div class="card-header bg-danger">Modify league</div>
+            <div class="card-body">
             <form method="POST">
             League<br>
             <?php
@@ -325,9 +325,9 @@ title($lng->getTrn('menu/admin_menu/nodes'));
     </tr>
     <tr>
         <td valign='top' colspan='2'>
-        <div class="boxCommon">
-            <div class="boxTitle<?php echo T_HTMLBOX_ADMIN;?>">Delete league</div>
-            <div class="boxBody">
+        <div class="card bg-dark text-white mt-4">
+            <div class="card-header bg-danger">Delete league</div>
+            <div class="card-body">
             <form method="POST">
             League<br>
             <?php

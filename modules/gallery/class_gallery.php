@@ -18,11 +18,25 @@ public static function main($argv) # argv = argument vector (array).
             case 'team':
                 $t = new Team((int) $_POST['tid']);
                 echo "<b>".$lng->getTrn('playersof', 'Gallery')." $t->name</b><br><hr><br>\n";
+                echo '<div class="row">';
                 foreach ($t->getPlayers() as $p) {
                     $img = new ImageSubSys(IMGTYPE_PLAYER, $p->player_id);
                     $pic = $img->getPath();
-                    echo "<div style='float:left; padding:10px;'>$p->name (#$p->nr)<br><a href='".urlcompile(T_URL_PROFILE,T_OBJ_PLAYER,$p->player_id,false,false)."'><img HEIGHT=150 src='$pic' alt='pic'></a></div>";
+
+
+                    echo '
+                        <div class="col mt-4">
+                            <div class="card bg-dark" style="width: 12rem;">
+                                  <a href="'.urlcompile(T_URL_PROFILE,T_OBJ_PLAYER,$p->player_id,false,false).'">
+                                  <img class="card-img-top gallery-img" src="' . $pic . '" alt="' . $p->name . ' picture">
+                                  </a>
+                                  <div class="card-body">
+                                    <p class="card-text">' . $p->name . ' (#' . $p->nr . ')' . '</p>
+                                  </div>
+                             </div>
+                         </div>';
                 }
+                echo "</div> <!-- row end -->";
                 break;
 
             case 'stad':

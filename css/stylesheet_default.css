@@ -475,3 +475,8 @@ a.icon-link {
 .icon-info:before {
     content: "\e900";
 }
+
+.gallery-img{
+    height: auto;
+    width: 10em;
+}

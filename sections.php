@@ -188,19 +188,25 @@ function sec_main() {
             $prevPinned = $e->pinned;
              echo "<div class='row mb-4'>\n";
             echo "<div class='col'>\n";
-            echo "<div class='card bg-secondary text-white'>\n";
-                echo "<div class='card-header'><i class='fas fa-info-circle'></i> $e->title</div>\n";
-                echo '<div class="card-body">';
-                    $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.
-                    echo '<p class="card-text">' . $fmtMsg . '</p></div>';
-                    echo '<div class="card-footer">';
                         switch ($e->type) 
                         {
                             case T_TEXT_MATCH_SUMMARY:
+                                echo "<div class='card bg-dark text-white'>\n";
+                                echo "<div class='card-header'><i class='fas fa-football-ball'></i></i> $e->title</div>\n";
+                                echo '<div class="card-body">';
+                                $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.
+                                echo '<p class="card-text">' . $fmtMsg . '</p></div>';
+                                echo '<div class="card-footer">';
                                 echo "<td align='left' width='100%'>".$lng->getTrn('main/posted')." ".textdate($e->date)." " . ((isset($e->date_mod) && $e->date_mod != $e->date) ? "(".$lng->getTrn('main/lastedit')." ".textdate($e->date_mod).") " : '') .$lng->getTrn('main/by')." $e->author</td>\n";
                                 echo "<td align='right'><a href='index.php?section=matches&amp;type=report&amp;mid=$e->match_id'>".$lng->getTrn('common/view')."</a></td>\n";
                                 break;
                             case  T_TEXT_MSG:
+                                echo "<div class='card bg-dark text-white'>\n";
+                                echo "<div class='card-header bg-info'><i class='fas fa-info-circle'></i> $e->title</div>\n";
+                                echo '<div class="card-body">';
+                                $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.
+                                echo '<p class="card-text">' . $fmtMsg . '</p></div>';
+                                echo '<div class="card-footer">';
                                 echo "<td align='left' width='100%'>".$lng->getTrn('main/posted')." ".textdate($e->date)." ".$lng->getTrn('main/by')." $e->author</td>\n";
                                 if (is_object($coach) && ($IS_GLOBAL_ADMIN || $coach->coach_id == $e->author_id)) { // Only admins may delete messages, or if it's a commissioner's own message.
                                     echo "<td align='right'><a href='javascript:void(0);' onClick=\"slideToggle('msgedit$e->msg_id');\">".$lng->getTrn('common/edit')."</a></td>\n";
@@ -214,6 +220,12 @@ function sec_main() {
                                 }
                                 break;
                             case T_TEXT_TNEWS:
+                                echo "<div class='card bg-dark text-white'>\n";
+                                echo "<div class='card-header bg-secondary'><i class='fas fa-newspaper'></i></i> $e->title</div>\n";
+                                echo '<div class="card-body">';
+                                $fmtMsg = fmtprint($e->message); # Basic supported syntax: linebreaks.
+                                echo '<p class="card-text">' . $fmtMsg . '</p></div>';
+                                echo '<div class="card-footer">';
                                 echo "<td align='left' width='100%'>".$lng->getTrn('main/posted')." ".textdate($e->date)."</td>\n";
                                 break;
                         }
@@ -757,17 +769,17 @@ function sec_rules() {
     global $lng, $settings, $leagues;
     title($lng->getTrn('menu/rules'));
     ?>
-    <div class="boxWide">
+    <div class="card bg-dark mt-4">
         <?php
             if(count($leagues) > 1)
             {
-                echo '<div class="boxTitle4">';
+                echo '<div class="card-header">';
                 list($sel_lid, $HTML_LeagueSelector) = HTMLOUT::simpleLeagueSelector();
                 echo $HTML_LeagueSelector;
                 echo '</div>';
             }
         ?>
-        <div class="boxBody">
+        <div class="card-body">
             <div>
                 <?php echo $settings['rules']; ?>
             </div>

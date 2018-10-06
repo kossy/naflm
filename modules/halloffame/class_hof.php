@@ -331,7 +331,7 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
 {
     global $lng;
     $entries = self::getHOF($node,$node_id);
-    echo "<table style='table-layout:fixed; width:".(count($entries) == 1 ? 50 : 100)."%;'><tr>"; # The percentage difference is a HTML layout fix.
+    echo "<div class='row'>";
     $i = 1;
     foreach ($entries as $e) {
         if ($i > 2) {
@@ -339,10 +339,10 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
             $i = 1;
         }
         ?>
-        <td style='width:50%;' valign='top'>
-        <div class="boxWide" style="width: 80%; margin: 20px auto 20px auto;">
-            <div class="boxTitle<?php echo T_HTMLBOX_INFO;?>"><?php echo "<a href='".urlcompile(T_URL_PROFILE,T_OBJ_PLAYER,$e->pid,false,false)."'>$e->name</a> ".$lng->getTrn('from', __CLASS__)." <a href='".urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$e->f_tid,false,false)."'>$e->f_tname</a>: $e->title";?></div>
-            <div class="boxBody">
+       <div class="col-4">
+        <div class="card bg-dark">
+            <div class="card-header"><?php echo "<a href='".urlcompile(T_URL_PROFILE,T_OBJ_PLAYER,$e->pid,false,false)."'>$e->name</a> ".$lng->getTrn('from', __CLASS__)." <a href='".urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$e->f_tid,false,false)."'>$e->f_tname</a>: $e->title";?></div>
+            <div class="card-body">
                 <table class="common">
                     <tr>
                         <td align="left" valign="top">
@@ -374,11 +374,11 @@ public static function printList($node, $node_id, $ALLOW_EDIT)
                 </table>
             </div>
         </div>
-        </td>
+        </div>
         <?php
         $i++;
     }
-    echo "</tr></table>";
+    echo "</div>";
 }
 }
 ?>
