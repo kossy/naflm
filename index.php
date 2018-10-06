@@ -49,7 +49,12 @@ if ($_VISSTATE['COOKIE'] || $_VISSTATE['POST_IN'] || $_VISSTATE['POST_OUT']) {
 // Upgrade install?
 if($coach && $coach->isGlobalAdmin()) {
     if(!isset($db_version)) {
-        echo '<div class="alert alert-danger" role="alert">Your desired database version cannot be determined. Please ensure $db_version is set to a value in settings.php. If you aren\'t certain what to set it to, ask a NAFLM developer. 101 could be an appropriate default.</div>';
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+               Your desired database version cannot be determined. Please ensure $db_version is set to a value in settings.php. If you aren\'t certain what to set it to, ask a NAFLM developer. 101 could be an appropriate default.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>';
     } else {
         $databaseVersion = SQLUpgrade::getCurrentDatabaseVersion();
         $fromVersion = $databaseVersion ? $databaseVersion : '075-080'; // set to earliest auto-upgrade version by default

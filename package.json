@@ -1,4 +1,4 @@
-﻿{
+{
 	"name": "NAFLM",
 	"description": "",
 	"author": "Craig Fleming <craig.fleming.42@gmail.com>",
@@ -13,5 +13,8 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/TheNAF/naflm.git"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-free": "^5.3.1"
 	}
 }

@@ -107,20 +107,45 @@ class Coach_HTMLOUT extends Coach
 		global $lng, $settings, $rules;
 		$url = urlcompile(T_URL_PROFILE,T_OBJ_COACH,$this->coach_id,false,false);
 		?>
-		<ul class="css3menu1 menu" style="z-index:0">
-			<li><a href="<?php echo $url.'&amp;subsec=teams';?>"><?php echo $lng->getTrn('cc/coach_teams');?></a></li>
-			<li><a href="<?php echo $url.'&amp;subsec=profile';?>"><?php echo $lng->getTrn('cc/profile');?></a></li>
-			<li><a href="<?php echo $url.'&amp;subsec=stats';?>"><?php echo $lng->getTrn('common/stats');?></a></li>
-			<li><a href="<?php echo $url.'&amp;subsec=recentmatches';?>"><?php echo $lng->getTrn('common/recentmatches');?></a></li>
+
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $url.'&amp;subsec=teams';?>"><?php echo $lng->getTrn('cc/coach_teams');?>
+					
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $url.'&amp;subsec=profile';?>">
+					<i class="fas fa-user fa-fw"></i>&nbsp; <?php echo $lng->getTrn('cc/profile');?>
+					
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $url.'&amp;subsec=stats';?>">
+					<i class="fas fa-chart-line fa-fw"></i>&nbsp; <?php echo $lng->getTrn('common/stats');?>
+					
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $url.'&amp;subsec=recentmatches';?>"><?php echo $lng->getTrn('common/recentmatches');?></a></li>
 			<?php
 			if ($ALLOW_EDIT) {
-				?><li><a href="handler.php?type=teamcreator"><?php echo $lng->getTrn('cc/new_team');?></a></li><?php
+				?>
+				<li class="nav-item">
+					<a class="nav-link" href="handler.php?type=teamcreator"><?php echo $lng->getTrn('cc/new_team');?>
+					
+				    </a>
+				</li>
+			<?php
 			}
 			if (Module::isRegistered('SGraph')) {
-				echo "<li><a href='handler.php?type=graph&amp;gtype=".SG_T_COACH."&amp;id=$this->coach_id'>Vis. stats</a></li>\n";
+				echo "<li class='nav-item'><a class='nav-link' href='handler.php?type=graph&amp;gtype=".SG_T_COACH."&amp;id=$this->coach_id'>Vis. stats</a></li>\n";
+			
 			}
 			?>
 		</ul>
+	</nav>
 		<?php
 	}
 
@@ -161,8 +186,8 @@ class Coach_HTMLOUT extends Coach
 		<!-- Following HTML from ./lib/class_coach_htmlout.php -->
 		<br><br>
 		<div class='boxCommon'>
-			<h3 class='boxTitle<?php echo T_HTMLBOX_COACH;?>'><?php echo $lng->getTrn('cc/new_team');?></h3>
-			<div class='boxBody'>
+			<h3 class='boxTitle<?php echo T_HTMLBOX_COACH;?>'></h3>
+			<div class='boxBody'> 
 			
 		<form method="POST">
 		<?php echo $lng->getTrn('common/name');?><br>
@@ -249,14 +274,18 @@ class Coach_HTMLOUT extends Coach
 		echo "<br><br>";
 		?>
 		<!-- Following HTML from .lib/class_coach_htmlout.php -->
-		<table class="common"><tr class="commonhead"><td><b><?php echo $lng->getTrn('cc/coach_info');?></b></td></tr></table>
+		<table class="table table-dark">
+			<tr class="commonhead">
+				<td><b><?php echo $lng->getTrn('cc/coach_info');?></b></td>
+			</tr>
+		</table>
 		<br>
 		<?php
 		echo $lng->getTrn('cc/note_persinfo');
 		echo "<br><br>";
 		if (is_object($coach) && !$ALLOW_EDIT) { # Logged in but not viewing own coach page.
 			?>
-			<table>
+			<table class="table table-dark">
 				<tr>
 					<td>ID:</td>
 					<td><?php echo $this->coach_id;?></td>
@@ -283,7 +312,7 @@ class Coach_HTMLOUT extends Coach
 		}
 		if ($ALLOW_EDIT) {
 			?>
-			<table class="common" style="border-spacing:5px; padding:20px;">
+			<table class="table table-dark" style="border-spacing:5px; padding:20px;">
 				<tr><td colspan='4'>ID: <?php echo $this->coach_id;?></td></tr>
 				<tr>
 					<form method="POST">
@@ -371,7 +400,7 @@ class Coach_HTMLOUT extends Coach
 		}
 		?>
 
-		<table class='common'>
+		<table class="table table-dark">
 			<tr class='commonhead'>
 				<td><b><?php echo $lng->getTrn('cc/photo');?></b></td>
 				<td><b><?php echo $lng->getTrn('common/about');?></b></td>
@@ -412,10 +441,11 @@ class Coach_HTMLOUT extends Coach
 		global $lng, $settings;
 		?>
 		<!-- Following HTML from .lib/class_coach_htmlout.php -->
-		<div class="row">
-			<div class="boxCoachPage">
-				<h3 class='boxTitle1'><?php echo $lng->getTrn('common/general'); ?></h3>
-				<div class='boxBody'>
+		<div class="row mt-4">
+			<div class="col">
+			<div class='card bg-dark text-white'>
+			<h6 class='card-header'><?php echo $lng->getTrn('common/general'); ?></h6>
+			<div class='card-body'>
 					<table class="boxTable">
 					<?php
 					echo "<tr><td>Played</td><td>$this->mv_played</td></tr>\n";
@@ -450,9 +480,11 @@ class Coach_HTMLOUT extends Coach
 					</table>
 				</div>
 			</div>
-			<div class="boxCoachPage">
-				<h3 class='boxTitle1'><?php echo $lng->getTrn('common/ach'); ?></h3>
-				<div class='boxBody'>
+		</div>
+		<div class="col">
+			<div class='card bg-dark text-white'>
+				<h6 class='card-header'><?php echo $lng->getTrn('common/ach'); ?></h6>
+				<div class='card-body'>
 					<table class="boxTable">
 					<?php
 					$stats = array(
@@ -483,19 +515,24 @@ class Coach_HTMLOUT extends Coach
 				</div>
 			</div>
 		</div>
-		<br>
-		<div class="row"></div>
-		<br>
+		</div>
 		<?php
 		if (!$settings['hide_ES_extensions']) {
 			?>
-			<div class="row">
-				<div class="boxWide">
-					<div class="boxTitle<?php echo T_HTMLBOX_STATS;?>"><a href='javascript:void(0);' onClick="slideToggleFast('ES');"><b>[+/-]</b></a> &nbsp;<?php echo $lng->getTrn('common/extrastats'); ?></div>
-					<div class="boxBody" id="ES">
-						<?php
-						HTMLOUT::generateEStable($this);
-						?>
+			<div class="row mt-4 mb-4 ">
+				<div class="col">
+					<div class="card bg-dark text-white">
+						<div class="card-header">
+							<h6>
+							<a href='javascript:void(0);' onClick="slideToggleFast('ES');">
+								<i class="fas fa-sort"></i>&nbsp; <?php echo $lng->getTrn('common/extrastats'); ?></a> 
+							</h6>
+						</div>
+						<div class="card-body" id="ES">
+							<?php
+							HTMLOUT::generateEStable($this);
+							?>
+						</div>
 					</div>
 				</div>
 			</div>

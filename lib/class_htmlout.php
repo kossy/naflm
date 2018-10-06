@@ -904,7 +904,7 @@ class HTMLOUT
 					<div class="col-1">
 						<img src="../images/themes/UPBL/logo_1_prod.svg" class="logo img-fluid" alt="logos">
 					</div>	
-					<div class="col-2 pt-2">
+					<div class="col-3 pt-2">
 						<h4>
 						<?php echo $settings['banner_title']; ?>
 						</h4>
@@ -912,7 +912,7 @@ class HTMLOUT
 							<?php echo $settings['banner_subtitle']; ?>
 						</h6>
 					</div>
-					<div class="col-6">
+					<div class="col">
 
 						
 					</div>
@@ -978,6 +978,7 @@ class HTMLOUT
 		global $lng, $coach, $settings, $rules, $admin_menu;
 		?>
 		<!-- Following HTML from ./lib/class_htmlout.php make_menu -->
+		<div class="sticky-top">
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -1277,6 +1278,7 @@ class HTMLOUT
 	?>
 	</div>
 	</nav>
+	</div>
 	<?php
 	}
 	

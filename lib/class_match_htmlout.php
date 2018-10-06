@@ -497,7 +497,7 @@ class Match_HTMLOUT extends Match
 
 		?>
 		<!-- Following HTML from ./lib/class_match_htmlout.php report -->
-		<table>
+		<table class="table table-dark">
 		<tr><td></td><td style='text-align: right;'><i><?php echo $lng->getTrn('common/home');?></i></td><td>&mdash;</td><td style='text-align: left;'><i><?php echo $lng->getTrn('common/away');?></i></td></tr>
 		<tr><td><b><?php echo $lng->getTrn('common/teams');?></b>:</td><td style='text-align: right;'><?php echo "$teamUrl1</td><td> &mdash; </td><td style='text-align: left;'>$teamUrl2";?></td></tr>
 		<tr><td><b><?php echo $lng->getTrn('common/coaches');?></b>:</td><td style='text-align: right;'><?php echo "$coachUrl1</td><td> &mdash; </td><td style='text-align: left;'>$coachUrl2";?></td></tr>
@@ -508,9 +508,11 @@ class Match_HTMLOUT extends Match
 		<tr><td><b><?php echo $lng->getTrn('common/tournament');?></b>:</td><td colspan="3"><?php   echo $tourUrl;?></td></tr>
 		<tr><td><b><?php echo $lng->getTrn('common/round');?></b>:</td><td colspan="3">     <?php   echo $T_ROUNDS[$m->round];?></td></tr>
 		<tr><td><b><?php echo $lng->getTrn('common/dateplayed');?></b>:</td><td colspan="3"><?php   echo ($m->is_played) ? textdate($m->date_played) : '<i>'.$lng->getTrn('matches/report/notplayed').'</i>';?></td></tr>
+		<tr><td><b>Date Last Modified</b>:</td><td colspan="3"><?php echo ($m->is_played) ? textdate($m->date_modified) : '<i>'.$lng->getTrn('matches/report/notplayed').'</i>';?></td></tr>
 		<?php
+		echo var_dump($m);
 		if (Module::isRegistered('PDFMatchReport')) {
-			$str = '<a href="handler.php?type=pdfmatchreport&amp;tid1='.$team1->team_id.'&amp;tid2='.$team2->team_id.'&amp;mid='.$m->match_id.'" TARGET="_blank">Download PDF report</a>';
+			$str = '<a  data-toggle="tooltip" data-placement="top" title="Download" href="handler.php?type=pdfmatchreport&amp;tid1='.$team1->team_id.'&amp;tid2='.$team2->team_id.'&amp;mid='.$m->match_id.'" TARGET="_blank"><i class="fas fa-download"></i> Download PDF report</a>';
 			echo "<tr><td><b>Match report</b>:</td><td>$str</td></tr>";
 		}
 		if (Module::isRegistered('UPLOAD_BOTOCS')) {
@@ -532,7 +534,9 @@ class Match_HTMLOUT extends Match
 			echo "<tr><td><b>Admin:</b></td><td colspan='3'><b>";
 			echo "<a onclick=\"return match_reset();\" href='$matchURL&amp;action=reset'>".$lng->getTrn('common/reset')."</a>&nbsp;\n";
 			echo "<a onclick=\"return match_delete();\" href='$deleteURL&amp;action=delete' style='color:".(!empty($m->date_played) ? 'Red' : 'Blue').";'>".$lng->getTrn('common/delete')."</a>&nbsp;\n";
-			echo "<a href='$matchURL&amp;action=".(($m->locked) ? 'unlock' : 'lock')."'>" . ($m->locked ? $lng->getTrn('common/unlock') : $lng->getTrn('common/lock')) . "</a>&nbsp;\n";
+
+			echo "<a href='$matchURL&amp;action=".(($m->locked) ?  'unlock' : 'lock')."'>" . ($m->locked ? '<i class="fas fa-lock-open"></i> ' .$lng->getTrn('common/unlock') : "<i class='fas fa-lock'></i> " . $lng->getTrn('common/lock')) . "</a>&nbsp;\n";
+
 			echo "<br><a href='javascript:void(0);' onClick='slideToggleFast(\"chRound\");'>".$lng->getTrn('matches/report/chround')."</a><div id='chRound' style='display:none;'>
 			<form method='POST'>
 			<select name='round'>";
@@ -550,9 +554,8 @@ class Match_HTMLOUT extends Match
 		<br>
 		<?php echo "<b><a TARGET='_blank' href='".DOC_URL_GUIDE."'>".$lng->getTrn('common/needhelp')."</a></b><br><br>"; ?>
 		<form method="POST" enctype="multipart/form-data">
-			<table class="common">
+			<table class="table table-dark">
 				<tr class='commonhead'><td colspan="<?php echo $CP;?>"><b><?php echo $lng->getTrn('matches/report/info');?></b></td></tr>
-				<tr><td class='seperator' colspan='<?php echo $CP;?>'></td></tr>
 				<tr><td colspan='<?php echo $CP;?>'>
 					<b><?php echo $lng->getTrn('matches/report/stadium');?></b>&nbsp;
 					<select name="stadium" <?php echo $DIS;?>>
@@ -581,7 +584,7 @@ class Match_HTMLOUT extends Match
 					<?php
 				}
 				?>
-				<tr><td class="seperator" colspan='<?php echo $CP;?>'></td></tr>
+
 				<tr class='commonhead'>
 					<td><b><?php echo $lng->getTrn('common/teams');?></b></td>
 					<td><b><?php echo $lng->getTrn('common/score');?></b></td>
@@ -593,7 +596,7 @@ class Match_HTMLOUT extends Match
 					<td><b><?php echo $lng->getTrn('matches/report/tv');?></b></td>
 				</tr>
 
-				<tr><td class='seperator' colspan='<?php echo $CP;?>'></td></tr>
+
 				<?php
 				foreach (array(1,2) as $N) {
 					echo "<tr>\n";
@@ -619,12 +622,10 @@ class Match_HTMLOUT extends Match
 			$CPP = count($playerFields);
 			foreach (array(1 => $team1, 2 => $team2) as $id => $t) {
 				?>
-				<table class='common'>
-				<tr><td class='seperator' colspan='<?php echo $CPP;?>'></td></tr>
+				<table class='table table-dark'>
 				<tr class='commonhead'><td colspan='<?php echo $CPP;?>'>
 					<b><a href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$t->team_id,false,false);?>"><?php echo $t->name;?></a> <?php echo $lng->getTrn('matches/report/report');?></b>
 				</td></tr>
-				<tr><td class='seperator' colspan='<?php echo $CPP;?>'></td></tr>
 				<?php
 				echo "<tr>\n";
 				foreach (array_values($playerFields) as $f) {
@@ -713,11 +714,10 @@ class Match_HTMLOUT extends Match
 				}
 				?>
 
-				<table style='border-spacing: 0px 10px;'>
+				<table class="table table-dark">
+					<?php if($settings['Star_Players'] == true){?>
 					<tr><td align="left" valign="top">
 						<b>Star Players</b>:
-						<input type='button' id="addStarsBtn_<?php echo $id;?>" value="<?php echo $lng->getTrn('common/add');?>"
-						onClick="stars = document.getElementById('stars_<?php echo $id;?>'); addStarMerc(<?php echo $id;?>, stars.options[stars.selectedIndex].value);" <?php echo $DIS; ?>>
 						<select id="stars_<?php echo $id;?>" <?php echo $DIS; ?>>
 							<?php
 							foreach ($stars as $s => $d) {
@@ -725,9 +725,13 @@ class Match_HTMLOUT extends Match
 							}
 							?>
 						</select>
+						<input class="btn btn-primary" type='button' id="addStarsBtn_<?php echo $id;?>" value="<?php echo $lng->getTrn('common/add');?>"
+						onClick="stars = document.getElementById('stars_<?php echo $id;?>'); addStarMerc(<?php echo $id;?>, stars.options[stars.selectedIndex].value);" <?php echo $DIS; ?>>
+						
 					</td></tr>
+				<?php }?>
 					<tr><td align="left" valign="top">
-						<b>Mercenaries</b>: <input type='button' id="addMercsBtn_<?php echo $id;?>" value="<?php echo $lng->getTrn('common/add');?>" onClick="addStarMerc(<?php echo "$id, ".ID_MERCS;?>);" <?php echo $DIS; ?>>
+						<b>Mercenaries</b>: <input class="btn btn-primary" type='button' id="addMercsBtn_<?php echo $id;?>" value="<?php echo $lng->getTrn('common/add');?>" onClick="addStarMerc(<?php echo "$id, ".ID_MERCS;?>);" <?php echo $DIS; ?>>
 					</td></tr>
 				</table>
 
@@ -736,14 +740,13 @@ class Match_HTMLOUT extends Match
 				<?php
 			}
 			?>
-			<table class='common'>
-				<tr><td class='seperator' colspan='13'></td></tr>
+			<table class='table table-dark'>
 				<tr class='commonhead'><td colspan='13'><b><?php echo $lng->getTrn('matches/report/summary');?></b></td></tr>
 				<tr><td colspan='13'><textarea name='summary' rows='10' cols='100' <?php echo $DIS . ">" . $m->getText(); ?></textarea></td></tr>
 			</table>
 			<br>
 			<center>
-				<input type="submit" name='button' value="<?php echo $lng->getTrn('common/save');?>" <?php echo $DIS; ?>>
+				<input type="submit" class="btn btn-primary" name='button' value="<?php echo $lng->getTrn('common/save');?>" <?php echo $DIS; ?>>
 				<?php if ($USED_JOURNEYMAN_PRESENT) {echo "<br><br><b>".$lng->getTrn('matches/report/usedjourney')."</b>";} ?>
 			</center>
 		</form>

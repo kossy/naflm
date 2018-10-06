@@ -181,14 +181,16 @@ function fatal($err_msg) {
 // Print a status message.
 function status($status, $msg = '') {
     if ($status) { # Status == success
-        echo '<div class="alert alert-success" role="alert">';
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
         echo "Request succeeded";
     } else { # Status == failure
-        echo '<div class="alert alert-danger" role="alert">';
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
         echo "Request failed";
     }
     if ($msg) {echo " : $msg\n";}
-    echo "</div>";
+    echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>';
 }
 
 function textdate($mysqldate, $noTime = false, $setSeconds = true) {
