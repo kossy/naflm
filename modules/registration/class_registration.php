@@ -272,31 +272,6 @@ class Registration implements ModuleInterface
          **/
 
         $form = '
-        <form >
-            <div class="boxCommon">
-                <div class="boxTitle'.T_HTMLBOX_COACH.'">
-                    Register
-                </div>
-                <div class="boxBody">
-                    Username<br> <input type="text" name="new_name" size="20" maxlength="50"><br><br>
-                    Email<br> <input type="text" name="new_mail" size="20" maxlength="129"><br><br>
-                    Password<br> <input type="password" name="new_passwd" size="20" maxlength="50"><br><br>
-
-                    <strong>I\'m a league commissioner:</strong> <input type="checkbox" name="is_commissioner" data-bind="checked: isCommissioner"><br /><br />
-                    <div data-bind="visible: showLeagueSelection">
-                        <div>League</div>
-                        <select name="new_league" data-bind="options: leagues, optionsText: \'name\', optionsValue: \'lid\', value: selectedLeague, optionsCaption: \'Select a league.\'"></select>
-                    </div>
-                    <br />
-                    *Admin activation is required.
-                    <br><br>
-                    <input type="submit" name="button" value="Create user">
-                </div>
-            </div>
-        </form>
-        ';
-
-        $form = '
         <div class="card bg-dark mt-3">
           <h6 class="card-header">
             Register
@@ -554,9 +529,7 @@ class Registration implements ModuleInterface
                     <input type='submit' name='button' value='Activate'>
                 </div>
             </div>
-        </form>
-        ";
-
+        </form>";
 
         return $form;
 

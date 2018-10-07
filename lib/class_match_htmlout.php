@@ -127,8 +127,8 @@ class Match_HTMLOUT extends Match
 					</script>
 					<?php
 					echo "<a onclick=\"return match_reset();\" href='$matchURL&amp;action=reset'>".$lng->getTrn('common/reset')."</a>&nbsp;\n";
-					echo "<a onclick=\"return match_delete();\" href='$matchURL&amp;action=delete' style='color:".(!empty($m->date_played) ? 'Red' : 'Blue').";'>".$lng->getTrn('common/delete')."</a>&nbsp;\n";
-					echo "<a href='$matchURL&amp;action=".(($m->locked) ? 'unlock' : 'lock')."'>" . ($m->locked ? $lng->getTrn('common/unlock') : $lng->getTrn('common/lock')) . "</a>&nbsp;\n";
+					echo "<a onclick=\"return match_delete();\" href='$matchURL&amp;action=delete' class='".(!empty($m->date_played) ? 'text-danger' : 'text-info')."'>".$lng->getTrn('common/delete')."</a>&nbsp;\n";
+					echo "<a href='$matchURL&amp;action=".(($m->locked) ? 'unlock' : 'lock')."'>" . ($m->locked ? '<i class="fas fa-lock-open"></i> ' . $lng->getTrn('common/unlock') : '<i class="fas fa-lock"></i> ' . $lng->getTrn('common/lock')) . "</a>&nbsp;\n";
 				}
 				?>
 				</td>
@@ -498,19 +498,22 @@ class Match_HTMLOUT extends Match
 		?>
 		<!-- Following HTML from ./lib/class_match_htmlout.php report -->
 		<table class="table table-dark">
-		<tr><td></td><td style='text-align: right;'><i><?php echo $lng->getTrn('common/home');?></i></td><td>&mdash;</td><td style='text-align: left;'><i><?php echo $lng->getTrn('common/away');?></i></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/teams');?></b>:</td><td style='text-align: right;'><?php echo "$teamUrl1</td><td> &mdash; </td><td style='text-align: left;'>$teamUrl2";?></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/coaches');?></b>:</td><td style='text-align: right;'><?php echo "$coachUrl1</td><td> &mdash; </td><td style='text-align: left;'>$coachUrl2";?></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/races');?></b>:</td><td style='text-align: right;'><?php echo "$raceUrl1</td><td> &mdash; </td><td style='text-align: left;'>$raceUrl2";?></td></tr>
-		<tr><td colspan="4"><hr></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/league');?></b>:</td><td colspan="3">    <?php   echo $leagueUrl; ?></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/division');?></b>:</td><td colspan="3">  <?php   echo $divUrl;?></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/tournament');?></b>:</td><td colspan="3"><?php   echo $tourUrl;?></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/round');?></b>:</td><td colspan="3">     <?php   echo $T_ROUNDS[$m->round];?></td></tr>
-		<tr><td><b><?php echo $lng->getTrn('common/dateplayed');?></b>:</td><td colspan="3"><?php   echo ($m->is_played) ? textdate($m->date_played) : '<i>'.$lng->getTrn('matches/report/notplayed').'</i>';?></td></tr>
-		<tr><td><b>Date Last Modified</b>:</td><td colspan="3"><?php echo ($m->is_played) ? textdate($m->date_modified) : '<i>'.$lng->getTrn('matches/report/notplayed').'</i>';?></td></tr>
+			<tr>
+				<td></td><td><i><?php echo $lng->getTrn('common/home');?></i></td><td>&mdash;</td>
+				<td><i><?php echo $lng->getTrn('common/away');?></i></td>
+			</tr>
+			<tr><td><b><?php echo $lng->getTrn('common/teams');?></b>:</td>
+				<td><?php echo "$teamUrl1</td><td> &mdash; </td><td style='text-align: left;'>$teamUrl2";?></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/coaches');?></b>:</td><td ><?php echo "$coachUrl1</td><td> &mdash; </td><td style='text-align: left;'>$coachUrl2";?></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/races');?></b>:</td><td><?php echo "$raceUrl1</td><td> &mdash; </td><td style='text-align: left;'>$raceUrl2";?></td></tr>
+			<tr><td colspan="4"><hr></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/league');?></b>:</td><td colspan="3">    <?php   echo $leagueUrl; ?></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/division');?></b>:</td><td colspan="3">  <?php   echo $divUrl;?></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/tournament');?></b>:</td><td colspan="3"><?php   echo $tourUrl;?></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/round');?></b>:</td><td colspan="3">     <?php   echo $T_ROUNDS[$m->round];?></td></tr>
+			<tr><td><b><?php echo $lng->getTrn('common/dateplayed');?></b>:</td><td colspan="3"><?php   echo ($m->is_played) ? textdate($m->date_played) : '<i>'.$lng->getTrn('matches/report/notplayed').'</i>';?></td></tr>
+			<tr><td><b>Date Last Modified</b>:</td><td colspan="3"><?php echo ($m->is_played) ? textdate($m->date_modified) : '<i>'.$lng->getTrn('matches/report/notplayed').'</i>';?></td></tr>
 		<?php
-		echo var_dump($m);
 		if (Module::isRegistered('PDFMatchReport')) {
 			$str = '<a  data-toggle="tooltip" data-placement="top" title="Download" href="handler.php?type=pdfmatchreport&amp;tid1='.$team1->team_id.'&amp;tid2='.$team2->team_id.'&amp;mid='.$m->match_id.'" TARGET="_blank"><i class="fas fa-download"></i> Download PDF report</a>';
 			echo "<tr><td><b>Match report</b>:</td><td>$str</td></tr>";
@@ -558,7 +561,7 @@ class Match_HTMLOUT extends Match
 				<tr class='commonhead'><td colspan="<?php echo $CP;?>"><b><?php echo $lng->getTrn('matches/report/info');?></b></td></tr>
 				<tr><td colspan='<?php echo $CP;?>'>
 					<b><?php echo $lng->getTrn('matches/report/stadium');?></b>&nbsp;
-					<select name="stadium" <?php echo $DIS;?>>
+					<select class="form-control form-control-sm bg-card" name="stadium" <?php echo $DIS;?>>
 						<?php
 						$stad = ($m->stadium) ? $m->stadium : $m->team1_id;
 						foreach (array($team1, $team2) as $_t) {
@@ -569,11 +572,11 @@ class Match_HTMLOUT extends Match
 				</td></tr>
 				<tr><td colspan='<?php echo $CP;?>'>
 					<b><?php echo $lng->getTrn('common/gate');?></b>&nbsp;
-					<input type="text" name="gate" onChange='numError(this);' value="<?php echo $m->gate ? $m->gate/1000 : 0;?>" size="4" maxlength="4" <?php echo $DIS;?>>k
+					<input class="form-control form-control-sm bg-card" type="text" name="gate" onChange='numError(this);' value="<?php echo $m->gate ? $m->gate/1000 : 0;?>" size="4" maxlength="4" <?php echo $DIS;?>>
 				</td></tr>
 				<tr><td colspan='<?php echo $CP;?>'>
 					<b><?php echo $lng->getTrn('matches/report/fans');?></b>&nbsp;
-					<input type="text" name="fans" onChange='numError(this);' value="<?php echo $m->fans;?>" size="7" maxlength="12" <?php echo $DIS;?>>
+					<input class="form-control form-control-sm bg-card" type="text" name="fans" onChange='numError(this);' value="<?php echo $m->fans;?>" size="7" maxlength="12" <?php echo $DIS;?>>
 				</td></tr>
 				<?php
 				if (!$settings['hide_ES_extensions']) {
@@ -601,17 +604,44 @@ class Match_HTMLOUT extends Match
 				foreach (array(1,2) as $N) {
 					echo "<tr>\n";
 					echo "<td>".${"teamUrl$N"}."</td>\n";
-					echo "<td><input type='text' onChange='numError(this);' name='result$N' value='".((int) $m->{"team${N}_score"})."' size='1' maxlength='2' $DIS></td>\n";
-					echo "<td><input type='text' onChange='numErrorAllowNegative(this);' name='inc$N' value='".(((int) $m->{"income$N"})/1000)."' size='4' maxlength='4' $DIS>k</td>\n";
+					echo "<td><input class='form-control form-control-sm bg-card' type='text' onChange='numError(this);' name='result$N' value='".((int) $m->{"team${N}_score"})."' size='1' maxlength='2' $DIS></td>\n";
+					echo "<td>
+						<div class='input-group input-group-sm'>
+							<input class='form-control form-control-sm bg-card' type='text' onChange='numErrorAllowNegative(this);' name='inc$N' value='".(((int) $m->{"income$N"})/1000)."' size='4' maxlength='4' $DIS>
+								<div class='input-group-append'>
+							      <div class='input-group-text'>k</div>
+							    </div></div>
+							</td>\n";
 					echo "<td>";
 					foreach (array('1' => 'green', '0' => 'blue', '-1' => 'red') as $Nff => $color) {
-						echo "<input $DIS type='radio' name='ff$N' value='$Nff' ".(($m->{"ffactor$N"} == (int) $Nff) ? 'CHECKED' : '')."><font color='$color'><b>$Nff</b></font>";
+						echo "
+							<div class='form-check form-check-inline'>
+							<input id='ff' class='form-check-input' $DIS type='radio' name='ff$N' value='$Nff' ".(($m->{"ffactor$N"} == (int) $Nff) ? 'CHECKED' : '').">
+							<label class='form-check-label' for='ff'>
+								<font color='$color'><b>$Nff</b></font>
+							</label>
+							</div>";
 					}
 					echo "</td>\n";
-					echo "<td><input type='text' onChange='numError(this);' name='smp$N' value='".($m->{"smp$N"})."' size='1' maxlength='2' $DIS>".$lng->getTrn('matches/report/pts')."</td>\n";
-					echo "<td><input type='text' onChange='numError(this);' name='tcas$N' value='".($m->{"tcas$N"})."' size='1' maxlength='2' $DIS></td>\n";
-					echo "<td><input type='text' onChange='numError(this);' name='fame$N' value='".($m->{"fame$N"})."' size='1' maxlength='2' $DIS></td>\n";
-					echo "<td><input type='text' onChange='numError(this);' name='tv$N' value='".($m->is_played ? $m->{"tv$N"}/1000 : ${"team$N"}->value/1000)."' size='4' maxlength='10' $DIS>k</td>\n";
+					echo "<td>
+						<div class='input-group input-group-sm'>
+						<input class='form-control form-control-sm bg-card' type='text' onChange='numError(this);' name='smp$N' value='".($m->{"smp$N"})."' size='1' maxlength='2' $DIS>
+						<div class='input-group-append'>
+							      <div class='input-group-text'>" . $lng->getTrn('matches/report/pts') . "</div>
+							    </div></div></div>
+
+
+					</td>\n";
+					echo "<td><input class='form-control form-control-sm bg-card' type='text' onChange='numError(this);' name='tcas$N' value='".($m->{"tcas$N"})."' size='1' maxlength='2' $DIS></td>\n";
+					echo "<td><input class='form-control form-control-sm bg-card'  type='text' onChange='numError(this);' name='fame$N' value='".($m->{"fame$N"})."' size='1' maxlength='2' $DIS></td>\n";
+					echo "<td>
+							<div class='input-group input-group-sm'>
+							<input class='form-control form-control-sm bg-card' type='text' onChange='numError(this);' name='tv$N' value='".($m->is_played ? $m->{"tv$N"}/1000 : ${"team$N"}->value/1000)."' size='4' maxlength='10' $DIS>
+							<div class='input-group-append'>
+							      <div class='input-group-text'>k</div>
+							    </div></div>
+							</div>
+							</td>\n";
 					echo "</tr>\n";
 				}
 				?>
@@ -622,7 +652,7 @@ class Match_HTMLOUT extends Match
 			$CPP = count($playerFields);
 			foreach (array(1 => $team1, 2 => $team2) as $id => $t) {
 				?>
-				<table class='table table-dark'>
+				<table class='table table-dark table-sm'>
 				<tr class='commonhead'><td colspan='<?php echo $CPP;?>'>
 					<b><a href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_TEAM,$t->team_id,false,false);?>"><?php echo $t->name;?></a> <?php echo $lng->getTrn('matches/report/report');?></b>
 				</td></tr>
@@ -742,7 +772,7 @@ class Match_HTMLOUT extends Match
 			?>
 			<table class='table table-dark'>
 				<tr class='commonhead'><td colspan='13'><b><?php echo $lng->getTrn('matches/report/summary');?></b></td></tr>
-				<tr><td colspan='13'><textarea name='summary' rows='10' cols='100' <?php echo $DIS . ">" . $m->getText(); ?></textarea></td></tr>
+				<tr><td colspan='13'><textarea class="form-control" name='summary' rows='10' cols='100' <?php echo $DIS . ">" . $m->getText(); ?></textarea></td></tr>
 			</table>
 			<br>
 			<center>
@@ -792,15 +822,15 @@ class Match_HTMLOUT extends Match
 		echo "<td>$pos</td>\n";
 		// MVP
 		echo "<!-- Following HTML from ./lib/class_match_htmlout.php _print_player_row -->";
-		echo "<td><select $DIS name='mvp_$FS'>";
+		echo "<td><select class='form-control form-control-sm bg-card' $DIS name='mvp_$FS'>";
 		foreach (range(0,2) as $n) {echo "<option value='$n' ".((isset($mdat['mvp']) && $mdat['mvp'] == $n) ? 'SELECTED' : '').">$n</option>";}
 		echo "</select>\n";
 		// Rest of ACH.
 		foreach (array_diff(array_keys($T_MOUT_ACH), array('mvp')) as $f) {
-			echo "<td><input $DIS type='text' onChange='numError(this);' size='1' maxlength='2' name='${f}_$FS' value='".(isset($mdat[$f]) ? $mdat[$f] : 0)."'></td>\n";
+			echo "<td><input  class='form-control form-control-sm bg-card' $DIS type='text' onChange='numError(this);' size='1' maxlength='2' name='${f}_$FS' value='".(isset($mdat[$f]) ? $mdat[$f] : 0)."'></td>\n";
 		}
 		foreach (array_keys($T_MOUT_IR) as $irl) {
-			echo "<td><select name='${irl}_$FS' $DIS>";
+			echo "<td><select  class='form-control form-control-sm bg-card' name='${irl}_$FS' $DIS>";
 			foreach (range(0,6) as $N) {
 				echo "<option value='$N' ".((isset($mdat[$irl]) && $mdat[$irl] == $N) ? 'SELECTED' : '').">$N</option>";
 			}
@@ -809,7 +839,7 @@ class Match_HTMLOUT extends Match
 		global $T_INJS;
 		$T_INJS_AGN = array_diff_key($T_INJS, array(MNG => null, DEAD => null));
 		foreach (array_combine(array_keys($T_MOUT_INJ), array($T_INJS, $T_INJS_AGN, $T_INJS_AGN)) as $f => $opts) {
-			echo "<td><select name='${f}_$FS' $DIS>";
+			echo "<td><select  class='form-control form-control-sm bg-card' name='${f}_$FS' $DIS>";
 			foreach ($opts as $status => $name) {
 				echo "<option value='$status' ".((isset($mdat[$f]) && $mdat[$f] == $status) ? 'SELECTED' : '').">$name</option>";
 			}

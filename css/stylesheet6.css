@@ -264,13 +264,34 @@ div.red                 {clear:both;background-color:#F20000;border:1px solid #c
     }
 }
 
-.row {
+/*.row {
     margin-left: 0px;
 }
-
+*/
 .navbar-dark .navbar-nav .nav-link{
     color: white;
 }
 
 td.round     {background-color: #32383E;}
 td.match     {background-color: #3a4047;}
+
+.bg-body, .bg-body:focus{
+
+    background-color: #4D555D;
+}
+
+.table-dark {
+     background-color: #343A40;
+}
+
+.bg-card, .bg-card:focus{
+    background-color: #343A40;
+    color: #FFFFFF;
+}
+
+
+.form-control:focus{
+    border-color: #005DAC;  
+    box-shadow: none; 
+    -webkit-box-shadow: none;
+}

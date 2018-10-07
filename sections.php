@@ -138,40 +138,60 @@ function sec_main() {
     ?>
     <!-- <div class="main_head"><?php echo $settings['league_name']; ?></div> -->
     <div class='row'>
-    <div class='col'>
-        <div class="row">
-        
-            <?php
-            echo "<div class='main_leftColumn_welcome'>\n";
-            echo $settings['welcome'];
-            echo "</div>\n";
-            echo "<div class='main_leftColumn_left'>\n";
-            if(count($leagues) > 1)
-				echo $HTML_LeagueSelector;
-            echo "</div>\n";
-            echo "<div class='main_leftColumn_right'>\n";
-            if (is_object($coach) && $coach->isNodeCommish(T_NODE_LEAGUE, $sel_lid)) {
-                echo "<a href='javascript:void(0);' onClick=\"slideToggle('msgnew');\">".$lng->getTrn('main/newmsg')."</a>&nbsp;\n";
-            }
-            if (Module::isRegistered('RSSfeed')) {echo "<a href='handler.php?type=rss'>RSS</a>\n";}
-            echo "</div>\n";
-            ?>
-            <div style="display:none; clear:both;" id="msgnew">
-                <br><br>
-                <form method="POST">
-                    <textarea name="title" rows="1" cols="50"><?php echo $lng->getTrn('common/notitle');?></textarea><br><br>
-                    <textarea name="txt" rows="15" cols="50"><?php echo $lng->getTrn('common/nobody');?></textarea><br><br>
-                    <?php 
-                    if ($IS_GLOBAL_ADMIN) {
-                        echo $lng->getTrn('main/broadcast');
-                        ?><input type="checkbox" name="BC"><br><br><?php
+    <div class='col-6'>
+        <div class="card bg-dark mt-4 mb-4">
+          <div class="card-body p-2">
+                <div class="row">
+                
+                    <?php
+                    echo "<div class='col'>";
+                        echo $settings['welcome'];
+                    echo "</div>";
+
+                    if (is_object($coach) && $coach->isNodeCommish(T_NODE_LEAGUE, $sel_lid)) {
+                        echo "<div class='col'>
+                            <a href='javascript:void(0);' onClick=\"slideToggle('msgnew');\">".$lng->getTrn('main/newmsg')."</a>&nbsp;\n 
+                            </div>";
+                    }
+                    if (Module::isRegistered('RSSfeed')) {
+                        echo "<div class='col'>
+                                <a href='handler.php?type=rss'>RSS</a>\n
+                                </div>";
+                    }
+
+                    if(count($leagues) > 1) {
+
+                        echo "<div class='col'>" . $HTML_LeagueSelector . "</div>";
                     }
                     ?>
-                    <input type="hidden" name="type" value="msgnew">
-                    <input type="submit" value="<?php echo $lng->getTrn('common/submit');?>">
-                </form>
-            </div>
 
+                </div>
+
+                <div class="row">
+                    <div class="col" style="display:none; clear:both;" id="msgnew">
+                        <br><br>
+                        <form method="POST">
+                            <!-- New Message Title Input -->
+                            <textarea class="form-control bg-dark text-white" name="title" rows="1" cols="50"><?php echo $lng->getTrn('common/notitle');?>
+                            </textarea>
+                            <br><br>
+
+                            <!-- New Message Input -->
+                            <textarea  class="form-control bg-dark text-white" name="txt" rows="15" cols="50"><?php echo $lng->getTrn('common/nobody');?>
+                            </textarea>
+                            <br><br>
+                            <?php 
+                            if ($IS_GLOBAL_ADMIN) {
+                                echo $lng->getTrn('main/broadcast');
+                                ?><input type="checkbox" name="BC"><br><br><?php
+                            }
+                            ?>
+                            <input type="hidden" name="type" value="msgnew">
+                            <input class="btn btn-primary" type="submit" value="<?php echo $lng->getTrn('common/create');?>">
+                        </form>
+                    </div>
+                </div>
+            </div>
         <?php
         /*
             Generate main board.
@@ -181,7 +201,7 @@ function sec_main() {
         */
         $j = 1; $prevPinned = 0;
         echo "</div>";
-        echo "<div class='row'>\n";
+        echo "<div class='row col'>\n";
         foreach (TextSubSys::getMainBoardMessages($settings['fp_messageboard']['length'], $sel_lid, $settings['fp_messageboard']['show_team_news'], $settings['fp_messageboard']['show_match_summaries']) as $e) {
 
             if ($prevPinned == 1 && !$e->pinned) { echo "<hr>\n"; }
@@ -327,7 +347,7 @@ function sec_main() {
             }
             list($teams, ) = Stats::getRaw(T_OBJ_TEAM, array($box['type'] => $box['id']), array(1, $box['length']), $SR, false);
             ?>
-            <div class='row mt-5 mb-4'>
+            <div class='row mt-4 mb-4'>
             <div class='col'>
               <div class='card bg-dark text-white'>
                 <div class='card-header'><?php echo $box['title'];?></div>
@@ -362,8 +382,8 @@ function sec_main() {
                     </table>
                     <?php
                     if (isset($box['infocus']) && $box['infocus']) {
-                        echo "<hr>";
-                        _infocus($teams);
+                        // echo "<hr>";
+                        // _infocus($teams);
                     }                    
                     ?>
                 </div>

@@ -760,7 +760,9 @@ class HTMLOUT
 		}
 		// Done preprocessing...
 		$NL = '';
-		$NL .= "<select class='form-control form-control-sm' name='$nameid' id='$nameid' ".implode(' ', $extra_tags).">\n";
+		$NL .= "
+					<select class='form-control form-control-sm' name='$nameid' id='$nameid' " . implode(' ', $extra_tags) . ">
+				\n";
 		if ($init_option) {
 			$NL .= $init_option;
 		}
@@ -899,7 +901,7 @@ class HTMLOUT
 			</script>
 		</head>
 		<body>
-			<div class="everything">
+			<div class="container-fluid">
 				<div class="row logo-banner">
 					<div class="col-1">
 						<img src="../images/themes/UPBL/logo_1_prod.svg" class="logo img-fluid" alt="logos">
@@ -912,14 +914,15 @@ class HTMLOUT
 							<?php echo $settings['banner_subtitle']; ?>
 						</h6>
 					</div>
-					<div class="col">
+					<div class="col-8">
 
 						
 					</div>
-				</div>
-				<?php if ($menu) {HTMLOUT::make_menu();} ?>
+				</div>	
+			</div>
+			<?php if ($menu) {HTMLOUT::make_menu();} ?>
 
-				<div class="container-fluid"> <!-- This container holds the section specific content -->
+			<div class="container-fluid"> <!-- This container holds the section specific content -->
 		<?php
 	}
 	

@@ -506,7 +506,7 @@ EOQ;
 		}
 
 		function makeSelect(id, type, max) {
-			var str = "<select class='form-control form-control-sm' id=\"qty" + type + id + "\" name=\"qty" + type + id + "\" onchange=\"updateQty(" + id + ", '" + type + "', this.options[this.selectedIndex].value)\">";
+			var str = "<select class='form-control form-control-sm bg-card' id=\"qty" + type + id + "\" name=\"qty" + type + id + "\" onchange=\"updateQty(" + id + ", '" + type + "', this.options[this.selectedIndex].value)\">";
 			for (var i = 0; i <= max; i++) {
 				str += "<option value=\"" + i + "\">" + i + "</option>";
 			}
@@ -663,10 +663,10 @@ EOQ;
 		<form method="POST" id="form_team">
 		<input type="hidden" id="action" name="action" value="create" />
 		<input type="hidden" id="raceid" name="raceid" value="" />
-		<div class='boxWide'>
-		<table class="common"><tr><td>
-		<label for="tname">$txtRaceSelectTitle:</label></td><td>
-		<select class="form-control form-control-sm" id="rid" name="rid" onchange="changeRace(this.options[this.selectedIndex].value)">
+		<div class='form-row align-items-center'>
+			 <div class="col">
+				<label for="tname">$txtRaceSelectTitle:</label></td><td>
+				<select class="form-control form-control-sm bg-body text-white" id="rid" name="rid" onchange="changeRace(this.options[this.selectedIndex].value)">
 EOQ;
 		echo "<option value='-1'>$txtRaceSelectOption</option>";
 		$i = 0;
@@ -676,14 +676,19 @@ EOQ;
 			$i++;
 		}
 		echo <<<EOQ
-		</select></td>
+		</select></div>
 EOQ;
 		if (isset($coach)) {
 			$lgeDiv = $lng->getTrn('common/league') . '/' . $lng->getTrn('common/division');
 		echo <<<EOQ
-		<td><label for="tname">$txtTeamName:</label></td><td><input type="text" class="form-control form-control-sm" id="tname" name="tname" size="20" maxlength="50"></td>
+		<div class="col">
+			<label for="tname">$txtTeamName:</label>
+			<input type="text" class="form-control form-control-sm bg-body text-white" id="tname" name="tname" size="20" maxlength="50">
+		</div>
 
-		<td align="right"><label for="lid_did">$lgeDiv:</label></td><td><select class="form-control bg-darkform-control-sm" name="lid_did" id="lid_did">
+		<div class="col">
+			<label for="lid_did">$lgeDiv:</label></td><td>
+			<select class="form-control form-control-sm bg-body text-white" name="lid_did" id="lid_did">
 EOQ;
 		foreach ($leagues = Coach::allowedNodeAccess(Coach::NODE_STRUCT__TREE, $coach->coach_id, array(T_NODE_LEAGUE => array('tie_teams' => 'tie_teams'))) as $lid => $lstruct) {
 			if ($lstruct['desc']['tie_teams']) {
@@ -699,7 +704,8 @@ EOQ;
 			}
 		}
 		echo <<<EOQ
-		</select></td>
+		</select>
+		</div>
 EOQ;
 		}
 
@@ -715,18 +721,24 @@ EOQ;
 		$txtSubtotal = $lng->getTrn('subtotal', 'TeamCreator');
 
 		echo <<<EOQ
-	    <td  class="form-check">
-		    <label class="form-check-label" for="induce">$txtInducements:</label>
-	        <input type="checkbox"  class="form-check-input" id="induce" onclick="changeInduce(this.checked)">
-	        <input type="hidden" id="oldInduce" value="false" />
+		    <div class="col-2">
+			     <label class="form-check-label" for="induce">
+			         	$txtInducements:
+		         </label>
+		        <input type="checkbox" class="form-check-input" id="induce" onclick="changeInduce(this.checked)">
+		        
+		        <input type="hidden" id="oldInduce" value="false" />
+	        </div>
 	        
-        </td>
+			<div class="col-1 form-group">
+				<b>$txtPlayerCount</b>: <span id="pcnt"></span>
+			</div>
 
-		<td align="right"><b>$txtPlayerCount</b>:</td><td><div id="pcnt"></div></td>
-		<td align="right"><b>$txtTotal</b>:</td><td><div id="total"></div></td>
-		</tr></table>
+			<div class="col-1 form-group">
+				<b>$txtTotal</b>: <span id="total"></span>
+			</div>
 		</div>
-		<div class="boxWide">
+		<div class="card bg-dark mb-4 mt-4">
 			<table class="table table-dark table-sm" id="teamTable">
     			 <tr>
 					<th>$txtPos</th>
@@ -742,16 +754,16 @@ EOQ;
 					<th>$txtSubtotal</th>
 				</tr>
 			</table>
-		</div>
-		<div class='row'>
+			<div class='row mb-3'>
 		    <div class='col-11'>
 			</div>
 			<div class='col'>
 			<span id="createBtnTxt" title="$txtNoRaceSelected"><button id="createBtn"  class="btn btn-success btn-sm" onclick="createTeam(); return false;" DISABLED>$txtCreateBtn</button>
 			</div>
 
-			</div>
-		</form>
+		</div>
+		</div>
+	</form>
 EOQ;
 	}
 }
