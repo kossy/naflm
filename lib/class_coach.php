@@ -269,7 +269,7 @@ class Coach
     }
 
     public function setPasswd($passwd) {
-        $query = "UPDATE coaches SET passwd = '". hash('sha256', $passwd)."' WHERE coach_id = $this->coach_id";
+        $query = "UPDATE coaches SET passwd = '" . password_hash($passwd, PASSWORD_DEFAULT) . "' WHERE coach_id = $this->coach_id";
         return (mysql_query($query) && ($this->passwd = hash('sha256', $passwd)));
     }
 
@@ -478,7 +478,8 @@ class Coach
     }
     
     public static function checkPasswd($cid, $passwd, $hash = true) {
-        return (get_alt_col('coaches', 'coach_id', $cid, 'passwd') == ($hash ? hash('sha256', $passwd) : $passwd));
+        $db_hash = get_alt_col('coaches', 'coach_id', $cid, 'passwd');
+        return password_verify($passwd, $db_hash);
     }
     
     protected static function _setSession($cid) {
@@ -524,7 +525,7 @@ class Coach
         $query = "INSERT INTO coaches (name, realname, passwd, mail, phone, ring, settings) 
                     VALUES ('" . mysql_real_escape_string($input['name']) . "',
                             '" . mysql_real_escape_string($input['realname']) . "', 
-                            '" . hash('sha256', $input['passwd']) . "', 
+                            '" . password_hash($input['passwd']) . "', 
                             '" . mysql_real_escape_string($input['mail']) . "', 
                             '" . mysql_real_escape_string($input['phone']) . "', 
                             " . $input['ring'].",
