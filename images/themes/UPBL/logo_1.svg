@@ -108,8 +108,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="178.60029"
-     inkscape:cy="392.12212"
+     inkscape:cx="233.04751"
+     inkscape:cy="565.86203"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -118,9 +118,9 @@
      inkscape:pagecheckerboard="true"
      fit-margin-left="0.2"
      inkscape:window-width="1366"
-     inkscape:window-height="720"
+     inkscape:window-height="768"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -130,7 +130,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -179,7 +179,7 @@
            x="218"
            y="480.51968" /></flowRegion><flowPara
          id="flowPara854"
-         style="font-size:213.33334351px">upbl</flowPara></flowRoot>    <rect
+         style="font-size:213.33334351px">uppbluu</flowPara></flowRoot>    <rect
        style="fill:#efdd90;fill-opacity:1;stroke:none;stroke-width:1.4452368;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect915-7"
        width="7"
@@ -251,5 +251,16 @@
        id="path4661"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccczccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.63333321px;line-height:1.25;font-family:Freshman;-inkscape-font-specification:Freshman;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.18520834"
+       x="31.36734"
+       y="105.74959"
+       id="text1451"><tspan
+         sodipodi:role="line"
+         id="tspan1449"
+         x="31.36734"
+         y="105.74959"
+         style="font-size:25.92916679px;fill:#ffffff;stroke-width:0.18520834">UPBBL</tspan></text>
   </g>
 </svg>
