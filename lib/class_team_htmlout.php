@@ -801,157 +801,157 @@ class Team_HTMLOUT extends Team
 		<!-- Following HTML is from class_team_htmlout.php _actionBoxes -->
 		<a name="aanc"></a>
 		<div class="row">
-		<div class="col">
-		<div class="card text-white bg-dark">
-			<div class="card-header"><?php echo $lng->getTrn('profile/team/box_info/title');?></div>
-			<div class="card-body">
-				<table width="100%">
-					<tr>
-						<td><?php echo $lng->getTrn('common/coach');?></td>
-						<td><a href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$team->owned_by_coach_id,false,false);?>"><?php echo $team->f_cname; ?></a></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/race');?></td>
-						<td><a href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_RACE,$team->f_race_id,false,false);?>"><?php echo $lng->getTrn('race/'.strtolower(str_replace(' ','', $team->f_rname))); ?></a></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/league');?></td>
-						<td><?php if (isset($leagues[$team->f_lid])) {
-							echo "<a href=\"";
-							echo urlcompile(T_URL_STANDINGS,T_OBJ_TEAM,false,T_NODE_LEAGUE,$team->f_lid);
-							echo "\">" . $leagues[$team->f_lid]['lname'] . "</a>";
-						} else {
-							echo '<i>'.$lng->getTrn('common/none').'</i>';
-						} ?></td>
-					</tr>
-					<?php
-					if ($team->f_did != self::T_NO_DIVISION_TIE) {
-						?>
-						<tr>
-							<td><?php echo $lng->getTrn('common/division');?></td>
-							<td><?php if (isset($divisions[$team->f_did])) {
-							echo "<a href=\"";
-							echo urlcompile(T_URL_STANDINGS,T_OBJ_TEAM,false,T_NODE_DIVISION,$team->f_did);
-							echo "\">" . $divisions[$team->f_did]['dname'] . "</a>";
-						} else {
-							echo '<i>'.$lng->getTrn('common/none').'</i>';
-						} ?></td>
-						</tr>
-						<?php
-					}
-					?>
-					<tr>
-						<td><?php echo $lng->getTrn('common/ready');?></td>
-						<td><?php echo ($team->rdy) ? $lng->getTrn('common/yes') : $lng->getTrn('common/no'); ?></td>
-					</tr>
-					<tr>
-						<td>TV</td>
-						<td><?php echo $team->tv/1000 . 'k'; ?></td>
-					</tr>
-					<tr>
-						 <td><?php echo $lng->getTrn('matches/report/treas')?></td>
-						<td><?php echo $team->treasury/1000 . 'k'; ?></td>
-					</tr>
-					<tr>
-					<?php
-					if (in_array($team->f_race_id, $racesHasNecromancer)) {
-						?>
-						<td>Necromancer</td>
-						<td><?php echo $lng->getTrn('common/yes');?></td>
-						<?php
-					}
-					if (!in_array($team->f_race_id, $racesNoApothecary)) {
-						echo "<td>".$lng->getTrn('common/apothecary')."</td>\n";
-						echo "<td>" . ($team->apothecary ? $lng->getTrn('common/yes') : $lng->getTrn('common/no')) . "</td>\n";
-					}
-					?>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/reroll')?></td>
-						<td><?php echo $team->rerolls; ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('matches/report/ff')?></td>
-						<td><?php echo $team->rg_ff; ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/ass_coach')?></td>
-						<td><?php echo $team->ass_coaches; ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/cheerleader')?></td>
-						<td><?php echo $team->cheerleaders; ?></td>
-					</tr>
-					<tr>
-						<td colspan=2><hr></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/played');?></td>
-						<td><?php echo $team->mv_played; ?></td>
-					</tr>
-					<tr>
-						<td>WIN%</td>
-						<td><?php echo sprintf("%1.1f", $team->rg_win_pct).'%'; ?></td>
-					</tr>
-					<tr>
-						<td>ELO</td>
-						<td><?php echo (($team->rg_elo) ? sprintf("%1.2f", $team->rg_elo) : '<i>N/A</i>'); ?></td>
-					</tr>
-					<tr>
-						<td>W/L/D</td>
-						<td><?php echo "$team->mv_won/$team->mv_lost/$team->mv_draw"; ?></td>
-					</tr>
-					<tr>
-						<td>W/L/D <?php echo $lng->getTrn('common/streaks');?></td>
-						<td><?php echo "$team->rg_swon/$team->rg_slost/$team->rg_sdraw"; ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('common/wontours');?></td>
-						<td><?php echo $team->wt_cnt; ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $lng->getTrn('profile/team/box_info/ltour');?></td>
-						<td><?php echo Tour::getTourUrl($team->getLatestTour()); ?></td>
-					</tr>
-					<tr valign="top">
-						<td><?php echo $lng->getTrn('common/playedtours');?></td>
-						<td><small><?php $tours = $team->getToursPlayedIn(false);
-						if (empty($tours)) {
-							echo $lng->getTrn('common/none');
-						} else {
-							$first = true;
-							foreach($tours as $tour) {
-								if ($first) {
-									$first = false;
+			<div class="col">
+				<div class="card text-white bg-dark">
+					<div class="card-header"><?php echo $lng->getTrn('profile/team/box_info/title');?></div>
+					<div class="card-body">
+						<table width="100%">
+							<tr>
+								<td><?php echo $lng->getTrn('common/coach');?></td>
+								<td><a href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_COACH,$team->owned_by_coach_id,false,false);?>"><?php echo $team->f_cname; ?></a></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/race');?></td>
+								<td><a href="<?php echo urlcompile(T_URL_PROFILE,T_OBJ_RACE,$team->f_race_id,false,false);?>"><?php echo $lng->getTrn('race/'.strtolower(str_replace(' ','', $team->f_rname))); ?></a></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/league');?></td>
+								<td><?php if (isset($leagues[$team->f_lid])) {
+									echo "<a href=\"";
+									echo urlcompile(T_URL_STANDINGS,T_OBJ_TEAM,false,T_NODE_LEAGUE,$team->f_lid);
+									echo "\">" . $leagues[$team->f_lid]['lname'] . "</a>";
 								} else {
-									echo ", ";
-								}
-								echo $tour->getUrl();
+									echo '<i>'.$lng->getTrn('common/none').'</i>';
+								} ?></td>
+							</tr>
+							<?php
+							if ($team->f_did != self::T_NO_DIVISION_TIE) {
+								?>
+								<tr>
+									<td><?php echo $lng->getTrn('common/division');?></td>
+									<td><?php if (isset($divisions[$team->f_did])) {
+									echo "<a href=\"";
+									echo urlcompile(T_URL_STANDINGS,T_OBJ_TEAM,false,T_NODE_DIVISION,$team->f_did);
+									echo "\">" . $divisions[$team->f_did]['dname'] . "</a>";
+								} else {
+									echo '<i>'.$lng->getTrn('common/none').'</i>';
+								} ?></td>
+								</tr>
+								<?php
 							}
-						} ?></small></td>
-					</tr>
-					<?php
-					if (Module::isRegistered('Prize')) {
-						?>
-						<tr valign="top">
-							<td><?php echo $lng->getTrn('name', 'Prize');?></td>
-							<td><small><?php echo Module::run('Prize', array('getPrizesString', T_OBJ_TEAM, $team->team_id));?></small></td>
-						</tr>
-						<?php
-					}
-					if (Module::isRegistered('FamousTeams')) {
-						?>
-						<tr>
-							<td><?php echo $lng->getTrn('isfamous', 'FamousTeams');?></td>
-							<td><?php echo (Module::run('FamousTeams', array('isInFT', $team->team_id))) ? '<b><font color="green">Yes</font></b>' : 'No';?></td>
-						</tr>
-						<?php
-					}
-					?>
-				</table>
-			</div>
-		</div>
-	</div>
+							?>
+							<tr>
+								<td><?php echo $lng->getTrn('common/ready');?></td>
+								<td><?php echo ($team->rdy) ? $lng->getTrn('common/yes') : $lng->getTrn('common/no'); ?></td>
+							</tr>
+							<tr>
+								<td>TV</td>
+								<td><?php echo $team->tv/1000 . 'k'; ?></td>
+							</tr>
+							<tr>
+								 <td><?php echo $lng->getTrn('matches/report/treas')?></td>
+								<td><?php echo $team->treasury/1000 . 'k'; ?></td>
+							</tr>
+							<tr>
+							<?php
+							if (in_array($team->f_race_id, $racesHasNecromancer)) {
+								?>
+								<td>Necromancer</td>
+								<td><?php echo $lng->getTrn('common/yes');?></td>
+								<?php
+							}
+							if (!in_array($team->f_race_id, $racesNoApothecary)) {
+								echo "<td>".$lng->getTrn('common/apothecary')."</td>\n";
+								echo "<td>" . ($team->apothecary ? $lng->getTrn('common/yes') : $lng->getTrn('common/no')) . "</td>\n";
+							}
+							?>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/reroll')?></td>
+								<td><?php echo $team->rerolls; ?></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('matches/report/ff')?></td>
+								<td><?php echo $team->rg_ff; ?></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/ass_coach')?></td>
+								<td><?php echo $team->ass_coaches; ?></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/cheerleader')?></td>
+								<td><?php echo $team->cheerleaders; ?></td>
+							</tr>
+							<tr>
+								<td colspan=2><hr></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/played');?></td>
+								<td><?php echo $team->mv_played; ?></td>
+							</tr>
+							<tr>
+								<td>WIN%</td>
+								<td><?php echo sprintf("%1.1f", $team->rg_win_pct).'%'; ?></td>
+							</tr>
+							<tr>
+								<td>ELO</td>
+								<td><?php echo (($team->rg_elo) ? sprintf("%1.2f", $team->rg_elo) : '<i>N/A</i>'); ?></td>
+							</tr>
+							<tr>
+								<td>W/L/D</td>
+								<td><?php echo "$team->mv_won/$team->mv_lost/$team->mv_draw"; ?></td>
+							</tr>
+							<tr>
+								<td>W/L/D <?php echo $lng->getTrn('common/streaks');?></td>
+								<td><?php echo "$team->rg_swon/$team->rg_slost/$team->rg_sdraw"; ?></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('common/wontours');?></td>
+								<td><?php echo $team->wt_cnt; ?></td>
+							</tr>
+							<tr>
+								<td><?php echo $lng->getTrn('profile/team/box_info/ltour');?></td>
+								<td><?php echo Tour::getTourUrl($team->getLatestTour()); ?></td>
+							</tr>
+							<tr valign="top">
+								<td><?php echo $lng->getTrn('common/playedtours');?></td>
+								<td><small><?php $tours = $team->getToursPlayedIn(false);
+								if (empty($tours)) {
+									echo $lng->getTrn('common/none');
+								} else {
+									$first = true;
+									foreach($tours as $tour) {
+										if ($first) {
+											$first = false;
+										} else {
+											echo ", ";
+										}
+										echo $tour->getUrl();
+									}
+								} ?></small></td>
+							</tr>
+							<?php
+							if (Module::isRegistered('Prize')) {
+								?>
+								<tr valign="top">
+									<td><?php echo $lng->getTrn('name', 'Prize');?></td>
+									<td><small><?php echo Module::run('Prize', array('getPrizesString', T_OBJ_TEAM, $team->team_id));?></small></td>
+								</tr>
+								<?php
+							}
+							if (Module::isRegistered('FamousTeams')) {
+								?>
+								<tr>
+									<td><?php echo $lng->getTrn('isfamous', 'FamousTeams');?></td>
+									<td><?php echo (Module::run('FamousTeams', array('isInFT', $team->team_id))) ? '<b><font color="green">Yes</font></b>' : 'No';?></td>
+								</tr>
+								<?php
+							}
+							?>
+						</table>
+					</div> <!-- card body -->
+				</div> <!-- card -->
+			</div> <!-- col -->
 
 		<?php
 		if ($ALLOW_EDIT) {
@@ -1266,14 +1266,11 @@ class Team_HTMLOUT extends Team
 			}
 		}
 		?>
-		<br>
-		<div class="row"></div>
-		<br>
 		<?php
 		if (!$settings['hide_ES_extensions']){
 			?>
 			<div class="row">
-				<div class="col">
+				<div class="col-10">
 					<div class="card bg-dark text-white">
 						<div class="card-header">&nbsp;<?php echo $lng->getTrn('common/extrastats'); ?></div>
 						<div class="card-body" id="ES">
