@@ -64,30 +64,40 @@ function sec_login() {
                 $('#coach').focus();
             });
         </script>
-        <div class='boxCommon'>
-            <h3 class='boxTitle<?php echo T_HTMLBOX_COACH;?>'><?php echo $lng->getTrn('menu/login');?></h3>
-            <div class='boxBody'>
+        <div class='card bg-dark bm-4'>
+            <h6 class='card-header'><?php echo $lng->getTrn('menu/login');?></h6>
+            <div class='card-body'>
             <form method="POST" action="<?php echo getFormAction(''); ?>">
-                <?php echo $lng->getTrn('login/loginname');?><br>
-                <input type="text" id="coach" name="coach" size="20" maxlength="50"><br><br>
-                <?php echo $lng->getTrn('login/passwd');?><br>
-                <input type="password" name="passwd" size="20" maxlength="128">
-                <div style='display: none;'><input type='text' name='hackForHittingEnterToLogin' size='1'></div>
-                <br><br>
-                <?php echo $lng->getTrn('login/remember');?>
-                <input type='checkbox' name='remember' value='1'>
-                <br><br>
-                <input type="submit" name="login" value="<?php echo $lng->getTrn('login/loginbutton');?>">
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="coach"><?php echo $lng->getTrn('login/loginname');?></label>
+                    <input id="coach" class="form-control bg-card" type="text" id="coach" name="coach" size="20" maxlength="50">
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">                             
+                    <label for="password"> <?php echo $lng->getTrn('login/passwd');?></label>
+                    <input id="password" class="form-control bg-card" type="password" name="passwd" size="20" maxlength="128">             
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input id="remember"  class="form-check-input" type='checkbox' name='remember' value='1'>
+                        <label class="form-check-label" for="remember"> <?php echo $lng->getTrn('login/remember');?></label>
+                    </div>
+                </div>
+
+                <input class="btn btn-primary" type="submit" name="login" value="<?php echo $lng->getTrn('login/loginbutton');?>">
             </form>
-            <br><br>
+            </div>
+            <div class="card-footer">    
             <?php
-            if(!Mobile::isMobile()) {
-                if (Module::isRegistered('Registration') && $settings['allow_registration']) {
-                    echo "<a href='handler.php?type=registration'><b>Register</b></a>";
-                }  
-                echo "<br><br>";
-                echo "<a href='$_URL_forgotpass'><b>".$lng->getTrn('login/forgotpass').'</b></a>';
-            }
+            if (Module::isRegistered('Registration') && $settings['allow_registration']) {
+                echo "<a href='handler.php?type=registration'><b>Register</b></a>";
+            }  
+            echo "<br><br>";
+            echo "<a href='$_URL_forgotpass'><b>".$lng->getTrn('login/forgotpass').'</b></a>';
             ?>
             </div>
         </div>

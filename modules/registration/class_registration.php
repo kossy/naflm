@@ -272,7 +272,7 @@ class Registration implements ModuleInterface
          **/
 
         $form = '
-        <div class="card bg-dark mt-3">
+        <div class="card bg-dark mt-4 mb-4">
           <h6 class="card-header">
             Register
           </h6>
@@ -281,15 +281,15 @@ class Registration implements ModuleInterface
         <form id="registrationForm" method="POST" action="handler.php?type=registration" data-bind="with: registrationViewModel">
                   <div class="form-group">
                     <label for="inputUsername">Username</label>
-                    <input name="new_name" type="text" class="form-control" id="inputUsername" placeholder="" maxlength="50">
+                    <input name="new_name" type="text" class="form-control bg-card" id="inputUsername" placeholder="" maxlength="50">
                   </div>
                   <div class="form-group">
                     <label for="inputEmail">Email</label>
-                    <input name="new_mail" type="email" class="form-control" id="inputEmail" placeholder="" maxlength="129">
+                    <input name="new_mail" type="email" class="form-control bg-card" id="inputEmail" placeholder="" maxlength="129">
                   </div>
                   <div class="form-group">
                     <label for="inputPassword">Password</label>
-                    <input name="new_passwd" type="password" class="form-control" id="inputPassword" placeholder="">
+                    <input name="new_passwd" type="password" class="form-control bg-card" id="inputPassword" placeholder="">
                   </div>
                   <div class="form-group form-check">
                    <input type="checkbox" class="form-check-input" id="check" name="is_commissioner" data-bind="checked: isCommissioner">
@@ -298,7 +298,7 @@ class Registration implements ModuleInterface
                   
                   <div class="form-group" data-bind="visible: showLeagueSelection">
                     <label for="inputLeague">League</label>
-                    <select id="inputLeague" class="form-control"  name="new_league" data-bind="options: leagues, optionsText: \'name\', optionsValue: \'lid\', value: selectedLeague, optionsCaption: \'Select a league.\'"></select>
+                    <select id="inputLeague" class="form-control bg-card"  name="new_league" data-bind="options: leagues, optionsText: \'name\', optionsValue: \'lid\', value: selectedLeague, optionsCaption: \'Select a league.\'"></select>
                   </div>
 
                 <button type="submit" class="btn btn-primary text-white" aria-describedby="submitHelpBlock">Create</button>
