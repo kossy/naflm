@@ -721,13 +721,15 @@ EOQ;
 		$txtSubtotal = $lng->getTrn('subtotal', 'TeamCreator');
 
 		echo <<<EOQ
-		    <div class="col-2">
-			     <label class="form-check-label" for="induce">
-			         	$txtInducements:
-		         </label>
+		    <div class="form-group col-2">
+		    	<div class="form-check">
 		        <input type="checkbox" class="form-check-input" id="induce" onclick="changeInduce(this.checked)">
 		        
 		        <input type="hidden" id="oldInduce" value="false" />
+			     <label class="form-check-label" for="induce">
+			         	$txtInducements
+		         </label>
+		        </div>
 	        </div>
 	        
 			<div class="col-1 form-group">
