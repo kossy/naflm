@@ -564,96 +564,121 @@ class HTMLOUT
 		# $leagues = Coach::allowedNodeAccess(Coach::NODE_STRUCT__TREE, is_object($coach) ? $coach->coach_id : false);
 		?>
 		<!-- Following HTML from ./lib/class_htmlout.php -->
-		<form method="POST">
-		<?php 
-		echo $lng->getTrn('common/displayfrom');
-		?>
-		<select <?php if ($hideNodes) {echo "style='display:none;'";}?> name="node" onChange="
-			selConst = Number(this.options[this.selectedIndex].value);
-			disableall();
-			switch(selConst)
-			{
-				case <?php echo T_NODE_TOURNAMENT;?>: document.getElementById('tour_in').style.display = 'inline'; break;
-				case <?php echo T_NODE_DIVISION;?>:   document.getElementById('division_in').style.display = 'inline'; break;
-				case <?php echo T_NODE_LEAGUE;?>:     document.getElementById('league_in').style.display = 'inline'; break;
-			}
-		">
+		<div class="card card-body bg-dark">
+			<form class="form-inline" method="POST">
+
+				<div class="form-group">
+
+					<label class="mr-2" for="node"><?php echo $lng->getTrn('common/displayfrom');?></label>
+					<select id="node" class="form-control bg-card form-control-sm" <?php if ($hideNodes) {echo "style='display:none;'";}?> name="node" onChange="
+						selConst = Number(this.options[this.selectedIndex].value);
+						disableall();
+						switch(selConst)
+						{
+							case <?php echo T_NODE_TOURNAMENT;?>: document.getElementById('tour_in').style.display = 'inline'; break;
+							case <?php echo T_NODE_DIVISION;?>:   document.getElementById('division_in').style.display = 'inline'; break;
+							case <?php echo T_NODE_LEAGUE;?>:     document.getElementById('league_in').style.display = 'inline'; break;
+						}
+					">
+						<?php
+						foreach (array(T_NODE_LEAGUE => $lng->getTrn('common/league'), T_NODE_DIVISION => $lng->getTrn('common/division'), T_NODE_TOURNAMENT => $lng->getTrn('common/tournament')) as $const => $name) {
+							echo "<option value='$const' ".(($_SESSION[$s_node] == $const) ? 'SELECTED' : '').">$name</option>\n";
+						}
+						?>
+					</select>
+				</div>
+				<div class="form-group mr-2">
+					<?php
+					if (!$hideNodes) {echo "<label class=' ml-1 mr-1' for='node'>:</label>";}
+					echo self::nodeList(T_NODE_TOURNAMENT, 'tour_in',     array(), array(), array('all' => true, 'sel_id' => ($_SESSION[$s_node] == T_NODE_TOURNAMENT) ? $_SESSION[$s_node_id] : null, 'extra_tags' => array('style="display:none;"'),  'hide_empty' => array(T_NODE_DIVISION)));
+					echo self::nodeList(T_NODE_DIVISION,   'division_in', array(), array(), array('all' => true, 'sel_id' => ($_SESSION[$s_node] == T_NODE_DIVISION)   ? $_SESSION[$s_node_id] : null, 'extra_tags' => array('style="display:none;"'),  'empty_str' => array(T_NODE_LEAGUE => '')));
+					echo self::nodeList(T_NODE_LEAGUE,     'league_in',   array(), array(), array('all' => true, 'sel_id' => ($_SESSION[$s_node] == T_NODE_LEAGUE)     ? $_SESSION[$s_node_id] : null, 'extra_tags' => array('style="display:none;"'),  'empty_str' => array(T_NODE_LEAGUE => ''), 'allow_all' => true));
+
+					?> 
+				</div> 
 			<?php
-			foreach (array(T_NODE_LEAGUE => $lng->getTrn('common/league'), T_NODE_DIVISION => $lng->getTrn('common/division'), T_NODE_TOURNAMENT => $lng->getTrn('common/tournament')) as $const => $name) {
-				echo "<option value='$const' ".(($_SESSION[$s_node] == $const) ? 'SELECTED' : '').">$name</option>\n";
-			}
-			?>
-		</select>
-		<?php
-		if (!$hideNodes) {echo ":";}
-		echo self::nodeList(T_NODE_TOURNAMENT, 'tour_in',     array(), array(), array('all' => true, 'sel_id' => ($_SESSION[$s_node] == T_NODE_TOURNAMENT) ? $_SESSION[$s_node_id] : null, 'extra_tags' => array('style="display:none;"'),  'hide_empty' => array(T_NODE_DIVISION)));
-		echo self::nodeList(T_NODE_DIVISION,   'division_in', array(), array(), array('all' => true, 'sel_id' => ($_SESSION[$s_node] == T_NODE_DIVISION)   ? $_SESSION[$s_node_id] : null, 'extra_tags' => array('style="display:none;"'),  'empty_str' => array(T_NODE_LEAGUE => '')));
-		echo self::nodeList(T_NODE_LEAGUE,     'league_in',   array(), array(), array('all' => true, 'sel_id' => ($_SESSION[$s_node] == T_NODE_LEAGUE)     ? $_SESSION[$s_node_id] : null, 'extra_tags' => array('style="display:none;"'),  'empty_str' => array(T_NODE_LEAGUE => ''), 'allow_all' => true));
-		if ($setState) {
-			echo $lng->getTrn('common/type');
-			?>
-			<select name="state_in" id="state_in">
-				<?php
-				echo "<option value='".T_STATE_ALLTIME."' ".(($_SESSION[$s_state] == T_STATE_ALLTIME) ? 'SELECTED' : '').">".$lng->getTrn('common/alltime')."</option>\n";
-				echo "<option value='".T_STATE_ACTIVE."'  ".(($_SESSION[$s_state] == T_STATE_ACTIVE) ? 'SELECTED' : '').">".$lng->getTrn('common/active')."</option>\n";
+			if ($setState) {
 				?>
-			</select>
-			<?php
-		}
-		if ($setRace) {
-			echo $lng->getTrn('common/race');
-			?>
-			<select name="race_in" id="race_in">
+				<label class="mr-2" for='race_in'><?php echo $lng->getTrn('common/type');?></label>
+				<div class="form-group">
+					<select class="form-control form-control-sm bg-card mr-2" name="state_in" id="state_in">
+						<?php
+						echo "<option value='".T_STATE_ALLTIME."' ".(($_SESSION[$s_state] == T_STATE_ALLTIME) ? 'SELECTED' : '').">".$lng->getTrn('common/alltime')."</option>\n";
+						echo "<option value='".T_STATE_ACTIVE."'  ".(($_SESSION[$s_state] == T_STATE_ACTIVE) ? 'SELECTED' : '').">".$lng->getTrn('common/active')."</option>\n";
+						?>
+					</select>
+				</div>
 				<?php
-				echo "<option style='font-weight: bold;' value='".T_RACE_ALL."'>-".$lng->getTrn('common/all')."-</option>\n";
-				foreach ($raceididx as $rid => $rname) {
-					echo "<option value='$rid'".(($_SESSION[$s_race] == $rid) ? 'SELECTED' : '').">$rname</option>\n";
+			}
+			if ($setRace) {
+				?>
+				<div class="form-group">
+					<label class="mr-2" for='race_in'><?php echo $lng->getTrn('common/race');?></label>
+					<select class="form-control form-control-sm bg-card mr-2" name="race_in" id="race_in">
+						<?php
+						echo "<option style='font-weight: bold;' value='".T_RACE_ALL."'>-".$lng->getTrn('common/all')."-</option>\n";
+						foreach ($raceididx as $rid => $rname) {
+							echo "<option value='$rid'".(($_SESSION[$s_race] == $rid) ? 'SELECTED' : '').">$rname</option>\n";
+						}
+						?>
+					</select>
+				</div>
+				<?php
+			}
+			if ($setSGrp) {
+				?>
+				<div class="form-group">
+					<label class="mr-2" for='sgrp_in'><?php echo $lng->getTrn('common/sgrp');?></label>
+					<select class="form-control form-control-sm bg-card mr-2" class="form-control form-control-sm bg-body text-white" name="sgrp_in" id="sgrp_in">
+						<?php
+						echo "<option value='GENERAL'>".$lng->getTrn('common/general')."</option>\n";
+						foreach (($settings['hide_ES_extensions']) ? array() : getESGroups(false) as $f) {
+							echo "<option value='$f'".(($_SESSION[$s_sgrp] == $f) ? 'SELECTED' : '').">$f</option>\n";
+						}
+						?>
+					</select>
+				</div>
+				<?php
+			}
+			if ($setFFilter) {
+				$FFilterFields = self::_getDefFields($obj, $_SESSION[$s_node], $_SESSION[$s_node_id]);
+				if (!in_array($_SESSION[$s_ffilter_field], array_keys($FFilterFields))) {
+					$_SESSION[$s_ffilter_field] = $def_ffilter_field;
+					$_SESSION[$s_ffilter_ineq]  = $def_ffilter_ineq;
+					$_SESSION[$s_ffilter_limit] = $def_ffilter_limit;
 				}
 				?>
-			</select>
-			<?php
-		}
-		if ($setSGrp) {
-			echo $lng->getTrn('common/sgrp');
-			?>
-			<select name="sgrp_in" id="sgrp_in">
+				<div class="form-group">
+					<label  class="mr-2" for='ffilter_field_in'><?php echo $lng->getTrn('common/having');?>:</label>
+					<select class="form-control form-control-sm bg-card" name="ffilter_field_in" id="ffilter_field_in">
+						<?php
+						foreach ($FFilterFields as $f => $desc) {
+							echo "<option value='$f'".(($_SESSION[$s_ffilter_field] == $f) ? 'SELECTED' : '').">$desc[desc]</option>\n";
+						}
+						?>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for='ffilter_ineq_in'>&nbsp;</label>
+					<select class="form-control form-control-sm bg-card" name="ffilter_ineq_in" id="ffilter_ineq_in">
+						<option value="<?php echo self::T_NS__ffilter_ineq_gt;?>" <?php echo ($_SESSION[$s_ffilter_ineq] == self::T_NS__ffilter_ineq_gt) ? 'SELECTED' : '';?>>>=</option>
+						<option value="<?php echo self::T_NS__ffilter_ineq_lt;?>" <?php echo ($_SESSION[$s_ffilter_ineq] == self::T_NS__ffilter_ineq_lt) ? 'SELECTED' : '';?>><=</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for='ffilter_limit_in'>&nbsp;</label>
+					<input class="form-control form-control-sm bg-card" type='text' name="ffilter_limit_in" id="ffilter_limit_in" size='2' value="<?php echo $_SESSION[$s_ffilter_limit];?>">
+				</div>
 				<?php
-				echo "<option value='GENERAL'>".$lng->getTrn('common/general')."</option>\n";
-				foreach (($settings['hide_ES_extensions']) ? array() : getESGroups(false) as $f) {
-					echo "<option value='$f'".(($_SESSION[$s_sgrp] == $f) ? 'SELECTED' : '').">$f</option>\n";
-				}
-				?>
-			</select>
-			<?php
-		}
-		if ($setFFilter) {
-			echo $lng->getTrn('common/having');
-			$FFilterFields = self::_getDefFields($obj, $_SESSION[$s_node], $_SESSION[$s_node_id]);
-			if (!in_array($_SESSION[$s_ffilter_field], array_keys($FFilterFields))) {
-				$_SESSION[$s_ffilter_field] = $def_ffilter_field;
-				$_SESSION[$s_ffilter_ineq]  = $def_ffilter_ineq;
-				$_SESSION[$s_ffilter_limit] = $def_ffilter_limit;
 			}
 			?>
-			<select name="ffilter_field_in" id="ffilter_field_in">
-				<?php
-				foreach ($FFilterFields as $f => $desc) {
-					echo "<option value='$f'".(($_SESSION[$s_ffilter_field] == $f) ? 'SELECTED' : '').">$desc[desc]</option>\n";
-				}
-				?>
-			</select>
-			<select name="ffilter_ineq_in" id="ffilter_ineq_in">
-				<option value="<?php echo self::T_NS__ffilter_ineq_gt;?>" <?php echo ($_SESSION[$s_ffilter_ineq] == self::T_NS__ffilter_ineq_gt) ? 'SELECTED' : '';?>>>=</option>
-				<option value="<?php echo self::T_NS__ffilter_ineq_lt;?>" <?php echo ($_SESSION[$s_ffilter_ineq] == self::T_NS__ffilter_ineq_lt) ? 'SELECTED' : '';?>><=</option>
-			</select>
-			<input type='text' name="ffilter_limit_in" id="ffilter_limit_in" size='2' value="<?php echo $_SESSION[$s_ffilter_limit];?>">
-			<?php
-		}
-		?>
-		&nbsp;
-		<input type="hidden" name="ANS" value="1">
-		<input type="submit" name="select" value="<?php echo $lng->getTrn('common/select');?>">
-		</form>
+				<div class="form-group ml-2">
+					<input type="hidden" name="ANS" value="1">
+					<label for='select'>&nbsp;</label>
+					<input class="btn btn-primary" type="submit" name="select" value="<?php echo $lng->getTrn('common/select');?>">
+				</div>
+			</form>
+		</div>
 		<script language="JavaScript" type="text/javascript">
 			var open;
 			<?php
@@ -881,7 +906,7 @@ class HTMLOUT
 			<meta name="msapplication-TileColor" content="#2b5797">
 			<meta name="theme-color" content="#ffffff">
 
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 			<script type="text/javascript" src="lib/misc_functions.js"></script>
