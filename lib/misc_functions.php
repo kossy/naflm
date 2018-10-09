@@ -181,10 +181,10 @@ function fatal($err_msg) {
 // Print a status message.
 function status($status, $msg = '') {
     if ($status) { # Status == success
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+        echo '<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">';
         echo "Request succeeded";
     } else { # Status == failure
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+        echo '<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">';
         echo "Request failed";
     }
     if ($msg) {echo " : $msg\n";}

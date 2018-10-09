@@ -13,7 +13,7 @@ function sec_login() {
     $_URL_forgotpass = "index.php?section=login&amp;forgotpass=1";
     if (isset($_GET['forgotpass'])) {
         if (!isset($_POST['_retry'])) {
-            title($lng->getTrn('login/forgotpass'));
+            // title($lng->getTrn('login/forgotpass'));
         }
         if (isset($_GET['cid']) && isset($_GET['activation_code'])) {
             $c = new Coach((int) $_GET['cid']);
@@ -40,17 +40,17 @@ function sec_login() {
             }
         } else {
             ?>
-            <div class='boxCommon'>
-                <h3 class='boxTitle<?php echo T_HTMLBOX_COACH;?>'><?php echo $lng->getTrn('login/forgotpass');?></h3>
-                <div class='boxBody'>
+            <div class='card mt-4 bg-dark'>
+                <h6 class='card-header'><?php echo $lng->getTrn('login/forgotpass');?></h6>
+                <div class='card-body'>
                 <form method="POST" action="<?php echo $_URL_forgotpass;?>">
                     <?php echo $lng->getTrn('login/loginname');?><br>
-                    <input type="text" name="coach_AC" size="20" maxlength="50">
+                    <input class="form-control bg-card" type="text" name="coach_AC" size="20" maxlength="50">
                     <br><br>
                     Email<br>
-                    <input type="text" name="email" size="20" maxlength="50">
+                    <input class="form-control bg-card" type="text" name="email" size="20" maxlength="50">
                     <br><br>
-                    <input type="submit" name="reqAC" value="<?php echo $lng->getTrn('common/submit');?>">
+                    <input class="btn btn-primary" type="submit" name="reqAC" value="<?php echo $lng->getTrn('common/submit');?>">
                 </form>
                 </div>
             </div>
