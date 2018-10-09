@@ -491,11 +491,12 @@ class HTMLOUT
 		# Save league view.
 		$_SESSION[self::T_NSStr__node]    = T_NODE_LEAGUE;
 		$_SESSION[self::T_NSStr__node_id] = (int) $sel_lid;
-		$HTMLselector = $lng->getTrn('common/league').'&nbsp;';
-		$HTMLselector .= "<form name='SLS' method='POST' style='display:inline; margin:0px;'>";
-		// $HTMLselector .= "<label for='SLS_lid' class='col-sm-2 col-form-label'>League</label>"
+		$HTMLselector  = "<form name='SLS' method='POST' style='display:inline; margin:0px;'>";
+		$HTMLselector .= "<div class='form-group'>
+							 <label for='SLS_lid'>" . $lng->getTrn('common/league') . "</label>";
 		$HTMLselector .= self::nodeList(T_NODE_LEAGUE, 'SLS_lid',array(),array(),array('sel_id' => $sel_lid, 'extra_tags' => array("onChange='document.SLS.submit();'")));
-		$HTMLselector .= "</form>\n";
+		$HTMLselector .= "</div>
+						  </form>\n";
 		return array($sel_lid, $HTMLselector);
 	}
 	
@@ -939,10 +940,10 @@ class HTMLOUT
 		<body>
 			<div class="container-fluid">
 				<div class="row logo-banner ">
-					<div class="col-1">
+					<div class="col-3 col-md-1">
 						<img src="../images/themes/UPBL/logo_1_prod.svg" class="logo img-fluid" alt="logos">
 					</div>	
-					<div class="col-3 pt-2">
+					<div class="col-9 pt-2">
 						<h4 class="font-sports">
 						<?php echo $settings['banner_title']; ?>
 						</h4>

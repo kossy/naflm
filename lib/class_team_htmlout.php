@@ -706,7 +706,6 @@ class Team_HTMLOUT extends Team
         </div>
       </li>
 	</nav>
-		<br>
 		<?php
 	}
 
@@ -801,7 +800,7 @@ class Team_HTMLOUT extends Team
 		<!-- Following HTML is from class_team_htmlout.php _actionBoxes -->
 		<a name="aanc"></a>
 		<div class="row">
-			<div class="col">
+			<div class="col-md mt-4">
 				<div class="card text-white bg-dark">
 					<div class="card-header"><?php echo $lng->getTrn('profile/team/box_info/title');?></div>
 					<div class="card-body">
@@ -959,7 +958,7 @@ class Team_HTMLOUT extends Team
 			if ($coach->isNodeCommish(T_NODE_LEAGUE, $team->f_lid)) {
 				?>
 				<!-- Following HTML is from class_team_htmlout.php _actionBoxes -->
-				<div class="col">
+				<div class="col-md mt-4">
 				<div class="card bg-dark text-white">
 					<div class="card-header bg-danger "><?php echo $lng->getTrn('profile/team/box_admin/title');?></div>
 					<div class="card-body">
@@ -1270,7 +1269,7 @@ class Team_HTMLOUT extends Team
 		if (!$settings['hide_ES_extensions']){
 			?>
 			<div class="row">
-				<div class="col-10">
+				<div class="col-md mt-4">
 					<div class="card bg-dark text-white">
 						<div class="card-header">&nbsp;<?php echo $lng->getTrn('common/extrastats'); ?></div>
 						<div class="card-body" id="ES">
@@ -1297,7 +1296,7 @@ class Team_HTMLOUT extends Team
 		global $lng, $rules, $DEA, $T_ALLOWED_PLAYER_NR;
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _teamManagementBox -->
-		<div class="col">
+		<div class="col-md mt-4">
 		<div class="card text-white bg-dark">
 		<div class="card-header"><?php echo $lng->getTrn('profile/team/box_tm/title') . ' - ' . $team->name;?></div>
 

@@ -147,7 +147,7 @@ function sec_main() {
 
     ?>
     <div class='row'>
-    <div class='col-6'>
+    <div class='col-md'>
         <div class="card bg-dark mt-4 mb-4">
           <div class="card-body p-2">
                 <div class="row">
@@ -186,7 +186,7 @@ function sec_main() {
                             <br><br>
 
                             <!-- New Message Input -->
-                            <textarea  class="form-control bg-dark text-white" name="txt" rows="15" cols="50"><?php echo $lng->getTrn('common/nobody');?>
+                            <textarea class="form-control bg-dark text-white" name="txt" rows="15" cols="50"><?php echo $lng->getTrn('common/nobody');?>
                             </textarea>
                             <br><br>
                             <?php 
@@ -210,7 +210,7 @@ function sec_main() {
         */
         $j = 1; $prevPinned = 0;
         echo "</div>";
-        echo "<div class='row col'>\n";
+        echo "<div class='row col-md'>\n";
         foreach (TextSubSys::getMainBoardMessages($settings['fp_messageboard']['length'], $sel_lid, $settings['fp_messageboard']['show_team_news'], $settings['fp_messageboard']['show_match_summaries']) as $e) {
 
             if ($prevPinned == 1 && !$e->pinned) { echo "<hr>\n"; }
