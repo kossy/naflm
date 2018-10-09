@@ -525,7 +525,7 @@ class Coach
         $query = "INSERT INTO coaches (name, realname, passwd, mail, phone, ring, settings) 
                     VALUES ('" . mysql_real_escape_string($input['name']) . "',
                             '" . mysql_real_escape_string($input['realname']) . "', 
-                            '" . password_hash($input['passwd']) . "', 
+                            '" . password_hash($input['passwd'],  PASSWORD_DEFAULT) . "', 
                             '" . mysql_real_escape_string($input['mail']) . "', 
                             '" . mysql_real_escape_string($input['phone']) . "', 
                             " . $input['ring'].",
