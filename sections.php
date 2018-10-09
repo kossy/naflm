@@ -57,14 +57,14 @@ function sec_login() {
             <?php 
         }       
     } else {
-        title($lng->getTrn('menu/login'));
+        // title($lng->getTrn('menu/login'));
         ?>
         <script lang="text/javascript">
             $(document).ready(function() {
                 $('#coach').focus();
             });
         </script>
-        <div class='card bg-dark bm-4'>
+        <div class='card bg-dark mt-3 mb-3'>
             <h6 class='card-header'><?php echo $lng->getTrn('menu/login');?></h6>
             <div class='card-body'>
             <form method="POST" action="<?php echo getFormAction(''); ?>">
