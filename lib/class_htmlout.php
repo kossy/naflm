@@ -916,7 +916,7 @@ class HTMLOUT
 			<script type="text/javascript" src="js/lib/knockout-3.3.0.min.js"></script>
 			<script type="text/javascript" src="lib/jquery.autocomplete-min.js"></script>
 			<script type="text/javascript" src="lib/jquery.expander.js"></script>
-			<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+			<script type="text/javascript" src="node_modules/tinymce/tinymce.min.js"></script>
 			<script>tinymce.init({ 
 				selector:'.html_edit',
 				menubar: false,

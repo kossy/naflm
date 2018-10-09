@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^5.3.1",
-		"jquery": "^3.3.1"
+		"jquery": "^3.3.1",
+		"tinymce": "^4.8.3"
 	}
 }
