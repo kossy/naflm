@@ -1301,7 +1301,7 @@ class Team_HTMLOUT extends Team
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _teamManagementBox -->
 		<div class="col">
-		<div class="card text-white bg-dark">
+		<div class="card text-white bg-dark mt-4">
 		<div class="card-header"><?php echo $lng->getTrn('profile/team/box_tm/title') . ' - ' . $team->name;?></div>
 
 		<div class="card-body">
