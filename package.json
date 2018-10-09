@@ -15,6 +15,7 @@
 		"url": "https://github.com/TheNAF/naflm.git"
 	},
 	"dependencies": {
-		"@fortawesome/fontawesome-free": "^5.3.1"
+		"@fortawesome/fontawesome-free": "^5.3.1",
+		"jquery": "^3.3.1"
 	}
 }
