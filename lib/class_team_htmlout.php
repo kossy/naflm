@@ -1301,7 +1301,7 @@ class Team_HTMLOUT extends Team
 		?>
 		<!-- Following HTML is from class_team_htmlout.php _teamManagementBox -->
 		<div class="col">
-		<div class="card text-white bg-dark mt-4">
+		<div class="card text-white bg-dark">
 		<div class="card-header"><?php echo $lng->getTrn('profile/team/box_tm/title') . ' - ' . $team->name;?></div>
 
 		<div class="card-body">
@@ -1335,7 +1335,7 @@ class Team_HTMLOUT extends Team
 			}
 			?>
 			<form method="POST" name="menu_tmanage_form">
-				<select name="menu_tmanage" onchange="document.menu_tmanage_form.submit();">
+				<select class="form-control bg-card" name="menu_tmanage" onchange="document.menu_tmanage_form.submit();">
 					<?php
 					foreach ($tmanage as $opt => $desc)
 						echo "<option value='$opt'" . ($_POST['menu_tmanage'] == $opt ? 'SELECTED' : '') . ">$desc</option>";
@@ -1354,9 +1354,9 @@ class Team_HTMLOUT extends Team
 				case 'hire_player':
 					echo $lng->getTrn('profile/team/box_tm/desc/hire_player');
 					?>
-					<hr><br>
-					<?php echo $lng->getTrn('common/player');?>:<br>
-					<select name='player'>
+					<hr>
+					<label for="player"><?php echo $lng->getTrn('common/player');?></label>
+					<select id="player" class="form-control bg-card" name='player'>
 					<?php
 					$active_players = array_filter($players, create_function('$p', "return (\$p->is_sold || \$p->is_dead || \$p->is_mng) ? false : true;"));
 					$DISABLE = true;
@@ -1371,8 +1371,8 @@ class Team_HTMLOUT extends Team
 					echo "</select>\n";
 					?>
 					<br><br>
-					<?php echo $lng->getTrn('common/number');?>:<br>
-					<select name="number">
+					<label for="number"><?php echo $lng->getTrn('common/number');?></label>
+					<select id="number" class="form-control bg-card" name="number">
 					<?php
 					foreach ($T_ALLOWED_PLAYER_NR as $i) {
 						foreach ($players as $p) {
@@ -1386,8 +1386,8 @@ class Team_HTMLOUT extends Team
 					<br><br>
 					<?php echo $lng->GetTrn('common/journeyman')?> ? <input type="checkbox" name="as_journeyman" value="1">
 					<br><br>
-					<?php echo $lng->getTrn('common/name');?>:<br>
-					<input type="text" name="name">
+					<label for="name"><?php echo $lng->getTrn('common/name');?></label>
+					<input id="name" class="form-control bg-card" type="text" name="name">
 					<input type="hidden" name="type" value="hire_player">
 					<?php
 					break;
@@ -1399,7 +1399,7 @@ class Team_HTMLOUT extends Team
 					?>
 					<hr><br>
 					<?php echo $lng->getTrn('common/player');?>:<br>
-					<select name="player">
+					<select class="form-control bg-card" name="player">
 					<?php
 					$DISABLE = true;
 					foreach ($players as $p) {
@@ -1424,8 +1424,8 @@ class Team_HTMLOUT extends Team
 					echo $lng->getTrn('profile/team/box_tm/desc/fire_player').' '.$rules['player_refund']*100 . "%.\n";
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('common/player');?>:<br>
-					<select name="player">
+					<label for="player"><?php echo $lng->getTrn('common/player');?>:</label>
+					<select class="form-control bg-card" name="player">
 					<?php
 					$DISABLE = true;
 					foreach ($players as $p) {
@@ -1447,8 +1447,8 @@ class Team_HTMLOUT extends Team
 					echo $lng->getTrn('profile/team/box_tm/desc/unbuy_player');
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('common/player');?>:<br>
-					<select name="player">
+					<label for="player"><?php echo $lng->getTrn('common/player');?>:</label>
+					<select class="form-control bg-card" name="player">
 					<?php
 					$DISABLE = true;
 					foreach ($players as $p) {
@@ -1469,8 +1469,8 @@ class Team_HTMLOUT extends Team
 					echo $lng->getTrn('profile/team/box_tm/desc/rename_player');
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('common/player');?>:<br>
-					<select name="player">
+					<label for="player"><?php echo $lng->getTrn('common/player');?>:</label>
+					<select class="form-control bg-card" name="player">
 					<?php
 					$DISABLE = true;
 					foreach ($players as $p) {
@@ -1486,8 +1486,8 @@ class Team_HTMLOUT extends Team
 					?>
 					</select>
 					<br><br>
-					<?php echo $lng->getTrn('common/name');?>:<br>
-					<input type='text' name='name' maxlength=50 size=20>
+					<label for="player"><?php echo $lng->getTrn('common/name');?>:</label>
+					<input class="form-control bg-card" type='text' name='name' maxlength=50 size=20>
 					<input type="hidden" name="type" value="rename_player">
 					<?php
 					break;
@@ -1498,8 +1498,8 @@ class Team_HTMLOUT extends Team
 					echo $lng->getTrn('profile/team/box_tm/desc/renumber_player');
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('common/player');?>:<br>
-					<select name="player">
+					<label for="player"><?php echo $lng->getTrn('common/player');?>:</label>
+					<select class="form-control bg-card" name="player">
 					<?php
 					$DISABLE = true;
 					foreach ($players as $p) {
@@ -1515,8 +1515,8 @@ class Team_HTMLOUT extends Team
 					?>
 					</select>
 					<br><br>
-					<?php echo $lng->getTrn('common/number');?>:<br>
-					<select name="number">
+					<label for="player"><?php echo $lng->getTrn('common/number');?>:</label>
+					<select class="form-control bg-card" name="number">
 					<?php
 					foreach ($T_ALLOWED_PLAYER_NR as $i) {
 						echo "<option value='$i'>$i</option>\n";
@@ -1533,8 +1533,8 @@ class Team_HTMLOUT extends Team
 					echo $lng->getTrn('profile/team/box_tm/desc/rename_team');
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('common/name');?>:<br>
-					<input type='text' name='name' maxlength='50' size='20'>
+					<label for="player"><?php echo $lng->getTrn('common/name');?>:</label>
+					<input class="form-control bg-card" type='text' name='name' maxlength='50' size='20'>
 					<input type="hidden" name="type" value="rename_team">
 					<?php
 					break;
@@ -1549,8 +1549,8 @@ class Team_HTMLOUT extends Team
 					}
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('profile/team/box_tm/fdescs/thing');?>:<br>
-					<select name="thing">
+					<label for="thing"><?php echo $lng->getTrn('profile/team/box_tm/fdescs/thing');?>:</label>
+					<select class="form-control bg-card" name="thing">
 					<?php
 					$DISABLE = true;
 					foreach ($team->getGoods() as $name => $details) {
@@ -1573,8 +1573,8 @@ class Team_HTMLOUT extends Team
 					echo $lng->getTrn('profile/team/box_tm/desc/drop_goods');
 					?>
 					<hr><br>
-					<?php echo $lng->getTrn('profile/team/box_tm/fdescs/thing');?>:<br>
-					<select name="thing">
+					<label for="thing"><?php echo $lng->getTrn('profile/team/box_tm/fdescs/thing');?>:</label>
+					<select class="form-control bg-card" name="thing">
 					<?php
 					$DISABLE = true;
 					foreach ($team->getGoods() as $name => $details) {
@@ -1632,7 +1632,7 @@ class Team_HTMLOUT extends Team
 				}
 				?>
 				<br><br>
-				<input type="submit" name="button" value="OK" <?php echo ($DISABLE ? 'DISABLED' : '');?>
+				<input class="btn btn-primary" type="submit" name="button" value="OK" <?php echo ($DISABLE ? 'DISABLED' : '');?>
 					<?php if (in_array($_POST['menu_tmanage'], $tmange_confirm)) {echo "onClick=\"if(!confirm('".$lng->getTrn('common/confirm_box')."')){return false;}\"";}?>
 				>
 				<?php if(Mobile::isMobile()) {
@@ -1714,11 +1714,11 @@ class Team_HTMLOUT extends Team
 				foreach ($news as $n) {
 					$news_2[] = '<p>'.fmtprint($n->txt).
 					'<div id="newsedit'.$n->news_id.'" style="display:none; clear:both;"><form method="POST">
-						<textarea name="txt" cols="60" rows="4">'.$n->txt.'</textarea>
+						<textarea class="form-control" name="txt" cols="60" rows="4">'.$n->txt.'</textarea>
 						<input type="hidden" name="type" value="newsedit">
 						<input type="hidden" name="news_id" value="'.$n->news_id.'">
 						<br><br>
-						<input type="submit" value="'.$lng->getTrn('common/submit').'">
+						<input class="btn btn-primary" type="submit" value="'.$lng->getTrn('common/submit').'">
 					</form></div>
 					<div style="text-align: right;"><p style="display: inline;">'.textdate($n->date, true).
 					(($ALLOW_EDIT)
@@ -1737,7 +1737,7 @@ class Team_HTMLOUT extends Team
 					<br>
 					<b><?php echo $lng->getTrn('profile/team/wnews');?></b>
 					<form method="POST">
-						<textarea name='txt' cols='60' rows='4'></textarea>
+						<textarea class="form-control" name='txt' cols='60' rows='4'></textarea>
 						<br><br>
 						<input type="hidden" name="type" value="news">
 						<input type='submit' class="btn btn-primary" value="<?php echo $lng->getTrn('common/submit');?>">
