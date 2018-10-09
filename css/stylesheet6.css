@@ -46,8 +46,9 @@ body
     background: #4D555D;
     color: #FFFFFF;
 
-    font: 12px bold Arial, Helvetica, sans-serif;
-    font-weight: bold;
+    font-size: 12px;
+
+    /*font: 12px 'Open Sans', sans-serif;*/
 }
 
 f1 {
@@ -71,6 +72,11 @@ f2 {
 	color: #201d0e;
 	font-size: 1em;
 	margin: 000px  00px 00px 160px;
+}
+
+.font-sports{
+    font-family: aurora, Verdana, "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-shadow: 1px 1px black;
 }
 
 
@@ -294,4 +300,8 @@ td.match     {background-color: #3a4047;}
     border-color: #005DAC;  
     box-shadow: none; 
     -webkit-box-shadow: none;
+}
+
+.card-header{
+    font-weight: bold;
 }

@@ -786,7 +786,7 @@ class HTMLOUT
 		// Done preprocessing...
 		$NL = '';
 		$NL .= "
-					<select class='form-control form-control-sm' name='$nameid' id='$nameid' " . implode(' ', $extra_tags) . ">
+					<select class='form-control form-control-sm bg-card' name='$nameid' id='$nameid' " . implode(' ', $extra_tags) . ">
 				\n";
 		if ($init_option) {
 			$NL .= $init_option;
@@ -938,12 +938,12 @@ class HTMLOUT
 		</head>
 		<body>
 			<div class="container-fluid">
-				<div class="row logo-banner">
+				<div class="row logo-banner ">
 					<div class="col-1">
 						<img src="../images/themes/UPBL/logo_1_prod.svg" class="logo img-fluid" alt="logos">
 					</div>	
 					<div class="col-3 pt-2">
-						<h4>
+						<h4 class="font-sports">
 						<?php echo $settings['banner_title']; ?>
 						</h4>
 						<h6>

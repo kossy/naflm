@@ -244,7 +244,8 @@ public static function makeList() {
         $player_id = false;
         $bounty = '';
         $why = '';
-        
+        echo '<div class="card bg-dark mt-4">
+        ';
         switch ($_GET['action'])
         {
             case 'delete':
@@ -273,42 +274,46 @@ public static function makeList() {
                 // Fall-through to "new" !!!
 
             case 'new':
-                echo "<a href='handler.php?type=wanted'><-- ".$lng->getTrn('common/back')."</a><br><br>";
+                echo "
+                <h6 class='card-header'>
+                  <a class='btn btn-primary' href='handler.php?type=wanted'><i class='fas fa-arrow-circle-left'></i> ".$lng->getTrn('common/back')."</a>
+                </h6>
+                <div class='card-body'>";
                 $_DISABLED = !isset($_POST['lid']) ? 'DISABLED' : '';
                 $node_id = isset($_POST['lid']) ? $_POST['lid'] : null;
                 ?>
                 <form name="STS" method="POST" enctype="multipart/form-data">
-                <b><?php echo $lng->getTrn('common/league');?></b><br>
-                <?php
-                echo HTMLOUT::nodeList(T_NODE_LEAGUE, 'lid', array(), array(), array('sel_id' => $node_id));
-                ?>
-                <input type='submit' value='<?php echo $lng->getTrn('common/select');?>'>
+                    <b><?php echo $lng->getTrn('common/league');?></b><br>
+                    <?php
+                    echo HTMLOUT::nodeList(T_NODE_LEAGUE, 'lid', array(), array(), array('sel_id' => $node_id));
+                    ?>
+                    <input class="btn btn-secondary" type='submit' value='<?php echo $lng->getTrn('common/select');?>'>
                 </form>
                 <br>
                 <form method="POST">
-                <b><?php echo $lng->getTrn('player', __CLASS__).'</b>&nbsp;&mdash;&nbsp;'.$lng->getTrn('sort_hint', __CLASS__);?><br>
-                <?php
-                $query = "SELECT DISTINCT player_id, f_tname, name FROM players, mv_players WHERE player_id = f_pid AND f_lid = $node_id ORDER by f_tname ASC, name ASC";
-                $result = mysql_query($query);
-                if ($result && mysql_num_rows($result) == 0) {
-                    $_DISABLED = 'DISABLED';
-                }
-                ?>
-                <select name="player_id" id="players" <?php echo $_DISABLED;?>>
+                    <b><?php echo $lng->getTrn('player', __CLASS__).'</b>&nbsp;&mdash;&nbsp;'.$lng->getTrn('sort_hint', __CLASS__);?><br>
                     <?php
-                    while ($row = mysql_fetch_assoc($result)) {
-                        echo "<option value='$row[player_id]' ".(($player_id == $row['player_id']) ? 'SELECTED' : '').">$row[f_tname]: $row[name] </option>\n";
+                    $query = "SELECT DISTINCT player_id, f_tname, name FROM players, mv_players WHERE player_id = f_pid AND f_lid = $node_id ORDER by f_tname ASC, name ASC";
+                    $result = mysql_query($query);
+                    if ($result && mysql_num_rows($result) == 0) {
+                        $_DISABLED = 'DISABLED';
                     }
                     ?>
-                </select>           
-                <br><br>
-                <b><?php echo $lng->getTrn('g_title', __CLASS__).'</b>&nbsp;&mdash;&nbsp;'.$lng->getTrn('title', __CLASS__);?><br>
-                <input type="text" name="bounty" size="60" maxlength="100" value="<?php echo $bounty;?>" <?php echo $_DISABLED;?>>
-                <br><br>
-                <b><?php echo $lng->getTrn('g_about', __CLASS__).'</b>&nbsp;&mdash;&nbsp;'.$lng->getTrn('about', __CLASS__);?><br>
-                <textarea name="why" rows="15" cols="100" <?php echo $_DISABLED;?>><?php echo $why;?></textarea>
-                <br><br>
-                <input type="submit" value="<?php echo $lng->getTrn('submit', __CLASS__);?>" name="Submit" <?php echo $_DISABLED;?>>
+                    <select class="form-control bg-card" name="player_id" id="players" <?php echo $_DISABLED;?>>
+                        <?php
+                        while ($row = mysql_fetch_assoc($result)) {
+                            echo "<option value='$row[player_id]' ".(($player_id == $row['player_id']) ? 'SELECTED' : '').">$row[f_tname]: $row[name] </option>\n";
+                        }
+                        ?>
+                    </select>           
+                    <br><br>
+                    <b><?php echo $lng->getTrn('g_title', __CLASS__).'</b>&nbsp;&mdash;&nbsp;'.$lng->getTrn('title', __CLASS__);?><br>
+                    <input  class="form-control bg-card" type="text" name="bounty" size="60" maxlength="100" value="<?php echo $bounty;?>" <?php echo $_DISABLED;?>>
+                    <br><br>
+                    <b><?php echo $lng->getTrn('g_about', __CLASS__).'</b>&nbsp;&mdash;&nbsp;'.$lng->getTrn('about', __CLASS__);?><br>
+                    <textarea  class="form-control bg-card" name="why" rows="15" cols="100" <?php echo $_DISABLED;?>><?php echo $why;?></textarea>
+                    <br><br>
+                    <input  class="btn btn-primary" type="submit" value="<?php echo $lng->getTrn('submit', __CLASS__);?>" name="Submit" <?php echo $_DISABLED;?>>
                 </form>
                 <br>
                 <?php
@@ -319,9 +324,14 @@ public static function makeList() {
 
         }
     }
+    echo '</div></div>';
     
     if ($ALLOW_EDIT) {
-        echo "<br><a href='handler.php?type=wanted&amp;action=new'>".$lng->getTrn('new', __CLASS__)."</a><br>\n";
+        echo "<div class='row ml-4 mt-4'>
+                <div class='col'>
+                    <a class='btn btn-primary' href='handler.php?type=wanted&amp;action=new'> <i class='fas fa-plus'></i> ".$lng->getTrn('new', __CLASS__)."</a>
+                </div>
+              </div>";
     }
     
     /* Print the wanted players */

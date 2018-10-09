@@ -146,7 +146,6 @@ function sec_main() {
      */
 
     ?>
-    <!-- <div class="main_head"><?php echo $settings['league_name']; ?></div> -->
     <div class='row'>
     <div class='col-6'>
         <div class="card bg-dark mt-4 mb-4">
